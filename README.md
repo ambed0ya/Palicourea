@@ -26,4 +26,5 @@ Edit alignments
 
 Infer trees
 `for filename in $(ls *NT.fs.aln-cln); do echo raxml-ng --all --msa $filename --model GTR+G --prefix out$filename --seed 2 --threads 2 --bs-metric fbp,tbe > $filename.sh; done`
+
 Run in parallel (`parallel -j 20 bash ::: *.sh`) 
