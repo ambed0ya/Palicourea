@@ -7,8 +7,19 @@ Initial Analyses of target enrichment data (including orthology inference) follo
 
 After contig assembly with Hybpiper2, select loci with at least 50% sequence recovered in >20% sequences. Use [Loci_filtered.R](https://github.com/ambed0ya/Palicourea/blob/main/Loci_filtered.R "Loci_filtered.R script") (adapted from https://github.com/ajhelmstetter/afrodyn/blob/master/local_scripts/75_75.R) to identify loci with <50% sequence length and >80% missing data. Use the Rscript [identify_putative_paralogs.R](https://github.com/ambed0ya/Palicourea/blob/main/identify_putative_paralogs.R "odentify_putative_paralogs.R script") to identify the targeted loci with >1 paralog warning from paralog_report.tsv (putative paralogs). Results are in 'putative_paralogs_list.csv'
 
-Move files identified with [Loci_filtered.R](https://github.com/ambed0ya/Palicourea/blob/main/Loci_filtered.R "Loci_filtered.R script") to 'filtered' folder (created inside Hybpiper output folder)
-bash move_50_20.sh
-From 'filtered' folder, move files identified as putative paralogs to main Hybpiper2 output folder
-while read name; do mv $name* ../; done < ../putative_paralogs_list.txt
+Move files identified with [Loci_filtered.R](https://github.com/ambed0ya/Palicourea/blob/main/Loci_filtered.R "Loci_filtered.R script") and not identified as putative paralogs to 'filtered' folder (created inside Hybpiper output folder).
+
 Similarly, from 'paralogs_no_chimeras', move files identified as putative paralogs and with at least 50% sequence recovered in >20 sequences to 'filtered' folder (create folder first inside of 'paralogs_no_chimeras')
+
+## Generate and edit alignments
+Create scripts for alignment with macse in 'filtered' folder inside Hybpiper2 folder (single copy loci) and in 'filtered' folder inside 'paralogs_no_chimeras' folder (putative paralogs) Output sequence files for putative loci from Spades (from Hybpiper) need to be edited (e.g., >HIL_parasitica_Jiminez2189 single_hit to >HIL_parasitica_Jiminez2189). Use sed (e.g., sed -i '/ single_hit//}’ *.fasta)
+for filename in $(ls *.fasta); do echo macse -prog alignSequences -seq $filename -out_NT $(cut -d'.' -f1 <<<"$filename").NT.aln -out_AA $(cut -d'.' -f1 <<<"$filename").AA.aln > $(cut -d'.' -f1 <<<"$filename").sh; done
+Run in parallel (Lagolab note: activate hybpiper2 env)
+parallel -j 32 bash ::: *.sh Adjust number of threads according to resources available/needed
+(Lagolab Note: activate py2)
+python remove_shifted_codons_from_macse.py . aln . nt **
+Remove columns with no data
+python pxclsq_wrapper.py . 0.1 dna **
+Infer trees
+for filename in $(ls *NT.fs.aln-cln); do echo raxml-ng --all --msa $filename --model GTR+G --prefix out$filename --seed 2 --threads 2 --bs-metric fbp,tbe > $filename.sh; done
+Run raxml-ng in parallel parallel -j 20 bash ::: *.sh Adjust number of threads according to resources available/needed
