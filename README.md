@@ -5,7 +5,7 @@ Initial Analyses of target enrichment data (including orthology inference) follo
 
 ## Filter loci: remove loci with low coverage across samples and total sequence length
 
-After contig assembly with Hybpiper2, select loci with at least 50% sequence recovered in >20% sequences. Use Loci_filtered.R script (adapted from https://github.com/ajhelmstetter/afrodyn/blob/master/local_scripts/75_75.R) to identify loci with <50% sequence length and >80% missing data. Use the Rscript identify_putative_paralogs.R created to identify the targeted genes into those with >1 paralog warning (putative paralogs). Results are in 'putative_paralogs_list.csv'
+After contig assembly with Hybpiper2, select loci with at least 50% sequence recovered in >20% sequences. Use [Loci_filtered.R](https://github.com/ambed0ya/Palicourea/blob/main/Loci_filtered.R "Loci_filtered.R script") (adapted from https://github.com/ajhelmstetter/afrodyn/blob/master/local_scripts/75_75.R) to identify loci with <50% sequence length and >80% missing data. Use the Rscript identify_putative_paralogs.R created to identify the targeted genes into those with >1 paralog warning (putative paralogs). Results are in 'putative_paralogs_list.csv'
 
 Move files identified with Loci_filtered.R to 'filtered' folder (created inside Hybpiper output folder)
 bash move_50_20.sh
