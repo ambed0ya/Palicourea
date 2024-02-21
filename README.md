@@ -27,4 +27,30 @@ Edit alignments
 Infer trees
 `for filename in $(ls *NT.fs.aln-cln); do echo raxml-ng --all --msa $filename --model GTR+G --prefix out$filename --seed 2 --threads 2 --bs-metric fbp,tbe > $filename.sh; done`
 
-Run in parallel (`parallel -j 20 bash ::: *.sh`) 
+Run in parallel (`parallel -j 20 bash ::: *.sh`)
+
+##Processing putative paralogs
+Change names of resulting FBP trees
+
+`rename "s/.supportFBP/.tt/" *FBP`
+`rename "s/out//" *.tt`
+`rename "s/NT.fs.aln-cln.raxml.//" *.tt`
+
+Create folder 'trees' and 'alignments' inside filtered paralogs_no_chimeras folder and move trees and alignments in there respectively. Go to each of those folders and use [name_changes.sh](https://github.com/ambed0ya/Palicourea/blob/main/name_changes.sh "name_changes.sh script") to change name structure in both alignments and trees for subsequent masking. (You'll need to edit the file to your species names; names@author but this may vary according to your dataset). Note: If preliminary analyses suggest that there are paraphyletic spp, you may need your name to include the collection number followed by @anything_you_want
+
+Mask monophyletic and paraphyletic taxa:
+`python mask_tips_by_taxonID_transcripts.py trees_folder alignments_folder y` (n if you don't want to mask paraphyletic taxa) **
+
+Use treeshrink to detect and remove long branches that may be spurious branches
+`python tree_shrink_wrapper.py . .tt.mm 0.01 treeshrink` (test different quantiles to see which one fit better your data; these are you final homolog trees) **
+
+Rename all outputs in every folder with [files_folders_namechanges.sh](https://github.com/ambed0ya/Palicourea/blob/main/files_folders_name_changes.sh "files_folders_name_changes.sh script") so they can then be all moved to a new folder (MO) to be pruned (e.g. `mv -t MO /.mm`)
+
+Run MO keeping clades with >20% total taxa using all outgroups
+`python prune_paralogs_MO.py your_MO_folder .mm 23 out_20percent` ** You'll need to modify this script to specify your own ingroups and outgroups. Also, play around with the minimum number of taxa to indicate in the MO analyses (23 here). For this, create a matrix occupancy stats plot as follows:
+`python ortholog_occupancy_stats.py out_20percent/` **
+
+Create fasta files from the final tree files to re-run trees and use those input trees for downstream analyses (optional)
+`python write_ortholog_fasta_from_multiple_aln.py alignments_folder out_20percent aln-cln .tre output_folder` **
+
+Align and infer trees as described above
