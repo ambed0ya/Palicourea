@@ -13,7 +13,7 @@
 # Reading in the Data #
 #######################
 
-#CHARACTER = "solitariness"
+#CHARACTER = "inflorescence"
 NUM_STATES = 3
 
 # Import the morphological character matrix #
