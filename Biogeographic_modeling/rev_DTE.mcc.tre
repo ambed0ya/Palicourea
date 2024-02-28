@@ -1,0 +1,91 @@
+#NEXUS
+
+	Begin taxa;
+	Dimensions ntax=80;
+	Taxlabels
+		Pal_acanthacea
+		Pal_acuminata1
+		Pal_acuminata2
+		Pal_allenii
+		Pal_amethystina
+		Pal_andina
+		Pal_angustifolia
+		Pal_apicata
+		Pal_bangii
+		Pal_berteroana
+		Pal_brachiata
+		Pal_brachypoda
+		Pal_brevicollis
+		Pal_callithrix
+		Pal_conephoroides
+		Pal_correae
+		Pal_corymbifera
+		Pal_crocea
+		Pal_croceoides
+		Pal_cyanococca
+		Pal_deflexa
+		Pal_demissa
+		Pal_dichotoma
+		Pal_didymocarpos
+		Pal_divaricata
+		Pal_domingensis
+		Pal_egensis
+		Pal_elata
+		Pal_flavescens
+		Pal_flavifolia
+		Pal_glabra
+		Pal_glomerulata
+		Pal_gracilenta
+		Pal_grandiflora
+		Pal_guianensis1
+		Pal_guianensis2
+		Pal_hazenii
+		Pal_jelskii
+		Pal_justiciifolia
+		Pal_lasiantha
+		Pal_lehmannii
+		Pal_lineata
+		Pal_loxensis
+		Pal_luteonivea
+		Pal_macrobotrys
+		Pal_marcgravii
+		Pal_nitidella
+		Pal_obliquinervia
+		Pal_ostreophora
+		Pal_padifolia
+		Pal_petiolaris
+		Pal_polycephala
+		Pal_prunifolia
+		Pal_pubescens
+		Pal_pyramidalis
+		Pal_quadrifolia
+		Pal_quinquepyrena
+		Pal_racemosa
+		Pal_reticulata
+		Pal_rhodothamna
+		Pal_rigida
+		Pal_rosea
+		Pal_seemannii
+		Pal_sessilis
+		Pal_standleyana
+		Pal_stenosepala
+		Pal_stipularis
+		Pal_subfusca
+		Pal_suerrensis
+		Pal_sulphurea
+		Pal_suterella
+		Pal_tetragona
+		Pal_thyrsiflora
+		Pal_timbiquensis
+		Pal_tinctoria
+		Pal_tomentosa
+		Pal_topoensis
+		Pal_triphylla
+		Pal_winkleri
+		Pal_woronovii
+		;
+End;
+
+Begin trees;
+tree TREE1 = [&R]((((((((((((((Pal_dichotoma[&index=75]:2.177447,Pal_winkleri[&index=74]:2.177447)[&index=81,posterior=1.000000,age_95%_HPD={2.17745,2.17745}]:0.510775,Pal_gracilenta[&index=73]:2.688222)[&index=82,posterior=1.000000,age_95%_HPD={2.68822,2.68822}]:0.704843,Pal_obliquinervia[&index=72]:3.393065)[&index=83,posterior=1.000000,age_95%_HPD={3.39306,3.39306}]:1.929030,(((Pal_justiciifolia[&index=80]:1.914342,Pal_suerrensis[&index=79]:1.914342)[&index=84,posterior=1.000000,age_95%_HPD={1.91434,1.91434}]:1.398566,Pal_ostreophora[&index=78]:3.312908)[&index=85,posterior=1.000000,age_95%_HPD={3.31291,3.31291}]:1.574200,(Pal_corymbifera[&index=77]:1.138625,Pal_quadrifolia[&index=76]:1.138625)[&index=86,posterior=1.000000,age_95%_HPD={1.13862,1.13862}]:3.748483)[&index=87,posterior=1.000000,age_95%_HPD={4.88711,4.88711}]:0.434987)[&index=88,posterior=1.000000,age_95%_HPD={5.3221,5.3221}]:0.604077,Pal_prunifolia[&index=71]:5.926172)[&index=89,posterior=1.000000,age_95%_HPD={5.92617,5.92617}]:0.286367,Pal_callithrix[&index=70]:6.212539)[&index=90,posterior=1.000000,age_95%_HPD={6.21254,6.21254}]:0.189645,Pal_glabra[&index=69]:6.402184)[&index=91,posterior=1.000000,age_95%_HPD={6.40218,6.40218}]:1.019890,(((Pal_acuminata1[&index=68]:2.819941,Pal_didymocarpos[&index=67]:2.819941)[&index=92,posterior=1.000000,age_95%_HPD={2.81994,2.81994}]:0.783309,Pal_rhodothamna[&index=66]:3.603250)[&index=93,posterior=1.000000,age_95%_HPD={3.60325,3.60325}]:1.625746,(Pal_acuminata2[&index=65]:3.143932,Pal_andina[&index=64]:3.143932)[&index=94,posterior=1.000000,age_95%_HPD={3.14393,3.14393}]:2.085064)[&index=95,posterior=1.000000,age_95%_HPD={5.229,5.229}]:2.193078)[&index=96,posterior=1.000000,age_95%_HPD={7.42207,7.42207}]:0.215006,(((((((Pal_crocea[&index=63]:1.029796,Pal_croceoides[&index=62]:1.029796)[&index=97,posterior=1.000000,age_95%_HPD={1.0298,1.0298}]:1.031630,Pal_triphylla[&index=61]:2.061426)[&index=98,posterior=1.000000,age_95%_HPD={2.06143,2.06143}]:0.258441,Pal_lasiantha[&index=60]:2.319867)[&index=99,posterior=1.000000,age_95%_HPD={2.31987,2.31987}]:0.470606,Pal_nitidella[&index=59]:2.790473)[&index=100,posterior=1.000000,age_95%_HPD={2.79047,2.79047}]:0.328268,(Pal_guianensis1[&index=58]:0.371410,Pal_macrobotrys[&index=57]:0.371410)[&index=101,posterior=1.000000,age_95%_HPD={0.37141,0.37141}]:2.747331)[&index=102,posterior=1.000000,age_95%_HPD={3.11874,3.11874}]:1.386008,(Pal_grandiflora[&index=56]:3.414300,Pal_marcgravii[&index=55]:3.414300)[&index=103,posterior=1.000000,age_95%_HPD={3.4143,3.4143}]:1.090449)[&index=104,posterior=1.000000,age_95%_HPD={4.50475,4.50475}]:0.596426,(Pal_guianensis2[&index=54]:3.278987,Pal_rigida[&index=53]:3.278987)[&index=105,posterior=1.000000,age_95%_HPD={3.27899,3.27899}]:1.822188)[&index=106,posterior=1.000000,age_95%_HPD={5.10117,5.10117}]:2.535905)[&index=107,posterior=1.000000,age_95%_HPD={7.63708,7.63708}]:0.484397,(((Pal_egensis[&index=52]:3.303178,Pal_polycephala[&index=51]:3.303178)[&index=108,posterior=1.000000,age_95%_HPD={3.30318,3.30318}]:1.105685,Pal_deflexa[&index=50]:4.408863)[&index=109,posterior=1.000000,age_95%_HPD={4.40886,4.40886}]:1.218040,Pal_woronovii[&index=49]:5.626903)[&index=110,posterior=1.000000,age_95%_HPD={5.6269,5.6269}]:2.494574)[&index=111,posterior=1.000000,age_95%_HPD={8.12148,8.12148}]:0.202315,((Pal_bangii[&index=48]:4.027341,Pal_flavifolia[&index=47]:4.027341)[&index=112,posterior=1.000000,age_95%_HPD={4.02734,4.02734}]:1.707866,Pal_reticulata[&index=46]:5.735207)[&index=113,posterior=1.000000,age_95%_HPD={5.73521,5.73521}]:2.588585)[&index=114,posterior=1.000000,age_95%_HPD={8.32379,8.32379}]:0.784329,(((((((((((Pal_lehmannii[&index=45]:2.119810,Pal_padifolia[&index=44]:2.119810)[&index=115,posterior=1.000000,age_95%_HPD={2.11981,2.11981}]:1.191083,Pal_thyrsiflora[&index=43]:3.310893)[&index=116,posterior=1.000000,age_95%_HPD={3.31089,3.31089}]:0.359861,Pal_demissa[&index=42]:3.670754)[&index=117,posterior=1.000000,age_95%_HPD={3.67075,3.67075}]:0.744291,((Pal_flavescens[&index=41]:3.088441,Pal_stipularis[&index=40]:3.088441)[&index=118,posterior=1.000000,age_95%_HPD={3.08844,3.08844}]:0.887738,(Pal_lineata[&index=39]:2.502258,Pal_stenosepala[&index=38]:2.502258)[&index=119,posterior=1.000000,age_95%_HPD={2.50226,2.50226}]:1.473921)[&index=120,posterior=1.000000,age_95%_HPD={3.97618,3.97618}]:0.438866)[&index=121,posterior=1.000000,age_95%_HPD={4.41505,4.41505}]:0.450152,Pal_amethystina[&index=37]:4.865197)[&index=122,posterior=1.000000,age_95%_HPD={4.8652,4.8652}]:0.426524,((Pal_seemannii[&index=36]:2.814063,Pal_standleyana[&index=35]:2.814063)[&index=123,posterior=1.000000,age_95%_HPD={2.81406,2.81406}]:1.315053,Pal_pyramidalis[&index=34]:4.129116)[&index=124,posterior=1.000000,age_95%_HPD={4.12912,4.12912}]:1.162605)[&index=125,posterior=1.000000,age_95%_HPD={5.29172,5.29172}]:0.335682,Pal_luteonivea[&index=33]:5.627403)[&index=126,posterior=1.000000,age_95%_HPD={5.6274,5.6274}]:0.921767,((Pal_apicata[&index=32]:4.232971,Pal_sulphurea[&index=31]:4.232971)[&index=127,posterior=1.000000,age_95%_HPD={4.23297,4.23297}]:0.820209,Pal_loxensis[&index=30]:5.053180)[&index=128,posterior=1.000000,age_95%_HPD={5.05318,5.05318}]:1.495990)[&index=129,posterior=1.000000,age_95%_HPD={6.54917,6.54917}]:0.462817,(Pal_angustifolia[&index=29]:4.460784,Pal_quinquepyrena[&index=28]:4.460784)[&index=130,posterior=1.000000,age_95%_HPD={4.46078,4.46078}]:2.551203)[&index=131,posterior=1.000000,age_95%_HPD={7.01199,7.01199}]:0.438403,((((Pal_domingensis[&index=27]:4.878626,Pal_tetragona[&index=26]:4.878626)[&index=132,posterior=1.000000,age_95%_HPD={4.87863,4.87863}]:0.399174,Pal_pubescens[&index=25]:5.277800)[&index=133,posterior=1.000000,age_95%_HPD={5.2778,5.2778}]:0.329444,(Pal_correae[&index=24]:3.310916,Pal_elata[&index=23]:3.310916)[&index=134,posterior=1.000000,age_95%_HPD={3.31092,3.31092}]:2.296328)[&index=135,posterior=1.000000,age_95%_HPD={5.60724,5.60724}]:0.543045,Pal_berteroana[&index=22]:6.150289)[&index=136,posterior=1.000000,age_95%_HPD={6.15029,6.15029}]:1.300101)[&index=137,posterior=1.000000,age_95%_HPD={7.45039,7.45039}]:1.003055,Pal_petiolaris[&index=21]:8.453445)[&index=138,posterior=1.000000,age_95%_HPD={8.45345,8.45345}]:0.654676)[&index=139,posterior=1.000000,age_95%_HPD={9.10812,9.10812}]:1.725803,(((((((Pal_acanthacea[&index=20]:1.938767,Pal_timbiquensis[&index=19]:1.938767)[&index=140,posterior=1.000000,age_95%_HPD={1.93877,1.93877}]:1.984012,Pal_brachiata[&index=18]:3.922779)[&index=141,posterior=1.000000,age_95%_HPD={3.92278,3.92278}]:0.567674,Pal_glomerulata[&index=17]:4.490453)[&index=142,posterior=1.000000,age_95%_HPD={4.49045,4.49045}]:0.823224,Pal_conephoroides[&index=16]:5.313677)[&index=143,posterior=1.000000,age_95%_HPD={5.31368,5.31368}]:0.336392,((Pal_jelskii[&index=15]:3.947981,Pal_tinctoria[&index=14]:3.947981)[&index=144,posterior=1.000000,age_95%_HPD={3.94798,3.94798}]:1.208081,Pal_allenii[&index=13]:5.156062)[&index=145,posterior=1.000000,age_95%_HPD={5.15606,5.15606}]:0.494007)[&index=146,posterior=1.000000,age_95%_HPD={5.65007,5.65007}]:0.688167,((Pal_cyanococca[&index=12]:4.203300,Pal_hazenii[&index=11]:4.203300)[&index=147,posterior=1.000000,age_95%_HPD={4.2033,4.2033}]:1.173774,(Pal_rosea[&index=9]:3.430714,Pal_tomentosa[&index=10]:3.430714)[&index=148,posterior=1.000000,age_95%_HPD={3.43071,3.43071}]:1.946360)[&index=149,posterior=1.000000,age_95%_HPD={5.37707,5.37707}]:0.961162)[&index=150,posterior=1.000000,age_95%_HPD={6.33824,6.33824}]:2.506084,(((Pal_brachypoda[&index=8]:4.848188,Pal_suterella[&index=7]:4.848188)[&index=151,posterior=1.000000,age_95%_HPD={4.84819,4.84819}]:1.294712,Pal_sessilis[&index=6]:6.142900)[&index=152,posterior=1.000000,age_95%_HPD={6.1429,6.1429}]:1.285335,Pal_divaricata[&index=5]:7.428235)[&index=153,posterior=1.000000,age_95%_HPD={7.42823,7.42823}]:1.416085)[&index=154,posterior=1.000000,age_95%_HPD={8.84432,8.84432}]:1.989604)[&index=155,posterior=1.000000,age_95%_HPD={10.8339,10.8339}]:0.430809,(((Pal_racemosa[&index=4]:3.214433,Pal_subfusca[&index=3]:3.214433)[&index=156,posterior=1.000000,age_95%_HPD={3.21443,3.21443}]:1.979792,Pal_topoensis[&index=2]:5.194225)[&index=157,posterior=1.000000,age_95%_HPD={5.19422,5.19422}]:1.343305,Pal_brevicollis[&index=1]:6.537530)[&index=158,posterior=1.000000,age_95%_HPD={6.53753,6.53753}]:4.727203)[&index=159,posterior=1.000000,age_95%_HPD={11.2647,11.2647}]:0.000000;
+End;
