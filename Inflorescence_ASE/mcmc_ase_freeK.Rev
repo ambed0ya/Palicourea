@@ -1,6 +1,7 @@
 ################################################################################
 #
-# This scriptnis modified from RevBayes Example: Inferring ancestral states and rates of morphological evolution using the independent rates model.
+# This script is modified from RevBayes Example: Inferring ancestral states and rates of morphological evolution using the independent rates model.
+#
 #
 #
 # author of original script:  Sebastian Höhna
@@ -11,7 +12,7 @@
 # Reading in the Data #
 #######################
 
-#CHARACTER = "inflorescence"
+CHARACTER = "palicourea.inflorescence_type"
 NUM_STATES = 3
 
 # Import the morphological character matrix #
