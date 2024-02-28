@@ -1,0 +1,16 @@
+range,color
+"C","#7570b3"
+"L","#e7298a"
+"N","#66a61e"
+"S","#e6ab02"
+"E","orchid"
+"F","green"
+"CH","cyan"
+"CA","cadetblue3"
+"CHA","tomato"
+"CHE","aquamarine2"
+"AE","#d95f02"
+"AEF","royalblue"
+"CHAEFG","#666666"
+"CHAEPFG","darkviolet"
+
