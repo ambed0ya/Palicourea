@@ -17,7 +17,7 @@
 NUM_STATES = 3
 
 # Import the morphological character matrix #
-morpho <- readDiscreteCharacterData("palicourea.inflorescence_type.nex")
+morpho <- readDiscreteCharacterData("Inflorescence_ASE/palicourea.inflorescence_type.nex")
 
 # Create some vector for the moves and monitors of this analysis
 moves    = VectorMoves()
@@ -30,7 +30,7 @@ monitors = VectorMonitors()
 # Here we use a fixed tree topology of primates
 # Note that the readTrees function always returns a vector of trees,
 # so we simple take the first tree
-phylogeny <- readTrees("time_stratified/rev_dendrogram.tre")[1]
+phylogeny <- readTrees("simple/rev_dendrogram.tre")[1]
 
 
 #########################
@@ -84,13 +84,13 @@ phyMorpho.clamp(morpho)
 mymodel = model(phylogeny)
 # Create a vector of monitors #
 # 1. for the full model #
-monitors.append( mnModel(filename="palicourea.inflorescence_type_freeK.log", printgen=1) )
+monitors.append( mnModel(filename="Inflorescence_ASE/palicourea.inflorescence_type_freeK.log", printgen=1) )
 # 2. and a few select parameters to be printed to the screen #
 monitors.append( mnScreen(printgen=100) )
 # 3. add an ancestral state monitor
 monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
                                                   ctmc=phyMorpho,
-                                                  filename="palicourea.inflorescence_type_freeK.states.txt",
+                                                  filename="Inflorescence_ASE/palicourea.inflorescence_type_freeK.states.txt",
                                                   type="Standard",
                                                   printgen=1,
                                                   withTips=true,
@@ -107,8 +107,8 @@ mymcmc.operatorSummary()
 
 
 # Read in the tree trace and construct the ancestral states (ASE) #
-anc_states = readAncestralStateTrace("output/"+CHARACTER+"_freeK.states.txt")
-anc_tree = ancestralStateTree(tree=phylogeny, ancestral_state_trace_vector=anc_states, include_start_states=false, file="output/"+CHARACTER+"_ase_freeK.tree", burnin=0.25, summary_statistic="MAP", site=1)
+anc_states = readAncestralStateTrace("Inflorescence_ASE/"+CHARACTER+"_freeK.states.txt")
+anc_tree = ancestralStateTree(tree=phylogeny, ancestral_state_trace_vector=anc_states, include_start_states=false, file="Inflorescence_ASE/"+CHARACTER+"_ase_freeK.tree", burnin=0.25, summary_statistic="MAP", site=1)
 
 # Quit RevBayes #
 q()
