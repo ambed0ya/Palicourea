@@ -292,7 +292,7 @@ dendro<-ape::read.tree("dendrogram_edited.tre")
 ####Heatmap######
 #set dendrogram
 dendrogram<-as.dendrogram(dendro)
-#added values for same secies to 100 overlap manually
+#added values for same species to 100 overlap manually
 plotting_df<-read.csv("heatmap.csv",header=T)
 heatmap<-plotting_df[,2:78]
 heatmap<-as.matrix(heatmap)
@@ -371,315 +371,47 @@ Heatmap(heatmap, cluster_rows=dendrogram, cluster_columns=dendrogram, column_den
 #        "Palicourea_deflexa","Palicourea_woronovii")
 
 
-##TO DO: add subsetting commands here
 
-dendro_subset<-ape::read.tree("dendrogram_subset.tre")
-dendro_subset<-as.dendrogram(dendro_subset)
+#dendro_subset<-ape::read.tree("dendrogram_subset.tre")
+#dendro_subset<-as.dendrogram(dendro_subset)
 ####Heatmap######
 
-heatmap_subset<-read.csv("heatmap_subset.csv",header=T)
+#heatmap_subset<-read.csv("heatmap_subset.csv",header=T)
 #added values for same secies to 100 overlap manually
-heatmap_subset<-heatmap_subset[,2:26]
-heatmap_subset<-as.matrix(heatmap_subset)
-rownames(heatmap_subset) = c("Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
-                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
-                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
-                      "Palicourea_acuminata","Palicourea_didymocarpos","Palicourea_rhodothamna",
-                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
-                      "Palicourea_nitidella","Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
-                      "Palicourea_deflexa","Palicourea_woronovii")
-colnames(heatmap_subset) = c("Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
-                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
-                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
-                      "Palicourea_acuminata","Palicourea_didymocarpos","Palicourea_rhodothamna",
-                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
-                      "Palicourea_nitidella","Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
-                      "Palicourea_deflexa","Palicourea_woronovii")
+#heatmap_subset<-heatmap_subset[,2:26]
+#heatmap_subset<-as.matrix(heatmap_subset)
+#rownames(heatmap_subset) = c("Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
+#                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
+#                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
+#                      "Palicourea_acuminata","Palicourea_didymocarpos","Palicourea_rhodothamna",
+#                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
+#                      "Palicourea_nitidella","Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
+#                      "Palicourea_deflexa","Palicourea_woronovii")
+#colnames(heatmap_subset) = c("Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
+#                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
+#                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
+#                      "Palicourea_acuminata","Palicourea_didymocarpos","Palicourea_rhodothamna",
+#                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
+#                      "Palicourea_nitidella","Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
+#                      "Palicourea_deflexa","Palicourea_woronovii")
 
 #col_fun = colorRamp2(c(0,50,100), c("#4EB265","#F7F056","#FE9929"))
-col_fun = colorRamp2(c(0,50,100), c("#F7F056","#FE9929","#DC050C"))
+#col_fun = colorRamp2(c(0,50,100), c("#F7F056","#FE9929","#DC050C"))
 
-Heatmap(heatmap_subset, cluster_rows=dendro_subset, cluster_columns=dendro_subset, column_dend_height = unit(2, "cm"),
-        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
+#Heatmap(heatmap_subset, cluster_rows=dendro_subset, cluster_columns=dendro_subset, column_dend_height = unit(2, "cm"),
+#        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
 #
 
-heatmap_subset2<-read.csv("heatmap_subsetF.csv",header=T)
+#heatmap_subset2<-read.csv("heatmap_subsetF.csv",header=T)
 #added values for same secies to 100 overlap manually
-heatmap_subset2<-heatmap_subset2[,2:6]
-heatmap_subset2<-as.matrix(heatmap_subset2)
-rownames(heatmap_subset2) = c("Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
-                              "Palicourea_divaricata","Palicourea_brevicollis")
-colnames(heatmap_subset2) = c("Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
-                              "Palicourea_divaricata","Palicourea_brevicollis")
-dendro_subsetF<-ape::read.tree("dendrogram_subsetF.tre")
-dendro_subsetF<-as.dendrogram(dendro_subsetF)
+#heatmap_subset2<-heatmap_subset2[,2:6]
+#heatmap_subset2<-as.matrix(heatmap_subset2)
+#rownames(heatmap_subset2) = c("Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
+#                              "Palicourea_divaricata","Palicourea_brevicollis")
+#colnames(heatmap_subset2) = c("Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
+#                              "Palicourea_divaricata","Palicourea_brevicollis")
+#dendro_subsetF<-ape::read.tree("dendrogram_subsetF.tre")
+#dendro_subsetF<-as.dendrogram(dendro_subsetF)
 
-Heatmap(heatmap_subset2, cluster_rows=dendro_subsetF, cluster_columns=dendro_subsetF, column_dend_height = unit(2, "cm"),
-        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
-
-#########################################################################################################
-################################EXTRA THINGS TO DECIDE IF DELETE OR LEAVE################################
-#########################################################################################################
-
-
-
-#######################################################
-#######################PCA#############################
-#######################################################
-
-#pc<-prcomp(pca_data_complete[,-1])
-#write.csv(pca_data,file="~/Desktop/test.csv")
-#summary(pc)
-#autoplot(pc)
-#autoplot(pc, data = pca_data_complete,
-#         loadings = TRUE, loadings.colour = 'blue',
-#         loadings.label = TRUE, loadings.label.size = 3)
-#autoplot(pc, data=pca_data_complete, colour="species",legend="none")
-
-final_list <- split( niche_data_complete , f = niche_data_complete$species )
-
-#nrows=lapply(occurrences,function(x) nrow(x))
-
-mean1<-lapply(final_list, function(x) mean(x$bio1))
-df1<-list.rbind(mean1)
-#mean2<-lapply(final_list, function(x) mean(x$bio2))
-#df2<-list.rbind(mean2)  
-#mean3<-lapply(final_list, function(x) mean(x$bio3))
-#df3<-list.rbind(mean3)
-#mean4<-lapply(final_list, function(x) mean(x$bio4))
-#df4<-list.rbind(mean4)
-mean5<-lapply(final_list, function(x) mean(x$bio5))
-df5<-list.rbind(mean5)  
-mean12<-lapply(final_list, function(x) mean(x$bio12))
-df12<-list.rbind(mean6)
-#mean7<-lapply(final_list, function(x) mean(x$bio7))
-#df7<-list.rbind(mean7)
-#mean8<-lapply(final_list, function(x) mean(x$bio8))
-#df8<-list.rbind(mean8)  
-#mean9<-lapply(final_list, function(x) mean(x$bio9))
-#df9<-list.rbind(mean9)
-#mean10<-lapply(final_list, function(x) mean(x$bio10))
-#df10<-list.rbind(mean10)
-#mean11<-lapply(final_list, function(x) mean(x$bio11))
-#df11<-list.rbind(mean11)  
-mean12<-lapply(final_list, function(x) mean(x$bio12))
-df12<-list.rbind(mean12)
-#mean13<-lapply(final_list, function(x) mean(x$bio13))
-#df13<-list.rbind(mean13)
-#mean14<-lapply(final_list, function(x) mean(x$bio14))
-#df14<-list.rbind(mean14)  
-#mean15<-lapply(final_list, function(x) mean(x$bio15))
-#df15<-list.rbind(mean15)
-#mean16<-lapply(final_list, function(x) mean(x$bio16))
-#df16<-list.rbind(mean16)
-#mean17<-lapply(final_list, function(x) mean(x$bio17))
-#df17<-list.rbind(mean17)
-#mean18<-lapply(final_list, function(x) mean(x$bio18))
-#df18<-list.rbind(mean18)  
-#mean19<-lapply(final_list, function(x) mean(x$bio19))
-#df19<-list.rbind(mean19) 
-#dfs_total<-cbind(df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16,df17,df18,df19)
-dfs_total<-cbind(df1,df5,df6,df12)
-dfs<-as.data.frame(dfs_total)
-
-my_species<-read.table("~/Desktop/Palicourea/species.txt",h=T)
-dfs_final<-cbind(my_species,dfs)
-#colnames(dfs_final)<-c("species","bio1","bio2","bio3","bio4","bio5","bio6","bio7","bio8","bio9","bio10","bio11",
-#                 "bio12","bio13","bio14","bio15","bio16","bio17","bio18","bio19")
-colnames(dfs_final)<-c("species","bio1","bio5","bio6",
-                       "bio12")
-#list2env(final_list,envir=.GlobalEnv)
-#use lapply to do PCA on each data fram of list
-#pca<-lapply(final_list, function(x) prcomp(x[,-1]))
-#list2env(pca,envir=.GlobalEnv)
-#autoplot(Palicourea_acanthacea)
-PCA_ALL<-prcomp(dfs_final[,-1],TRUE)
-#PCA_PREC<-prcomp(dfs_final[,2:5],TRUE)
-#PCA_TEMP<-prcomp(dfs_final[,],TRUE)
-#autoplot(PCA_PREC)
-#autoplot(PCA_TEMP)
-autoplot(PCA_ALL)
-
-#######################################################
-#######Niche stochastic character mapping##############
-#######################################################
-#read tree and PCA values
-tree <- read.tree("rev_starting.tre")
-niche_pca<-PCA_ALL$x[,1]
-
-#Manually remove unwanted values and NA for species that do not have values. I also need to change tip labels. Although this can be done when conducting species tree inference
-tips<- tree$tip.label
-
-
-#do not use#fit<-fastAnc(tree,niche_pca,vars=T,CI=T) or contmap. Shee which one
-
-######################
-## MAXENT MODELLING ##
-######################
-
-#the jar file evaluates 
-#the performance of models built with different subsets of
-#the environmental variables so each variable can be given a contribution score
-#jar file doesn't come with maxent so it has to be dowloaded separately
-jar <- paste(system.file(package="dismo"), "/java/maxent.jar", sep='')
-
-results <- model_niches(occ_data = occ_data1, clim_data = climate_stack, reps = 2, reptype = bootstrap, output_dir = "~/Desktop/Palicourea/maxent_output/")
-save(results, file = "~/Desktop/Palicourea/maxent_output/maxent_results14.RData")
-load("~/Desktop/Palicourea/maxent_output/maxent_results14.RData")
-
-#### Calculate the 'optimal' climate values for each bioclim variable ####
-
-max_wc <- as.data.frame(matrix(nrow = length(results[[2]]),
-                               ncol = length(names(final_stack))))
-colnames(max_wc) <- names(final_stack)
-rownames(max_wc) <- names(results[[2]])
-
-for (i in 1:nrow(max_wc)) {
-  print(paste0("working on ", rownames(max_wc)[i], ", species number ", i))
-  coords_of_max <- data.frame(long = rasterToPoints(results[[2]][[i]])[which.max( rasterToPoints(results[[2]][[i]])[,3]),c(1,2)][1],
-                              lat = rasterToPoints(results[[2]][[i]])[which.max( rasterToPoints(results[[2]][[i]])[,3]),c(1,2)][2])
-  max_wc[i,] <- raster::extract(x = final_stack, y = SpatialPoints(coords_of_max))
-  
-}
-
-#write.csv(max_wc, file = "~/Desktop/Palicourea/maxent_output/max_wc1.csv")
-#max_wc <- read.csv("~/Desktop/Palicourea/maxent_output/max_wc1.csv", row.names = 1)
-write.table(max_wc, file = "~/Desktop/Palicourea/maxent_output/maxent_output_max_wc1.csv", append = TRUE, sep=",",row.names = T, col.names = T)
-
-#### Compare average world clim values pre modeling to the optimum values from maxent ####
-
-mean_premodeling <- as.data.frame(matrix(nrow = length(occ_data1),
-                                         ncol = length(names(final_stack))))
-rownames(mean_premodeling) <- names(occ_data1)
-colnames(mean_premodeling) <- names(final_stack)
-
-median_premodeling <- as.data.frame(matrix(nrow = length(occ_data1),
-                                         ncol = length(names(final_stack))))
-rownames(median_premodeling) <- names(occ_data1)
-colnames(median_premodeling) <- names(final_stack)
-
-for (i in 1:nrow(mean_premodeling)){
-  print(paste0("working on ", rownames(mean_premodeling)[i], ", species number ", i))
-  coords <- data.frame(long = occ_data1[[i]]$longitude, 
-                       lat = occ_data1[[i]]$latitude)
-  clim_values <- raster::extract(x = final_stack, y = SpatialPoints(coords))
-
-  mean_premodeling[i, ] <- (clim_values)
-  median_premodeling[i,] <- matrixStats::colMedians(clim_values)
-}
-
-#### Boxplots of differences ####
-load("~/Desktop/Palicourea/maxent_output/maxent_results1.RData")
-# mean occ vs maxent
-combined <- cbind(max_wc, mean_premodeling)
-colnames(combined) <- c(paste0(colnames(max_wc), "_max_wc"),
-                        paste0(colnames(mean_premodeling), "_mean_premodeling"))
-combined_matrix <- log(as.matrix(combined) + 422)
-combined_mod <- as.data.frame(combined_matrix)
-
-
-pdf("~/Desktop/maxent_vs_mean_hist1.pdf", height = 10, width = 15)
-boxplot(combined_mod[,order(colnames(combined_mod))],
-        yaxt = "n", xaxt = "n", axes = T)
-axis(1, las = 3, cex.axis=0.75, 
-     at = seq(from = 1.5, to = 37.5, by = 2), 
-     labels = colnames(max_wc))
-rect(xleft = seq(from = 0.5, to = 37.5, by = 2),
-     xright = seq(from = 2.5, to = 38.5, by = 2),
-     ybottom = rep(4, times = 19),
-     ytop = rep(10, times = 19), 
-     col = c(rep(c(NA, "grey88"), times = 9), NA),
-     lty = 0)
-boxplot(combined_mod[,order(colnames(combined_mod))],
-        col = rep(c("#EF8A62", "#67A9CF"), times = 19),
-        pch = 19, yaxt = "n", xaxt = "n", add = TRUE)
-dev.off()
-
-# median occ vs maxent
-combined <- cbind(max_wc, median_premodeling)
-colnames(combined) <- c(paste0(colnames(max_wc), "_max_wc"),
-                        paste0(colnames(median_premodeling), "_median_premodeling"))
-combined_matrix <- log(as.matrix(combined) + 422)
-combined_mod <- as.data.frame(combined_matrix)
-
-
-pdf("~/Desktop/Palicourea/maxent_output/maxent_vs_median_hist1.pdf", height = 10, width = 15)
-boxplot(combined_mod[,order(colnames(combined_mod))],
-        yaxt = "n", xaxt = "n", axes = T)
-axis(1, las = 3, cex.axis=0.75, 
-     at = seq(from = 1.5, to = 37.5, by = 2), 
-     labels = colnames(max_wc))
-rect(xleft = seq(from = 0.5, to = 37.5, by = 2),
-     xright = seq(from = 2.5, to = 38.5, by = 2),
-     ybottom = rep(4, times = 19),
-     ytop = rep(10, times = 19), 
-     col = c(rep(c(NA, "grey88"), times = 9), NA),
-     lty = 0)
-boxplot(combined_mod[,order(colnames(combined_mod))],
-        col = rep(c("#EF8A62", "#67A9CF"), times = 19),
-        pch = 19, yaxt = "n", xaxt = "n", add = TRUE)
-dev.off()
-
-#### scatterplots of differences ####
-
-# mean occ vs maxent
-
-vars <- colnames(max_wc)
-vars <- vars[c(1,12:19,2:11)]
-sample_size <- unlist(lapply(occ_data1, nrow))
-rbPal <- colorRampPalette(c('red','blue'))
-color <- rbPal(10)[as.numeric(cut(log(sample_size), breaks = 10))]
-
-pdf("~/Desktop/Palicourea/maxent_output/maxent_vs_mean_scatterplots_col1.pdf")
-par(mfrow = c(2,2))
-for (i in 1:length(vars)) {
-  min <- min(c(max_wc[,vars[i]],
-               mean_premodeling[,vars[i]]), na.rm = T)
-  max <- max(c(max_wc[,vars[i]],
-               mean_premodeling[,vars[i]]), na.rm = T)
-  diff <- max - min
-  if (diff < 200) ticby <- 10
-  if (diff > 200 & diff < 1000) ticby <- 50
-  if (diff > 1000 & diff < 5000) ticby <- 200
-  if (diff > 5000) ticby <- 500
-  plot(max_wc[,vars[i]], mean_premodeling[,vars[i]], 
-       ylim=c(min,max), xlim = c(min, max), pch = 19,
-       xlab = "MaxEnt estimated optimum", ylab = "Mean from occurrence points",
-       col = alpha(color, 0.6), axes = F, main = vars[i])
-  axis(side = 1, at = seq(from = round(min, digits = -1) , 
-                          to = round(max, digits = -1), by = ticby))
-  axis(side = 2, at = seq(from = round(min, digits = -1) , 
-                          to = round(max, digits = -1), by = ticby))
-  abline(a = 0, b = 1, col = "black", lty = 2, lwd = 2)
-}
-dev.off()
-
-# median occ vs maxent
-
-vars <- colnames(max_wc)
-vars <- vars[c(1,12:19,2:11)]
-
-pdf("~/Desktop/maxent_vs_median_scatterplots.pdf")
-par(mfrow = c(2,2))
-for (i in 1:length(vars)) {
-  min <- min(c(max_wc[,vars[i]],
-               median_premodeling[,vars[i]]), na.rm = T)
-  max <- max(c(max_wc[,vars[i]],
-               median_premodeling[,vars[i]]), na.rm = T)
-  diff <- max - min
-  if (diff < 200) ticby <- 10
-  if (diff > 200 & diff < 1000) ticby <- 50
-  if (diff > 1000 & diff < 5000) ticby <- 200
-  if (diff > 5000) ticby <- 500
-  plot(max_wc[,vars[i]], median_premodeling[,vars[i]], 
-       ylim=c(min,max), xlim = c(min, max), pch = 19,
-       xlab = "MaxEnt estimated optimum", ylab = "median from occurrence points",
-       col = alpha("black", 0.6), axes = F, main = vars[i])
-  axis(side = 1, at = seq(from = round(min, digits = -1) , 
-                          to = round(max, digits = -1), by = ticby))
-  axis(side = 2, at = seq(from = round(min, digits = -1) , 
-                          to = round(max, digits = -1), by = ticby))
-  abline(a = 0, b = 1, col = "red", lty = 2, lwd = 2)
-}
-dev.off()
-
+#Heatmap(heatmap_subset2, cluster_rows=dendro_subsetF, cluster_columns=dendro_subsetF, column_dend_height = unit(2, "cm"),
+#        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
