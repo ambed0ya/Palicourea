@@ -275,7 +275,7 @@ plotting_df<-cbind(species4df,overlaps)
 write.csv(plotting_df, file = "~/Desktop/Palicourea/Manuscript/niche/plotting_df_revised.csv")
 
 ##Creating dendrogram from phylogenetic tree for Heatmap
-setwd ("~/Desktop/Palicourea/RevBayes/time_stratified/")
+setwd ("~/Desktop/Palicourea/Manuscript/niche")
 astral<-"rev_dendrogram.tre"
 astral01<-ape::read.tree(astral)
 astral01
@@ -286,7 +286,7 @@ tree <- ape::drop.tip(astral01, tips2delete)
 tree$tip.label
 setwd ("~/Desktop/Palicourea/Manuscript/niche/")
 write.tree(tree,file="dendrogram.tre")
-#Manually check labels on dendrogram to for labels on niche data then import
+#Manually check labels on dendrogram to labels on niche data then import
 dendro<-ape::read.tree("dendrogram_edited.tre")
 
 ####Heatmap######
