@@ -218,9 +218,8 @@ for(i in 1:length(file_names)) load(file_names[[i]])
 
 ####If making plots of prob. overlap##############################################################################
 clrs <- c("blue", "orange")
-overlap.plot(over.stat70, col = clrs, mean.cred.col = "turquoise", equal.axis = TRUE,
+overlap.plot(over.stat1300, col = clrs, mean.cred.col = "turquoise", equal.axis = TRUE,
              xlab = "Overlap Probability (%) -- Niche Region Size: 95%")
-
 #for (i in 1:length(over.stat_names)){
 #  overlap.plot((get(over.stat_names[2])), col = clrs, mean.cred.col = "turquoise",equal.axis = TRUE,
 #              xlab = "Overlap Probability (%) -- Niche Region Size: 95%")
