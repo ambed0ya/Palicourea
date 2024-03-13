@@ -1,8 +1,8 @@
 source("/Applications/RevBayes_OSX_v1.0.13/scripts/plot_anc_range.util.R")
 
-setwd("~/Desktop/Palicourea/RevBayes/simple/")
+setwd("~/Palicourea/Biogeographic_modeling/")
 # file names
-fp = "~/Desktop/Palicourea/RevBayes/simple/" # edit to provide an absolute filepath
+fp = "~/Palicourea/Biogeographic_modeling/" # edit to provide an absolute filepath
 plot_fn = paste(fp, "simple.range.pdf",sep="")
 mcc_fn = paste(fp, "rev_DTE.MCC.tre", sep="")
 tree_fn = paste(fp, "rev_DTE.ase.tre", sep="")
@@ -24,8 +24,9 @@ ase <- processAncStates(tree_fn,
 
 
 ncol <- length(state_labels)
-# C (Central America), L (Clow inter Andean), A (High Andes), E (Eastern Amazon), O (Orinoco), F(Atlantic Forest)
-colors_main <- c("#4E598C", "#FB9B2D", "#4ECDC4", "#568259","#FF6B6B","#97CC04")
+# C (Central America), L (Clow inter Andean), N (northern High Andes), S (Souther high Andes),
+# E (Eastern-northeastern SA), F(Atlantic Forest)
+colors_main <- c("yellow", "#FB9B2D", "#4ECDC4","#4E598C", "#568259","#97CC04")
 
 colors_combined <- colorRampPalette(c("#FDA8EF","cyan", "red","royalblue",
                                       "aquamarine", "#73C1FC", "darkviolet"))(128-7)
