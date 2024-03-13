@@ -218,9 +218,8 @@ for(i in 1:length(file_names)) load(file_names[[i]])
 
 ####If making plots of prob. overlap##############################################################################
 clrs <- c("blue", "orange")
-overlap.plot(over.stat1300, col = clrs, mean.cred.col = "turquoise", equal.axis = TRUE,
-             xlab = "Overlap Probability (%) -- Niche Region Size: 95%")
-#for (i in 1:length(over.stat_names)){
+overlap.plot(over.stat1469, col = clrs, mean.cred.col = "turquoise", equal.axis = TRUE,
+             xlab = "Overlap Probability (%) -- Niche Region Size: 95%")#for (i in 1:length(over.stat_names)){
 #  overlap.plot((get(over.stat_names[2])), col = clrs, mean.cred.col = "turquoise",equal.axis = TRUE,
 #              xlab = "Overlap Probability (%) -- Niche Region Size: 95%")
 #}
@@ -343,8 +342,8 @@ Heatmap(heatmap, cluster_rows=dendrogram, cluster_columns=dendrogram, column_den
 
              
 #commands for each step above (no loops)
-#over.stat <- overlap(niche_data_complete.par3850, nreps = nsamples, nprob = 1e3, alpha = c(.95,0.99))
-#over.mean <- apply(over.stat, c(1:2,4), mean)*100
+over.stat <- overlap(niche_data_complete.par300, nreps = 1000, nprob = 1e4, alpha = .95
+over.mean <- apply(over.stat, c(1:2,1), mean)*100
 #round(over.mean, 2)
 #over.cred <- apply(over.stat*100, c(1:2, 4), quantile, prob = c(.025, .975), na.rm = TRUE)
 #round(over.cred[,,,1])

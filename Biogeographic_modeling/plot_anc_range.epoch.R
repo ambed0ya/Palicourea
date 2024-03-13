@@ -4,6 +4,7 @@ setwd("~/Desktop/Palicourea/RevBayes/simple/")
 # file names
 fp = "~/Desktop/Palicourea/RevBayes/simple/" # edit to provide an absolute filepath
 plot_fn = paste(fp, "simple.range.pdf",sep="")
+mcc_fn = paste(fp, "rev_DTE.MCC.tre", sep="")
 tree_fn = paste(fp, "rev_DTE.ase.tre", sep="")
 label_fn = paste(fp, "rev_DTE.state_labels.txt", sep="")
 color_fn = paste(fp, "pali_range_colors.txt", sep="")
@@ -38,7 +39,7 @@ pp_map=plotAncStatesMAP(t = ase, node_color = colors, tip_labels_size = 2.7,
                         node_labels_as = NULL, node_labels_centered = T,
                         node_labels_offset = 0, tip_labels_states_offset = 1,
                         tip_labels_states_size = 2, tip_states=F,
-                        cladogenetic = TRUE, tip_labels_offset = 2, timeline = T, geo_units="epochs")+
+                        cladogenetic = TRUE, tip_labels_offset = 2, timeline = T, geo_units="epochs", tip_age_bars=TRUE, node_age_bars=TRUE, age_bars_colored_by="posterior", label_sampled_ancs=TRUE)+
   ggplot2::theme(legend.position = c(0.08, 0.67),
                  legend.key = element_blank(), legend.title = element_blank(),
                  legend.text = element_text(size = 11),
@@ -60,13 +61,49 @@ pp_map=plotAncStatesMAP(t = ase, node_color = colors, tip_labels_size = 2.7,
   ggplot2::geom_vline(xintercept = -4.5, linetype = "dotted") +
   ggplot2::annotate(geom = "text", 
                     x = -4.5, y = 97, 
-                    label = "A1",
+                    label = "A3",
                     hjust = 1, 
                     size = 8)
 #save
 ggsave(file=plot_fn, plot=pp_map, device="pdf", height=15, width=12, useDingbats=F)
 
+##Plotting divergence times with 95% HPD intervals. Modofied from David Černý (https://davidcerny.github.io/post/plotting_beast/)
 
+library(phytools)
+library(strap)
+library(phyloch)
+
+# Get shaded bars for the HPD intervals. Credit:
+# http://blog.phytools.org/2017/03/error-bars-on-divergence-times-on.html
+
+annot_tree <- phyloch::read.beast("~/Desktop/Palicourea/Manuscript/calibration/standard_Palicourea_ORC_versioncorrected_MCC.tre")
+tips2delete<-c("Car_guianensis_Gonzalez2158","Carapichea_ipecacuanha_Croat15117",
+               "Eum_boliviana_Campbell22035","Not_epiphytica_Neill15737",
+               "Not_uliginosa_Stevens37138","Psy_carthagenensis_Araujo2124",
+               "Psy_grandis_Taylor11745","Psy_guianensis_Merello1711",
+               "Psy_horizontalis_Stevens32733","Psy_jinotegensis_Stevens33549",
+               "Psy_limonensis_Stevens31580","Psy_marginata_Stevens32781",
+               "Psy_nervosa_Stevens32362","Psy_panamensis_Stevens32285","Psy_subsessilis_Stevens31494","Rud_cornifolia_deGracias818")
+
+if (is.null(annot_tree$`CAheight_95%_HPD_MIN`)) {
+  annot_tree$min_ages <- annot_tree$`height_95%_HPD_MIN`
+  annot_tree$max_ages <- annot_tree$`height_95%_HPD_MAX`
+} else {
+  annot_tree$min_ages <- annot_tree$`CAheight_95%_HPD_MIN`
+  annot_tree$max_ages <- annot_tree$`CAheight_95%_HPD_MAX`
+}
+
+annot_tree$root.time <- max(nodeHeights(annot_tree)) + 0.0
+time_tree=geoscalePhylo(ladderize(annot_tree, right = F), x.lim = c(0, 45), cex.tip = 0.7, cex.age = 1.3, cex.ts = 1)
+
+T1 <- get("last_plot.phylo", envir = .PlotPhyloEnv)
+
+for(i in (Ntip(annot_tree) + 1):(annot_tree$Nnode + Ntip(annot_tree))) {
+  lines(x = c(T1$root.time - annot_tree$min_ages[i - Ntip(annot_tree)],
+              T1$root.time - annot_tree$max_ages[i - Ntip(annot_tree)]),
+        y = rep(T1$yy[i], 2), lwd = 4, lend = 0,
+        col = make.transparent("blue", 0.3))
+}
 
 #misc
 # plot the ancestral states
@@ -102,6 +139,3 @@ ggsave(file=plot_fn, plot=pp_map, device="pdf", height=15, width=12, useDingbats
 #                      tip_pie_size = 0.4, tip_labels_states = T,
 #                      cladogenetic = TRUE, tip_labels_offset = 2, 
 #                      timeline = T) +
-
-
-
