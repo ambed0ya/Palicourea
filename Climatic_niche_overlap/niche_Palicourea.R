@@ -342,8 +342,8 @@ Heatmap(heatmap, cluster_rows=dendrogram, cluster_columns=dendrogram, column_den
 
              
 #commands for each step above (no loops)
-over.stat <- overlap(niche_data_complete.par300, nreps = 1000, nprob = 1e4, alpha = .95
-over.mean <- apply(over.stat, c(1:2,1), mean)*100
+#over.stat <- overlap(niche_data_complete.par300, nreps = 1000, nprob = 1e4, alpha = .95
+#over.mean <- apply(over.stat, c(1:2,1), mean)*100
 #round(over.mean, 2)
 #over.cred <- apply(over.stat*100, c(1:2, 4), quantile, prob = c(.025, .975), na.rm = TRUE)
 #round(over.cred[,,,1])
