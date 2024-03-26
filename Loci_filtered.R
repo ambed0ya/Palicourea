@@ -14,15 +14,16 @@ library(wesanderson)
 path_to_data <- "/PATH_TO_FOLDER_WITH_HYBPIPER_OUTPUT/"
 filename = paste0(path_to_data, "/seq_lengths.tsv")
 seq_lengths_raw <- read.table(filename, header = T, row.names = 1, sep = "\t", check.names = F)
-seqpath_to_out <- "/PATH_TO_FOLDER_WITH_HYBPIPER_OUTPUT/"
+path_to_out <- "/PATH_TO_FOLDER_WITH_HYBPIPER_OUTPUT/"
 limit_perc_length_wanted = c(0.1, 0.20, 0.5, 0.75)
 limit_perc_nb_wanted = c(0.1, 0.20, 0.5, 0.75)
 
+
 # Prepare the data frames -------------------------------------------------
 # FIRST: sort the locus names in the raw data frame
-seq_lengths_raw <- seq_lengths_raw[,order(names(genes_sequences_lengths_raw))]
+seq_lengths_raw <- seq_lengths_raw[,order(names(seq_lengths_raw))]
 # get the length of reference sequence for each locus
-reference_length = as.numeric(seq_lengths_raw[which(row.names(genes_sequences_lengths_raw)== "MeanLength"),])
+reference_length = as.numeric(seq_lengths_raw[which(row.names(seq_lengths_raw)== "MeanLength"),])
 names(reference_length) <- names(seq_lengths_raw)
 
 # Keep the sequences lengths only for the genes (that is: remove MeaLength from the dataframe)
