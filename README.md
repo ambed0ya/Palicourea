@@ -12,7 +12,7 @@ Move files identified with [Loci_filtered.R](https://github.com/ambed0ya/Palicou
 Similarly, from 'paralogs_no_chimeras', move files identified as putative paralogs and with at least 50% sequence recovered in >20 sequences to 'filtered' folder (create folder first inside of 'paralogs_no_chimeras')
 
 ## Generate and edit alignments
-Create scripts for alignment with macse in 'filtered' folder inside Hybpiper2 folder (single copy loci) and in 'filtered' folder inside 'paralogs_no_chimeras' folder (putative paralogs). Output sequence files for putative paralogs from Spades first need to be edited (e.g., >HIL_parasitica_Jiminez2189 single_hit to >HIL_parasitica_Jiminez2189). Use for example, sed (e.g., `sed -i '/ single_hit//}’ *.fasta`).
+Create scripts for alignment with macse in 'filtered' folder inside Hybpiper2 folder (single copy loci) and in 'filtered' folder inside 'paralogs_no_chimeras' folder (putative paralogs). Output sequence files for putative paralogs from Spades first need to be edited (e.g., >HIL_parasitica_Jiminez2189 single_hit to >HIL_parasitica_Jiminez2189). Use for example, sed (e.g., `sed -i 's/ single_hit//g' *.fasta`).
 
 `for filename in $(ls *.fasta); do echo macse -prog alignSequences -seq $filename -out_NT $(cut -d'.' -f1 <<<"$filename").NT.aln -out_AA $(cut -d'.' -f1 <<<"$filename").AA.aln > $(cut -d'.' -f1 <<<"$filename").sh; done`
 
