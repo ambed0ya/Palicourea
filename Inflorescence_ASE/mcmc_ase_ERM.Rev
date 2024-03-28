@@ -84,13 +84,13 @@ phyMorpho.clamp(morpho)
 mymodel = model(phylogeny)
 # Create a vector of monitors #
 # 1. for the full model #
-monitors.append( mnModel(filename="output/"+CHARACTER+"_ERM.log", printgen=1) )
+monitors.append( mnModel(filename=CHARACTER+"_ERM.log", printgen=1) )
 # 2. and a few select parameters to be printed to the screen #
 monitors.append( mnScreen(printgen=100) )
 # 3. add an ancestral state monitor
 monitors.append( mnJointConditionalAncestralState(tree=phylogeny,
                                                   ctmc=phyMorpho,
-                                                  filename="output/"+CHARACTER+"_ERM.states.txt",
+                                                  filename=CHARACTER+"_ERM.states.txt",
                                                   type="Standard",
                                                   printgen=1,
                                                   withTips=true,
@@ -104,8 +104,8 @@ mymcmc.run(generations=25000, tuningInterval=200)
 
 
 # Read in the tree trace and construct the ancestral states (ASE) #
-anc_states = readAncestralStateTrace("output/"+CHARACTER+"_ERM.states.txt")
-anc_tree = ancestralStateTree(tree=phylogeny, ancestral_state_trace_vector=anc_states, include_start_states=false, file="output/"+CHARACTER+"_ase_ERM.tree", burnin=0.25, summary_statistic="MAP", site=1)
+anc_states = readAncestralStateTrace(CHARACTER+"_ERM.states.txt")
+anc_tree = ancestralStateTree(tree=phylogeny, ancestral_state_trace_vector=anc_states, include_start_states=false, file=CHARACTER+"_ase_ERM.tree", burnin=0.25, summary_statistic="MAP", site=1)
 
 # Quit RevBayes #
 q()
