@@ -10,8 +10,8 @@
 # Reading in the Data #
 #######################
 
-CHARACTER = "solitariness"
-NUM_STATES = 2
+CHARACTER = "palicourea.inflorescence_type"
+NUM_STATES = 3
 
 # Import the morphological character matrix #
 morpho <- readDiscreteCharacterData(CHARACTER+".nex")
