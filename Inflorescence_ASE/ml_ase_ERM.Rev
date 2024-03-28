@@ -14,7 +14,7 @@ CHARACTER = "solitariness"
 NUM_STATES = 2
 
 # Import the morphological character matrix #
-morpho <- readDiscreteCharacterData("data/primates_"+CHARACTER+".nex")
+morpho <- readDiscreteCharacterData(CHARACTER+".nex")
 
 # Create some vector for the moves and monitors of this analysis
 moves    = VectorMoves()
@@ -29,7 +29,7 @@ monitors = VectorMonitors()
 # Here we use a fixed tree topology of mammals on a family level sampling
 # Note that the readTrees function always returns a vector of trees,
 # so we simple take the first tree
-phylogeny <- readTrees("data/primates_tree.nex")[1]
+phylogeny <- readTrees("../Biogeographic_modeling/rev_dendrogram.tre")[1]
 
 
 #########################
