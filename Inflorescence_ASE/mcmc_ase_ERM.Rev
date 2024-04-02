@@ -26,7 +26,6 @@ monitors = VectorMonitors()
 # Tree model #
 ##############
 
-# Here we use a fixed tree topology of mammals on a family level sampling
 # Note that the readTrees function always returns a vector of trees,
 # so we simple take the first tree
 phylogeny <- readTrees("../Biogeographic_modeling/rev_dendrogram.tre")[1]
