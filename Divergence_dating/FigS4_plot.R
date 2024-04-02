@@ -1,23 +1,36 @@
+Modified from David Černý (https://davidcerny.github.io/post/plotting_beast/)
+
 library("phytools")
 library("phyloch")
 library("strap")
 library("coda")
 
-setwd("~/Desktop/Palicourea/RevBayes/simple/")
-tips2delete<-c("Car_guianensis_Gonzalez2158","Carapichea_ipecacuanha_Croat15117",
-               "Eum_boliviana_Campbell22035","Not_epiphytica_Neill15737",
-               "Not_uliginosa_Stevens37138","Psy_carthagenensis_Araujo2124",
-               "Psy_grandis_Taylor11745","Psy_guianensis_Merello1711",
-               "Psy_horizontalis_Stevens32733","Psy_jinotegensis_Stevens33549",
-               "Psy_limonensis_Stevens31580","Psy_marginata_Stevens32781",
-               "Psy_nervosa_Stevens32362","Psy_panamensis_Stevens32285","Psy_subsessilis_Stevens31494","Rud_cornifolia_deGracias818")
+annot_tree <- phyloch::read.beast("~/Desktop/Palicourea/Manuscript/calibration/standard_Palicourea_ORC_versioncorrected_MCC.tre")
+#t<-read.beast("~/Desktop/Palicourea/Manuscript/calibration/standard_Palicourea_ORC_versioncorrected_MCC.tre")
+annot_tree <- ape::drop.tip(annot_tree, tips2delete)
 
-#mcc<-"~/Desktop/Palicourea/Manuscript/calibration/standard_Palicourea_ORC_versioncorrected_MCC_newick.tre"
+if (is.null(annot_tree$`CAheight_95%_HPD_MIN`)) {
+  annot_tree$min_ages <- annot_tree$`height_95%_HPD_MIN`
+  annot_tree$max_ages <- annot_tree$`height_95%_HPD_MAX`
+} else {
+  annot_tree$min_ages <- annot_tree$`CAheight_95%_HPD_MIN`
+  annot_tree$max_ages <- annot_tree$`CAheight_95%_HPD_MAX`
+}
 
-tree<-read.beast("~/Desktop/Palicourea/Manuscript/calibration/standard_Palicourea_ORC_versioncorrected_MCC.tre")
+annot_tree$root.time <- max(nodeHeights(annot_tree)) + 0.0
 
-t <- ape::drop.tip(tree, tips2delete)
+pdf("tree.pdf", width = 20, height = 20)
+geoscalePhylo(ladderize(annot_tree, right = F), x.lim = c(-10, 45), cex.tip = 0.5, cex.age = 1.3, cex.ts = 0.4)
 
+T1 <- get("last_plot.phylo", envir = .PlotPhyloEnv)
+
+for(i in (Ntip(annot_tree) + 1):(annot_tree$Nnode + Ntip(annot_tree))) {
+  lines(x = c(T1$root.time - annot_tree$min_ages[i - Ntip(annot_tree)],
+              T1$root.time - annot_tree$max_ages[i - Ntip(annot_tree)]),
+        y = rep(T1$yy[i], 2), lwd = 4, lend = 0,
+        col = make.transparent("blue", 0.4))
+}
+dev.off()
 setwd("~/Desktop/")
 t$root.time <- t$height[1]
 
@@ -52,10 +65,10 @@ for(n in names_list){
 }
 
 
-pdf("tree.pdf", width = 20, height = 20)
+
 
 geoscalePhylo(tree = t,
-              x.lim = c(-2,21),
+              x.lim = c(0,45),
               units = c("Epoch"),
               tick.scale = "myr",
               boxes = FALSE,
@@ -64,7 +77,7 @@ geoscalePhylo(tree = t,
               cex.age = 3,
               cex.ts = 2,
               erotate = 0,
-              label.offset = 0.1)
+              label.offset = 0.01)
 
 lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv)
 
@@ -81,19 +94,19 @@ p[t$node.label < 0.95 & t$node.label >= 0.75] <- "gray"
 p[t$node.label < 0.75] <- "white"
 nodelabels(pch = 21, cex = 1.5, bg = p)
 
-dev.off()
 
-plotTree(tree,xlim=c(110,-5),direction="leftwards",
-         mar=c(4.1,1.1,1.1,1.1),ftype="i")
-abline(v=seq(0,120,by=10),lty="dashed",
-       col=make.transparent("grey",0.5))
-axis(1,at=seq(0,120,by=20))
-obj<-get("last_plot.phylo",envir=.PlotPhyloEnv)
-for(i in 1:tree$Nnode+Ntip(tree))
-  lines(x=c(CI[i-Ntip(tree),1],CI[i-Ntip(tree),2]),
-        y=rep(obj$yy[i],2),lwd=11,lend=0,
-        col=make.transparent("blue",0.4))
-points(obj$xx[1:tree$Nnode+Ntip(tree)],
-       obj$yy[1:tree$Nnode+Ntip(tree)],pch=19,col="blue",
-       cex=1.8)
+
+#plotTree(t,xlim=c(50,-5),direction="leftwards",
+#         mar=c(4.1,1.1,1.1,1.1),ftype="i")
+#abline(v=seq(0,50,by=5),lty="dashed",
+#       col=make.transparent("grey",0.5))
+#axis(1,at=seq(0,120,by=20))
+#obj<-get("last_plot.phylo",envir=.PlotPhyloEnv)
+#for(i in 1:t$Nnode+Ntip(t))
+#  lines(x=c(CI[i-Ntip(t),1],CI[i-Ntip(t),2]),
+#        y=rep(obj$yy[i],2),lwd=11,lend=0,
+#        col=make.transparent("blue",0.4))
+#points(obj$xx[1:t$Nnode+Ntip(tree)],
+#       obj$yy[1:t$Nnode+Ntip(tree)],pch=19,col="blue",
+#       cex=1.8)
 #write.tree(tree,file="rev_dendrogram.tre")
