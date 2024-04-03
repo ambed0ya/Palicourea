@@ -26,7 +26,7 @@ ase <- processAncStates(tree_fn,
 ncol <- length(state_labels)
 # C (Central America), L (Clow inter Andean), N (northern High Andes), S (Souther high Andes),
 # E (Eastern-northeastern SA), F(Atlantic Forest)
-colors_main <- c("yellow", "#FB9B2D", "#4ECDC4","#4E598C", "#568259","#97CC04")
+colors_main <- c("yellow", "#FB9B2D", "deepskyblue", "#568259","#97CC04")
 
 colors_combined <- colorRampPalette(c("#FDA8EF","cyan", "red","royalblue",
                                       "aquamarine", "#73C1FC", "darkviolet"))(128-7)
