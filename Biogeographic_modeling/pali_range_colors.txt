@@ -1,9 +1,9 @@
 range,color
 "C","#7570b3"
 "L","#e7298a"
-"A","#66a61e"
-"E","orchid"
-"F","green"
+"A","deepskyblue"
+"E","green"
+"F","lightgreen"
 "CH","cyan"
 "CA","cadetblue3"
 "CHA","tomato"
