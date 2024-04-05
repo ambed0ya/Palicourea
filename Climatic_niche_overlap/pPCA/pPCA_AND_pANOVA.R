@@ -120,13 +120,13 @@ group_mean$areas<-areas
 
 
 #turn species' column into names
-row.names(group_mean) <- group_mean$Group.1
-group_mean[1] <- NULL
+group_mean_names<-row.names(group_mean) <- group_mean$Group.1
+group_mean_names[1] <- NULL
 
 ###Phylogenetic PCA##############################################################
 #################################################################################
 
-pPCA<-phyl.pca(tree,group_mean[1:4])
+pPCA<-phyl.pca(tree,group_mean_names[1:4])
 obj<-as.princomp(pPCA)
 
 fviz_screeplot(obj,addlabels=TRUE)
@@ -136,25 +136,12 @@ fviz_pca_ind(obj,label="none",habillage=areas,
 
 ###Phylogenetic ANOVA############################################################
 #################################################################################
-group_mean<- aggregate(x= niche_data_complete[2:5],
-                       # Specify group indicator
-                       by = list(niche_data_complete$species),      
-                       # Specify function (i.e. mean)
-                       FUN = mean)
-areas<-c("L","E","A","A","E","A","A","A","A","L","F","M","E","A",
-         "C","E","E","E","C","E","A","E","E","F","A","E","C","A",
-         "A","E","L","E","E","E","C","A","E","E","A","A","A","A",
-         "E","E","E","E","E","A","A","E","E","A","A","E","M","A",
-         "E","E","A","F","A","A","A","M","E","A","A","A","L","A",
-         "L","M","E","E","E","L","F") ##clumsy but works. You make it better
-group_mean$areas<-areas
+#drop values for species outside A and E
 
-group_meanA<-group_mean[group_mean[,6]=="A",c(1:6)]
-group_meanE<-group_mean[group_mean[,6]=="E",c(1:6)]
-group_meanAE<-rbind(group_meanA,group_meanE)
-
+group_meanAE<-group_mean[(group_mean$area =="A")| (group_mean$area=="E"),]
 species<-group_meanAE$Group.1
 
+#extract values for each variable and add labels (nneds loop)
 bio1<-group_meanAE$bio1
 bio1<- setNames(bio1, species)
 areas<-group_meanAE$areas
@@ -166,7 +153,7 @@ bio5<- setNames(bio5, species)
 bio6<-group_meanAE$bio6
 bio6<- setNames(bio6, species)
 
-
+##remove tips that are not in A or E
 tips2delete<-c("Palicourea_acanthacea","Palicourea_brachiata","Palicourea_brachypoda",
                "Palicourea_brevicollis","Palicourea_correae","Palicourea_correae","Palicourea_cyanococca",
                "Palicourea_divaricata","Palicourea_elata","Palicourea_glomerulata","Palicourea_hazenii",
@@ -174,5 +161,9 @@ tips2delete<-c("Palicourea_acanthacea","Palicourea_brachiata","Palicourea_brachy
                "Palicourea_tomentosa","Palicourea_topoensis","Psychotria_rosea","Psychotria_suterella")
 tree <- ape::drop.tip(tree, tips2delete)
 
+#phylANOVAs
+phylANOVA(tree,areas,bio1)
+phylANOVA(tree,areas,bio12)
+phylANOVA(tree,areas,bio5)
 phylANOVA(tree,areas,bio6)
-phylANOVA(tree,group_meanAE$areas,group_meanAE$bio1)
+
