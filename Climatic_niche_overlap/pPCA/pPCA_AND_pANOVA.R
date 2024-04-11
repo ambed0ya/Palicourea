@@ -33,7 +33,7 @@ library("circlize")
 library('RColorBrewer')
 library("factoextra")
 
-setwd("Climatic_niche_overlap/pPCA/")
+
 #source CANDI functions
 source("~/Applications/candi/R/get_occ_records.R")
 source("~/Applications/candi/R/get_both_occ_records.R")
