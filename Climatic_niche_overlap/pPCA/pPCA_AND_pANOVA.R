@@ -1,6 +1,7 @@
-#########################################################################################################
-### Phylogenetic PCA and Phylogenetic ANOVA. Scripts modified from Liam Revell Phytools blog http://blog.phytools.org/search?q=phyl.pca
-#########################################################################################################
+#########################################################################################
+### Phylogenetic PCA and Phylogenetic ANOVA. Scripts modified from Liam Revell's
+#Phytools blog http://blog.phytools.org/search?q=phyl.pca and CANDI (Tribble et al. 2023)
+#########################################################################################
 
 require("rJava")
 library("rgdal")
