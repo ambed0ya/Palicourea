@@ -32,6 +32,7 @@ library("phylogram")
 library("circlize")
 library('RColorBrewer')
 library("factoextra")
+library("ggpubr")
 
 
 #source CANDI functions
@@ -130,10 +131,26 @@ group_mean_names[1] <- NULL
 pPCA<-phyl.pca(tree,group_mean_names[1:4])
 obj<-as.princomp(pPCA)
 
-fviz_screeplot(obj,addlabels=TRUE)
-fviz_pca_ind(obj,label="none",habillage=areas,
-             addEllipses=F)
+p1<-fviz_screeplot(obj,addlabels=TRUE)
+p2<-fviz_pca_var(obj, col.var="contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE # Avoid text overlapping
+)
 
+p3<-fviz_pca_ind(obj,label="none", habillage=group_mean$areas,
+             palette= c("deepskyblue","#FFFF00", "forestgreen",
+                        "yellowgreen", "darkorange1", "grey" ), addEllipses=F,
+             repel=T, max.overlaps=100)
+
+plotnames <- p3$data$name %>% as.character()
+plotnames<-recode(plotnames, "Palicourea_divaricata"="Pal_dicarivata", 
+                  "Palicourea_timbiquensis"="Pal_timbiquensis",
+                  "Palicourea_acanthacea"="Pal_acanthacea")
+
+mylabels <- sapply(plotnames, function(x) ifelse(is.na(str_locate(x,"Pal_")[1]),
+                                                 "", x)) %>% as.vector()
+p3<-p3 + geom_text(aes(label = mylabels))
+ggpubr::ggarrange(p2,p3)
 
 ###Phylogenetic ANOVA############################################################
 #################################################################################
