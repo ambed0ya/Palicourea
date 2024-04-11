@@ -19,7 +19,7 @@ if (is.null(annot_tree$`CAheight_95%_HPD_MIN`)) {
 
 annot_tree$root.time <- max(nodeHeights(annot_tree)) + 0.0
 
-pdf("tree.pdf", width = 100, height = 100)
+pdf("Fig.S3.pdf", width = 100, height = 100)
 geoscalePhylo(ladderize(annot_tree, right = F), x.lim = c(-10, 45), cex.tip = 6, cex.age = 10, cex.ts = 9)
 
 T1 <- get("last_plot.phylo", envir = .PlotPhyloEnv)
