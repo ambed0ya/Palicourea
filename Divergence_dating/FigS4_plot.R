@@ -4,10 +4,10 @@ library("phytools")
 library("phyloch")
 library("strap")
 library("coda")
-
-annot_tree <- phyloch::read.beast("~/Desktop/Palicourea/Manuscript/calibration/standard_Palicourea_ORC_versioncorrected_MCC.tre")
+setwd("~/Palicourea/Divergence_dating/")
+annot_tree <- phyloch::read.beast("standard_Palicourea_ORC_MCC.tre")
 #t<-read.beast("~/Desktop/Palicourea/Manuscript/calibration/standard_Palicourea_ORC_versioncorrected_MCC.tre")
-annot_tree <- ape::drop.tip(annot_tree, tips2delete)
+#annot_tree <- ape::drop.tip(annot_tree, tips2delete)
 
 if (is.null(annot_tree$`CAheight_95%_HPD_MIN`)) {
   annot_tree$min_ages <- annot_tree$`height_95%_HPD_MIN`
