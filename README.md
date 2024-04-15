@@ -63,9 +63,13 @@ Run MO keeping clades with >20% total taxa using all outgroups
 
 in R:
 `a <- as.numeric(read.table("ortho_stats")[,1])` **
+
 `a <- sort(a, decreasing=TRUE)` **
+
 `pdf(file="taxon_occupancy.pdf")` **
+
 `plot(a, type="l", lwd=3, ylab="Number of Taxa in Each Ortholog")` **
+
 `dev.off()` **
 
 Results include [ortho stats](https://github.com/ambed0ya/Palicourea/blob/main/ortho_stats "ortho stats") and [taxon_stats](https://github.com/ambed0ya/Palicourea/blob/main/taxon_stats "taxon stats")
