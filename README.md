@@ -1,7 +1,7 @@
 # Palicourea
 Code for phylogenomics, climatic niche overlap, biogeography and character state reconstruction for Bedoya et al., In Review.
 
-## Contents
+### Contents
 
 
 
