@@ -54,3 +54,6 @@ Create fasta files from the final tree files to re-run trees and use those input
 `python write_ortholog_fasta_from_multiple_aln.py alignments_folder out_20percent aln-cln .tre output_folder` **
 
 Align and infer trees as described above
+
+Collapse low-support branches with newick utilities (see example below)
+`nw_ed  810-allexons.trees 'i & b<=10' o > 810-allexons-BS10.trees`
