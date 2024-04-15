@@ -58,11 +58,15 @@ Use treeshrink to detect and remove long branches that may be spurious branches
 Rename all outputs in every folder with [files_folders_namechanges.sh](https://github.com/ambed0ya/Palicourea/blob/main/files_folders_name_changes.sh "files_folders_name_changes.sh script") so they can then be all moved to a new folder (MO) to be pruned (e.g. `mv -t MO /.mm`)
 
 Run MO keeping clades with >20% total taxa using all outgroups
-`python prune_paralogs_MO.py your_MO_folder .mm 23 out_20percent` ** You'll need to modify this script to specify your own ingroups and outgroups. Also, play around with the minimum number of taxa to indicate in the MO analyses (23 here). For this, create a matrix occupancy stats plot as follows:
+`python prune_paralogs_MO.py your_MO_folder .mm 35 out_20percent` ** You'll need to modify this script to specify your own ingroups and outgroups. Also, play around with the minimum number of taxa to indicate in the MO analyses (35 here). For this, create a matrix occupancy stats plot as follows:
 `python ortholog_occupancy_stats.py out_20percent/` **
+Results include [ortho stats](https://github.com/ambed0ya/Palicourea/blob/main/ortho_stats "ortho stats") and [taxon_stats](https://github.com/ambed0ya/Palicourea/blob/main/taxon_stats "taxon stats")
+
 
 Create fasta files from the final tree files to re-run trees and use those input trees for downstream analyses (optional)
 `python write_ortholog_fasta_from_multiple_aln.py alignments_folder out_20percent aln-cln .tre output_folder` **
+
+Remove loci <200 bp.
 
 Align and infer trees as described above
 
