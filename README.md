@@ -3,13 +3,14 @@ Code for phylogenomics, climatic niche overlap, biogeography and character state
 
 ### Contents
 
- * [Trees](https://github.com/ambed0ya/Palicourea/blob/main/trees "Trees") inferred from target enrichment data (single-copy and inferred orthologs; see instricution for orthology and tree inference below)
- *
-
-
-
-
-
+ * [Trees](https://github.com/ambed0ya/Palicourea/blob/main/trees "Trees") inferred from target enrichment data (single-copy and inferred orthologs; see code for orthology and tree inference below)
+ * [Quartet Sampling Score data and code](https://github.com/ambed0ya/Palicourea/blob/main/Quartet_Sampling_Score "Quartet Sampling Score data and code")
+ * [Divergence dating data and code](https://github.com/ambed0ya/Palicourea/blob/main/Divergence_dating "Divergence Dating data and code")
+ * [Biogeographic_modeling data and code](https://github.com/ambed0ya/Palicourea/blob/main/Biogeographic_modeling "Biogeographic modeling data and code")
+ * [ASR Inflorescence morphology](https://github.com/ambed0ya/Palicourea/blob/main/Inflorescence_ASE "ASR Inflorescence morphology")
+ * [Probability of realized climatic niche overlap data and code](https://github.com/ambed0ya/Palicourea/blob/main/Climatic_niche_overlap "Probability of realized climatic niche overlap data and code")
+ 
+ 
 Initial Analyses of target enrichment data (including orthology inference) follows Morales-Briones (Morales-Briones, D.F., B. Gehrke, H. Chien-Hsun Huang, A. Liston, M. Hong. H.E. Marx, D.C. Tank & Y. Yang. 2022. Analysis of paralogs in target enrichment data pinpoints multiple ancient polyploidy events in Alchemilla s.l. (Rosaceae). Systematic Biology 71(1):190–207) in the treatment of putative paralogs. Diego's scripts are indicated with **
 
 ## Filter loci: remove loci with low coverage across samples and total sequence length
