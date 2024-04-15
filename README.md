@@ -60,6 +60,14 @@ Rename all outputs in every folder with [files_folders_namechanges.sh](https://g
 Run MO keeping clades with >20% total taxa using all outgroups
 `python prune_paralogs_MO.py your_MO_folder .mm 35 out_20percent` ** You'll need to modify this script to specify your own ingroups and outgroups. Also, play around with the minimum number of taxa to indicate in the MO analyses (35 here). For this, create a matrix occupancy stats plot as follows:
 `python ortholog_occupancy_stats.py out_20percent/` **
+
+in R:
+`a <- as.numeric(read.table("ortho_stats")[,1])` **
+`a <- sort(a, decreasing=TRUE)` **
+`pdf(file="taxon_occupancy.pdf")` **
+`plot(a, type="l", lwd=3, ylab="Number of Taxa in Each Ortholog")` **
+`dev.off()` **
+
 Results include [ortho stats](https://github.com/ambed0ya/Palicourea/blob/main/ortho_stats "ortho stats") and [taxon_stats](https://github.com/ambed0ya/Palicourea/blob/main/taxon_stats "taxon stats")
 
 
