@@ -11,7 +11,7 @@
 #######################
 
 CHARACTER = "palicourea.inflorescence_type"
-NUM_STATES = 3
+NUM_STATES = 4
 
 # Import the morphological character matrix #
 morpho <- readDiscreteCharacterData("palicourea.inflorescence_type.nex")
