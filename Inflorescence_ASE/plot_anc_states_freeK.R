@@ -11,9 +11,9 @@ library(RevGadgets)
 library(ggplot2)
 
 CHARACTER <- "palicourea.inflorescence_type"
-NUM_STATES <- 3
+NUM_STATES <- 4
 
-STATE_LABELS <- c("0" = "psy", "1" = "pali", "2" = "hotlips")
+STATE_LABELS <- c("0" = "psy_open", "1" = "psy_congested", "2" = "Pali", "3" = "Cephaelis")
 
 tree_file <- paste0(CHARACTER,"_ase_freeK.tree")
 
