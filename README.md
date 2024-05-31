@@ -55,7 +55,7 @@ Mask monophyletic and paraphyletic taxa:
 Use treeshrink to detect and remove long branches that may be spurious branches
 `python tree_shrink_wrapper.py . .tt.mm 0.01 treeshrink` (test different quantiles to see which one fit better your data; these are you final homolog trees) **
 
-Rename all outputs in every folder with [files_folders_namechanges.sh](https://github.com/ambed0ya/Palicourea/blob/main/files_folders_name_changes.sh "files_folders_name_changes.sh script") so they can then be all moved to a new folder (MO) to be pruned (e.g. `mv -t MO */*.mm`)
+Rename all outputs in every folder with [files_folders_namechanges.sh](https://github.com/ambed0ya/Palicourea/blob/main/files_folders_namechanges.sh "files_folders_name_changes.sh script") so they can then be all moved to a new folder (MO) to be pruned (e.g. `mv -t MO */*.mm`)
 
 Run MO keeping clades with >20% total taxa using all outgroups
 `python prune_paralogs_MO.py your_MO_folder .mm 35 out_20percent` ** You'll need to modify this script to specify your own ingroups and outgroups. Also, play around with the minimum number of taxa to indicate in the MO analyses (35 here). For this, create a matrix occupancy stats plot as follows:
