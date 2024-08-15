@@ -149,69 +149,43 @@ spp_df<-list.rbind(occurrences)
 
 df <- cbind.data.frame(spp_df,log_values_df)
 
-niche_data<-df[4:8]
+#add elevation using raster manually downloaded from worldclim.org
+elev <- raster("elevation.tif")
+
+long_lat <- df[c("longitude", "latitude")]
+coordinates(long_lat) <- ~longitude + latitude
+crs(long_lat) <- crs(elev)
+df$elev <- extract(elev, long_lat)
+
+#alt method; extracts elevation automatically, but takes a really long time to download data
+#pal_sf <- sf::st_as_sf(df, coords = c("longitude", "latitude"), crs = 4326)
+#df$elev <- get_elev_point(locations = pal_sf, prj = 4326)
+
+niche_data<-df[4:9]
 niche_data$species<-gsub(" ", "_", niche_data$species)
 niche_data_complete<-na.omit(niche_data)
-write.table(niche_data_complete, "Palicourea_raw_climate_data.csv", quote = FALSE, sep = "\t", )
-
-#########################################################################################
-###############################Phylogenetic PCA #########################################
-#########################################################################################
+write.csv(niche_data_complete, "Palicourea_climate_data_with_elev.csv", row.names = F)
 
 ##Calculationn of median value for cimatic variables for each species
-median_niche_values<-aggregate(niche_data_complete[2:5], niche_data_complete[1], median)
-write.table(median_niche_values, "Palicourea_median_climate_data.csv", quote = FALSE, sep = "\t", )
+median_niche_values<-aggregate(niche_data_complete[2:6], niche_data_complete[1], median)
+write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev.csv", row.names=F)
 #median_niche_values$species<-as.factor(median_niche_values$species)
 
-##Principal Components Analysis
-##Reading tree
-setwd ("~/Desktop/Submitted/Palicourea/Manuscript/niche")
-astral01 <- read.tree("rev_dendrogram.tre")
-tips2delete<-c("Pal_acuminata1","Pal_guianensis2","Pal_quinquepyrena")
-tree <- ape::drop.tip(astral01, tips2delete)
-plot(tree)
-
-# Update tip labels so that they match the names in the niche data
-new_names <- read.csv("pal_name_updates.csv", header = T)
-match_indices <- match(tree$tip.label, new_names$old_label)
-# Replace names in tree$tip.label vector
-tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
-plot(tree)
-
+#########################################################################################
+##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
+#########################################################################################
 #convert Species column into row names
 median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=median_niche_values[,1])
 
 #Convert dataframe to matrix
 matrix_median_niche_values<-data.matrix(median_niche_values_rownames)
-
-#Phylogenetic PCA
-pali_pca<-phyl.pca(tree, matrix_median_niche_values)
-
-attributes(pali_pca)
-print(pali_pca)
-summary(pali_pca)
-
-#Plotting Phylogenetic PCA
-#cols<-setNames(palette()[6:1],sort(unique(getStates(tree))))
-#par(mar=c(5.1,4.1,0.6,0.6))
-phylomorphospace(tree,scores(pali_pca,dim=c(1,2)),
-                 ftype="off",node.by.map=TRUE,bty="n",
-                 node.size=c(0,1.2))
-grid()
-legend("topleft",names(cols),pch=21,pt.bg=cols,horiz=TRUE,
-       bty="n",pt.cex=1.5)
-
-
-#########################################################################################
-##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
-#########################################################################################
-
 #Calculate and plot DTT across variables
-par( mfrow= c(1,5) )
-dttbio1<-dtt(phy=tree, data=matrix_median_niche_values[,"bio1"], index="avg.sq", nsim=1000, plot=TRUE, mdi.range = c(12,0))
+par( mfrow= c(5,1) )
+dttbio1<-dtt(phy=tree, data=matrix_median_niche_values[,"bio1"], index="avg.sq", nsim=1000, plot=TRUE)
+dttelev<-dtt(phy=tree, data=matrix_median_niche_values[,"elev"], index="avg.sq", nsim=1000, plot=TRUE)
+dttbio6<-dtt(phy=tree, data=matrix_median_niche_values[,"bio6"], index="avg.sq", nsim=1000, plot=TRUE)
 dttbio12<-dtt(phy=tree, data=matrix_median_niche_values[,"bio12"], index="avg.sq", nsim=1000, plot=TRUE)
 dttbio5<-dtt(phy=tree, data=matrix_median_niche_values[,"bio5"], index="avg.sq", nsim=1000, plot=TRUE)
-dttbio6<-dtt(phy=tree, data=matrix_median_niche_values[,"bio6"], index="avg.sq", nsim=1000, plot=TRUE)
 
 
 ###Disparity among groups
@@ -220,7 +194,7 @@ library("dispRity")
 
 #Assigning species to groups (Andes and Amazon)
 
-Andes_Amazon<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
+Biogeography<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
                  "Palicourea_stipularis","Palicourea_flavescens",
                  "Palicourea_padifolia","Palicourea_lehmannii",
                  "Palicourea_thyrsiflora","Palicourea_demissa",
@@ -229,7 +203,7 @@ Andes_Amazon<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
                  "Palicourea_luteonivea","Palicourea_sulphurea",
                  "Palicourea_apicata","Palicourea_loxensis",
                  "Palicourea_angustifolia"
-                 ,"Palicourea_flavifolia","Palicourea_bangii","Palicourea_reticulata"
+#                 ,"Palicourea_flavifolia","Palicourea_bangii","Palicourea_reticulata"
                  ),
      "Amazon" = c("Palicourea_suerrensis","Palicourea_justiciifolia",
                   "Palicourea_ostreophora","Palicourea_quadrifolia",
@@ -245,14 +219,21 @@ Andes_Amazon<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
                   "Palicourea_guianensis","Palicourea_marcgravii",
                   "Palicourea_grandiflora","Palicourea_rigida",
                   "Palicourea_polycephala","Palicourea_egensis",
-                  "Palicourea_deflexa","Palicourea_woronovii"))
+                  "Palicourea_deflexa","Palicourea_woronovii"),
+     "Central" = c("Palicourea_tetragona","Palicourea_domingensis",
+                   "Palicourea_pubescens","Palicourea_elata",
+                   "Palicourea_correae","Palicourea_berteroana"),
+     "Lowland" = c("Palicourea_timbiquensis","Palicourea_acanthacea",
+                   "Palicourea_brachiata","Palicourea_glomerulata"),
+     "Atlantic_Forest" = c("Psychotria_suterella","Palicourea_brachypoda",
+                           "Palicourea_sessilis","Palicourea_divaricata"))
 
 
 #########################################
 #Regular PCA for dispRity analysis below
 #########################################
 
-pc <- prcomp(median_niche_values[,-1],
+pc <- prcomp(median_niche_values[,2:5],
              center = TRUE,
              scale. = TRUE)
 attributes(pc)
@@ -290,9 +271,9 @@ matrix_pca_df<-as.matrix(pca_df_rownames)
 ##Disparity among groups using the average squared pairwise distance metric
 
 #Brootstrapping with rarefaction
-subsets<-custom.subsets(data=matrix_pca_df, group = Andes_Amazon)
+subsets<-custom.subsets(data=matrix_pca_df, group = Biogeography)
 boot<-boot.matrix(subsets, bootstraps = 100,
-            rarefaction = 20)
+            rarefaction = 4)
 
 #Estimating disparity
 disparity_rarefied <- dispRity(boot, metric = function(x) mean(dist(x)^2))
@@ -304,11 +285,11 @@ plot(disparity_rarefied, observed =T)
 #plot(disparity, observed = list("pch" = 19, col = "blue", cex = 4))
 
 # Measuring the subset overlap
-test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni")
+test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni") #in supplements
 
 # Differences between the subsets bootstrapped
 test.dispRity(disparity_rarefied, test = wilcox.test, comparisons = "pairwise", correction = "bonferroni",
-              conc.quantiles = c(mean, c(95, 5)))
+              conc.quantiles = c(mean, c(95, 5))) #in supplements
 
 #Disparity among groups using the average squared pairwise distance metric and No bootstrap nor rarification
 #disparity_data <- dispRity.per.group(matrix_median_niche_values,
@@ -324,14 +305,89 @@ test.dispRity(disparity_rarefied, test = wilcox.test, comparisons = "pairwise", 
 #test.dispRity(disparity_data, test = bhatt.coeff)
 
 ## Calculate the disparity of the dataset using dtt.dispRity
-dispRity_dtt <- dtt.dispRity(data = matrix_median_niche_values, metric = function(x) mean(dist(x)^2),
+dispRity_dtt <- dtt.dispRity(data = matrix_median_niche_values[,2:5], metric = function(x) mean(dist(x)^2),
                              tree = tree, nsim = 100, scale.time=T)
-dispRity_dtt
+
+#dispRity_dtt
 ## Plotting the results
-plot.dispRity()
 plot(dispRity_dtt)
 
-See if lines 330-336 are needed
+
+#########################################################################################
+###############################Phylogenetic PCA #########################################
+#########################################################################################
+
+##Principal Components Analysis
+##Reading tree
+astral01 <- read.tree("rev_dendrogram.tre")
+tips2delete<-c("Pal_acuminata1","Pal_guianensis2","Pal_quinquepyrena")
+tree <- ape::drop.tip(astral01, tips2delete)
+plot(tree)
+
+# Update tip labels so that they match the names in the niche data
+new_names <- read.csv("pal_name_updates.csv", header = T)
+match_indices <- match(tree$tip.label, new_names$old_label)
+# Replace names in tree$tip.label vector
+tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
+plot(tree)
+
+#add Areas to highlight for plotting
+areas<-c("L","E","Other","A","E","A","A","Other","C","L","F","Other","E","Other",
+         "C","E","E","E","Other","E","A","E","E","F","C","E","C","A",
+         "Other","E","L","E","E","E","Other","Other","E","E","A","A","A","A",
+         "E","E","E","E","E","A","Other","E","E","C","A","E","Other","A",
+         "E","E","A","F","A","A","A","Other","E","A","C","A","L","Other",
+         "Other","Other","E","E","E","Other","F") ##clumsy but works. You make it better
+median_niche_values$areas<-areas
+
+#convert Species column into row names
+median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=median_niche_values[,1])
+
+#Convert dataframe to matrix
+matrix_median_niche_values<-data.matrix(median_niche_values_rownames)
+
+#Phylogenetic PCA
+pPCA<-phyl.pca(tree, matrix_median_niche_values[,1:4])
+
+attributes(pPCA)
+print(pPCA)
+summary(pPCA)
+
+#Plotting Phylogenetic PCA
+#cols<-setNames(palette()[6:1],sort(unique(getStates(tree))))
+#par(mar=c(5.1,4.1,0.6,0.6))
+
+obj<-as.princomp(pPCA)
+
+p1<-fviz_screeplot(obj,addlabels=TRUE)
+p2<-fviz_pca_var(obj, col.var="contrib",
+                 gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+                 repel = TRUE # Avoid text overlapping
+)
+
+p3<-fviz_pca_ind(obj,label="none", habillage=median_niche_values$areas,
+                 palette= c("deepskyblue","#FFFF00","forestgreen", 
+                            "yellowgreen", "darkorange1","grey" ), addEllipses=F, pointsize=3,
+                 repel=T, max.overlaps=100)
+
+plotnames <- p3$data$name %>% as.character()
+plotnames<-recode(plotnames, "Palicourea_divaricata"="Pal_dicarivata", 
+                  "Palicourea_timbiquensis"="Pal_timbiquensis")
+
+mylabels <- sapply(plotnames, function(x) ifelse(is.na(str_locate(x,"Pal_")[1]),
+                                                 "", x)) %>% as.vector()
+p3<-p3 + geom_text(aes(label = mylabels))
+ggpubr::ggarrange(p3)
+ggpubr::ggarrange(p2) #in supplements
+
+#phylomorphospace(tree,scores(pali_pca,dim=c(1,2)),
+#                 ftype="off",node.by.map=TRUE,bty="n",
+#                 node.size=c(0,1.2))
+#grid()
+#legend("topleft",names(cols),pch=21,pt.bg=cols,horiz=TRUE,
+#       bty="n",pt.cex=1.5)
+
+
 #########################################################################################################
 ########################### 2.Calculating Niche Overlap with nicheRover##################################
 #########################################################################################################
