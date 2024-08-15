@@ -228,6 +228,49 @@ Biogeography<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
      "Atlantic_Forest" = c("Psychotria_suterella","Palicourea_brachypoda",
                            "Palicourea_sessilis","Palicourea_divaricata"))
 
+Biogeography2<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
+                 "Palicourea_stipularis","Palicourea_flavescens",
+                 "Palicourea_padifolia","Palicourea_lehmannii",
+                 "Palicourea_thyrsiflora","Palicourea_demissa",
+                 "Palicourea_amethystina","Palicourea_standleyana",
+                 "Palicourea_seemannii","Palicourea_pyramidalis",
+                 "Palicourea_luteonivea","Palicourea_sulphurea",
+                 "Palicourea_apicata","Palicourea_loxensis",
+                 "Palicourea_angustifolia"
+#                 ,"Palicourea_flavifolia","Palicourea_bangii","Palicourea_reticulata"
+                 ),
+     "Amazon" = c("Palicourea_suerrensis","Palicourea_justiciifolia",
+                  "Palicourea_ostreophora","Palicourea_quadrifolia",
+                  "Palicourea_corymbifera","Palicourea_winkleri",
+                  "Palicourea_dichotoma","Palicourea_gracilenta",
+                  "Palicourea_obliquinervia","Palicourea_prunifolia",
+                  "Palicourea_callithrix","Palicourea_glabra",
+                  "Palicourea_didymocarpos","Palicourea_acuminata",
+                  "Palicourea_rhodothamna","Palicourea_andina",
+                  "Palicourea_croceoides","Palicourea_crocea",
+                  "Palicourea_triphylla","Palicourea_lasiantha",
+                  "Palicourea_nitidella","Palicourea_macrobotrys",
+                  "Palicourea_guianensis","Palicourea_marcgravii",
+                  "Palicourea_grandiflora","Palicourea_rigida",
+                  "Palicourea_polycephala","Palicourea_egensis",
+                  "Palicourea_deflexa","Palicourea_woronovii"),
+     "Central" = c("Palicourea_tetragona","Palicourea_domingensis",
+                   "Palicourea_pubescens","Palicourea_elata",
+                   "Palicourea_correae","Palicourea_berteroana"),
+     "Lowland" = c("Palicourea_timbiquensis","Palicourea_acanthacea",
+                   "Palicourea_brachiata","Palicourea_glomerulata"),
+     "Atlantic_Forest" = c("Psychotria_suterella","Palicourea_brachypoda",
+                           "Palicourea_sessilis","Palicourea_divaricata"),
+     "out" = c("Palicourea_timbiquensis","Palicourea_acanthacea",
+               "Palicourea_brachiata","Palicourea_glomerulata",
+               "Palicourea_conephoroides","Palicourea_tinctoria",
+               "Palicourea_jelskii","Palicourea_allenii",
+               "Palicourea_tomentosa","Psychotria_rosea",
+               "Palicourea_hazenii","Palicourea_cyanococca",
+               "Psychotria_suterella","Palicourea_brachypoda",
+               "Palicourea_sessilis","Palicourea_divaricata"))
+
+
 
 #########################################
 #Regular PCA for dispRity analysis below
@@ -255,8 +298,9 @@ pca_df <- data.frame(
 #write.table(pca_df, "Palicourea_niche_PCA_with_elev.csv", quote = FALSE, sep = "\t", )
 pca_df_rownames <- data.frame(pca_df[,-1], row.names=pca_df[,1])
 pca_df_rownames<-pca_df_rownames[,1:2]
+pca_df_rownames_pc2<-pca_df_rownames[,2:3]
 matrix_pca_df<-as.matrix(pca_df_rownames)
-
+matrix_pca_df_pc2<-as.matrix(pca_df_rownames_pc2)
 ##Plot the PCA results
 #ggplot(pca_df, aes(x = PC1, y = PC2, label = Species)) +
 #  geom_point(size = 3) +
@@ -271,12 +315,12 @@ matrix_pca_df<-as.matrix(pca_df_rownames)
 ##Disparity among groups using the average squared pairwise distance metric
 
 #Brootstrapping with rarefaction
-subsets<-custom.subsets(data=matrix_pca_df, group = Biogeography)
+subsets<-custom.subsets(data=matrix_pca_df, group = Biogeography2)
 boot<-boot.matrix(subsets, bootstraps = 100,
             rarefaction = 4)
 
 #Estimating disparity
-disparity_rarefied <- dispRity(boot, metric = function(x) mean(dist(x)^2))
+disparity_rarefied <- dispRity(boot, dimensions=1,metric = function(x) mean(dist(x)^2))
 disparity_rarefied
 summary(disparity_rarefied)
 
