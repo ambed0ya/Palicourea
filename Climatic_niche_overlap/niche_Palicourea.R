@@ -170,6 +170,8 @@ write.csv(niche_data_complete, "Palicourea_climate_data_with_elev.csv", row.name
 median_niche_values<-aggregate(niche_data_complete[2:6], niche_data_complete[1], median)
 write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev.csv", row.names=F)
 #median_niche_values$species<-as.factor(median_niche_values$species)
+#load data
+median_niche_values<-read.csv("Palicourea_median_climate_data_with_elev.csv")
 
 #########################################################################################
 ##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
@@ -186,7 +188,6 @@ dttelev<-dtt(phy=tree, data=matrix_median_niche_values[,"elev"], index="avg.sq",
 dttbio6<-dtt(phy=tree, data=matrix_median_niche_values[,"bio6"], index="avg.sq", nsim=1000, plot=TRUE)
 dttbio12<-dtt(phy=tree, data=matrix_median_niche_values[,"bio12"], index="avg.sq", nsim=1000, plot=TRUE)
 dttbio5<-dtt(phy=tree, data=matrix_median_niche_values[,"bio5"], index="avg.sq", nsim=1000, plot=TRUE)
-
 
 ###Disparity among groups
 
@@ -335,6 +336,7 @@ test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni")
 test.dispRity(disparity_rarefied, test = wilcox.test, comparisons = "pairwise", correction = "bonferroni",
               conc.quantiles = c(mean, c(95, 5))) #in supplements
 
+
 #Disparity among groups using the average squared pairwise distance metric and No bootstrap nor rarification
 #disparity_data <- dispRity.per.group(matrix_median_niche_values,
 #                                     group = Andes_Amazon,
@@ -431,9 +433,36 @@ ggpubr::ggarrange(p2) #in supplements
 #legend("topleft",names(cols),pch=21,pt.bg=cols,horiz=TRUE,
 #       bty="n",pt.cex=1.5)
 
+#########################################################################################################
+########################### Inflorescence type, climate, and elevation##################################
+#########################################################################################################
+
+data<-read.csv("Palicourea_median_climate_data_with_elev_pollination.csv")
+
+pollination<-data$Principal_pollinator
+species<-data$species
+pollination<- setNames(pollination, species)
+
+elevation<-data$elev
+elevation<- setNames(elevation, species)
+
+#bio12<-data$bio12
+#bio12<- setNames(bio12, species)
+#convert Species column into row names
+
+phylANOVA(tree, pollination, elevation)
+
+p <- ggplot(data, aes(x=Principal_pollinator, y=elev, color=Principal_pollinator)) + # fill=name allow to automatically dedicate a color for each group
+  geom_boxplot()
+p
+
+#phylANOVA(tree, pollination, bio12)
+#PLOT THAT HERE TO SHOW THAT THERE IS THAT TENDENCY BUT THEY CAN ALSO GO DOWN
+
+#one.way <- aov(elev ~ Principal_pollinator, data = data)
 
 #########################################################################################################
-########################### 2.Calculating Niche Overlap with nicheRover##################################
+########################### Calculating Niche Overlap with nicheRover##################################
 #########################################################################################################
 
 #explore_data
@@ -692,3 +721,23 @@ Heatmap(heatmap, cluster_rows=dendrogram, cluster_columns=dendrogram, column_den
 
 #Heatmap(heatmap_subset2, cluster_rows=dendro_subsetF, cluster_columns=dendro_subsetF, column_dend_height = unit(2, "cm"),
 #        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
+
+#################################################################
+##Proportion of taxa by inflorescence type per evaluated clades##
+#################################################################
+
+#inflorescence_types<-read.csv("~/Desktop/Submitted/palicourea/Manuscript/area_inflorescence.csv",header=T)
+#io <- inflorescence_types[, percentage := V2 / sum(V2) * 100, by=V3]
+#                                                                   labels = c("Short", "Medium", "Long", "Extra Long")))
+
+# Use the table() function to get the counts of each species
+#Amazon<-filter(inflorescence_types,area=='Amazon')
+#Andes<-filter(inflorescence_types,area=='Andes')
+#Central<-filter(inflorescence_types,area=='Central') not enough data
+#Lowland<-filter(inflorescence_types,area=='Lowland') not enough data
+#out<-filter(inflorescence_types,area=='out')
+
+#i0group_counts<-table(inflorescence_types)
+#<- inflorescence_types %>%
+#  group_by(V3) %>%
+#  summarise(percentage = n() / nrow(inflorescence_types))
