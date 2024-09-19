@@ -164,7 +164,7 @@ df$elev <- extract(elev, long_lat)
 niche_data<-df[4:9]
 niche_data$species<-gsub(" ", "_", niche_data$species)
 niche_data_complete<-na.omit(niche_data)
-write.csv(niche_data_complete, "Palicourea_climate_data_with_elev.csv", row.names = F)
+write.csv(niche_data_complete, "Palicourea_raw_climate_data_with_elev.csv", row.names = F)
 
 ##Calculationn of median value for cimatic variables for each species
 median_niche_values<-aggregate(niche_data_complete[2:6], niche_data_complete[1], median)
@@ -183,11 +183,7 @@ median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=m
 matrix_median_niche_values<-data.matrix(median_niche_values_rownames)
 #Calculate and plot DTT across variables
 par( mfrow= c(5,1) )
-dttbio1<-dtt(phy=tree, data=matrix_median_niche_values[,"bio1"], index="avg.sq", nsim=1000, plot=TRUE)
-dttelev<-dtt(phy=tree, data=matrix_median_niche_values[,"elev"], index="avg.sq", nsim=1000, plot=TRUE)
-dttbio6<-dtt(phy=tree, data=matrix_median_niche_values[,"bio6"], index="avg.sq", nsim=1000, plot=TRUE)
-dttbio12<-dtt(phy=tree, data=matrix_median_niche_values[,"bio12"], index="avg.sq", nsim=1000, plot=TRUE)
-dttbio5<-dtt(phy=tree, data=matrix_median_niche_values[,"bio5"], index="avg.sq", nsim=1000, plot=TRUE)
+
 
 ###Disparity among groups
 
@@ -329,34 +325,8 @@ summary(disparity_rarefied)
 plot(disparity_rarefied, observed =T)
 #plot(disparity, observed = list("pch" = 19, col = "blue", cex = 4))
 
-# Measuring the subset overlap
+# Testing for the subset overlap
 test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni") #in supplements
-
-# Differences between the subsets bootstrapped
-test.dispRity(disparity_rarefied, test = wilcox.test, comparisons = "pairwise", correction = "bonferroni",
-              conc.quantiles = c(mean, c(95, 5))) #in supplements
-
-
-#Disparity among groups using the average squared pairwise distance metric and No bootstrap nor rarification
-#disparity_data <- dispRity.per.group(matrix_median_niche_values,
-#                                     group = Andes_Amazon,
-#                                     metric = function(x) mean(dist(x)^2))
-
-#disparity_data
-#summary(disparity_data)
-#Plotting the results
-#plot(disparity_data)
-
-#Testing for a difference between groups
-#test.dispRity(disparity_data, test = bhatt.coeff)
-
-## Calculate the disparity of the dataset using dtt.dispRity
-dispRity_dtt <- dtt.dispRity(data = matrix_median_niche_values[,2:5], metric = function(x) mean(dist(x)^2),
-                             tree = tree, nsim = 100, scale.time=T)
-
-#dispRity_dtt
-## Plotting the results
-plot(dispRity_dtt)
 
 
 #########################################################################################
@@ -418,7 +388,7 @@ p3<-fviz_pca_ind(obj,label="none", habillage=median_niche_values$areas,
 
 plotnames <- p3$data$name %>% as.character()
 plotnames<-recode(plotnames, "Palicourea_divaricata"="Pal_dicarivata", 
-                  "Palicourea_timbiquensis"="Pal_timbiquensis")
+                  "Palicourea_timbiquensis"="Pal_timbiquensis", "Palicourea_acanthacea"="Pal_acanthacea")
 
 mylabels <- sapply(plotnames, function(x) ifelse(is.na(str_locate(x,"Pal_")[1]),
                                                  "", x)) %>% as.vector()
@@ -438,6 +408,7 @@ ggpubr::ggarrange(p2) #in supplements
 #########################################################################################################
 
 data<-read.csv("Palicourea_median_climate_data_with_elev_pollination.csv")
+#mean(data$elev)
 
 pollination<-data$Principal_pollinator
 species<-data$species
@@ -446,8 +417,6 @@ pollination<- setNames(pollination, species)
 elevation<-data$elev
 elevation<- setNames(elevation, species)
 
-#bio12<-data$bio12
-#bio12<- setNames(bio12, species)
 #convert Species column into row names
 
 phylANOVA(tree, pollination, elevation)
@@ -456,288 +425,63 @@ p <- ggplot(data, aes(x=Principal_pollinator, y=elev, color=Principal_pollinator
   geom_boxplot()
 p
 
+library("car")
+
+levene_test = leveneTest(elev ~ Principal_pollinator, data)
+
+print(levene_test)
 #phylANOVA(tree, pollination, bio12)
-#PLOT THAT HERE TO SHOW THAT THERE IS THAT TENDENCY BUT THEY CAN ALSO GO DOWN
 
-#one.way <- aov(elev ~ Principal_pollinator, data = data)
+##reading data for proportion of pollinators at given elevation
+proportions<-read.csv("Palicourea_pollination_prop_elev.csv")
+reggression<-lm(proportion ~ elev, data = proportions)
+summary(reggression)
+plot(proportions, pch=16, col="grey")
+abline(reggression)
 
-#########################################################################################################
-########################### Calculating Niche Overlap with nicheRover##################################
-#########################################################################################################
+###########################################################################
+##Testing for the effect of spp. with broad elevation ranges on phylANOVA##
+###########################################################################
 
-#explore_data
-aggregate(niche_data_complete[2:5], niche_data_complete[1], median)
-#Prepare data
-new_names <- as.character(unique(niche_data_complete$species))
-new_names_sort<-sort(new_names)
-palicourea_split<-split(niche_data_complete, niche_data_complete$species)
-for (i in 1:length(palicourea_split)) {
-  assign(new_names_sort[i], palicourea_split[[i]])
-}
+niche_data_complete<-read.csv("Palicourea_raw_climate_data_with_elev.csv")
 
-#I created a file with combinations matching the order in the phylogeny
-combinations<-read.csv("combinations.csv",h=T)
-spp1<-as.character(combinations$spp1)
-spp2<-as.character(combinations$spp2)
+#Estimate standard deviation (SD) of elevation for each species
+sd_niche_values<-aggregate(niche_data_complete[2:6], niche_data_complete[1], sd)
+#write.csv(sd_niche_values, "Palicourea_sd_climate_data_with_elev.csv", row.names=F)
 
-pairs <- c(1:3003)
+#Remove species with SD above the average SD across species
+mean(sd_niche_values$elev) #467.8977
 
-for (i in seq_along(pairs)){
-  assign(paste('pair_', i, sep = ''), rbind(get(spp1[i]),get(spp2[i])))
-}
+broad_elev_removed = sd_niche_values[sd_niche_values$elev > 467.8977,]
 
-#Generate parameter draws from the "default" posterior for each species
-nsamples <- 1e3
-pair_names <- paste0("pair_", 1:3003)
-for (i in 1:length(pair_names)){
-  assign(paste('niche_data_complete.par',i, sep = ''), tapply(1:nrow(get(pair_names[i])), get(pair_names[i])$species,
-                      function(ii) niw.post(nsamples = nsamples, X = get(pair_names[i])[ii,2:5])))
-}
+new_names <- read.csv("pal_name_updates.csv", header = T)
+match_indices <- match(tree$tip.label, new_names$old_label)
+# Replace names in tree$tip.label vector
+tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
 
-#save this precious info
-lapply(ls(pattern="niche_data_complete.par[1-9]+"),function(x) save(list=x, file=paste0(x,".RData")))
+spp2remove<-broad_elev_removed$species
 
-#open them
-file_names <- paste0("niche_data_complete.par", 1:3003,".Rdata")
-for(i in 1:length(file_names)) load(file_names[[i]]) 
+new_data <- subset(data, !(species %in% spp2remove))
 
+new_pollination<-new_data$Principal_pollinator
+new_species<-new_data$species
+new_pollination<- setNames(new_pollination, new_species)
 
-#uncomment below for graphs with posterior distributions of each climatic variable in species pairs
-#par(mar = c(2, 2, .5, .1)+.1, mfrow = c(1,3))
-#clrs <- c("blue", "orange")
-#niche.par.plot(niche_data_complete.par2, col = clrs, plot.index = 1)
-#niche.par.plot(niche_data_complete.par2, col = clrs, plot.index = 2)
-#niche.par.plot(niche_data_complete.par2, col = clrs, plot.index = 1:2)
-#legend("topleft", legend = names(niche_data_complete.par), fill = clrs)
+new_elevation<-new_data$elev
+new_elevation<- setNames(new_elevation, new_species)
 
-#Overlap calculation
-niche_data.par_names <- paste0("niche_data_complete.par", 1:3003)
-for (i in 1:length(niche_data.par_names)){
-  assign(paste('over.stat',i, sep = ''), overlap(get(niche_data.par_names[i]), nreps = nsamples, nprob = 1e3, alpha = .95))
-}
+new_tree <- ape::drop.tip(tree, spp2remove)
 
-#save this precious info
-lapply(ls(pattern="over.stat[1-9]+"),function(x) save(list=x, file=paste0(x,".RData")))
+phylANOVA(new_tree, new_pollination, new_elevation)
+
+new_p <- ggplot(new_data, aes(x=Principal_pollinator, y=elev, color=Principal_pollinator)) + # fill=name allow to automatically dedicate a color for each group
+  geom_boxplot()
+new_p
+
+library("car")
+
+new_levene_test = leveneTest(elev ~ Principal_pollinator, new_data)
+
+print(new_levene_test)
 
 
-#open them
-file_names <- paste0("over.stat", 1:3003,".Rdata")
-for(i in 1:length(file_names)) load(file_names[[i]]) 
-
-####If making plots of prob. overlap##############################################################################
-clrs <- c("blue", "orange")
-overlap.plot(over.stat1469, col = clrs, mean.cred.col = "turquoise", equal.axis = TRUE,
-             xlab = "Overlap Probability (%) -- Niche Region Size: 95%")#for (i in 1:length(over.stat_names)){
-#  overlap.plot((get(over.stat_names[2])), col = clrs, mean.cred.col = "turquoise",equal.axis = TRUE,
-#              xlab = "Overlap Probability (%) -- Niche Region Size: 95%")
-#}
-#######################################################################################################
-
-#Clumsy way of removing same species comparison (diagonal)
-diagonal<-c(1,78,154,229,303,376,448,519,589,658,726,793,859,924,988,
-            1051,1113,1174,1234,1293,1351,1408,1464,1519,1573,1626,1678,1729,1779,
-            1828,1876,1923,1969,2014,2058,2101,2143,2184,2224,2263,2301,2338,2374,
-            2409,2443,2476,2508,2539,2569,2598,2626,2653,2679,2704,2728,
-            2751,2773,2794,2814,2833,2851,2868,2884,2899,2913,2926,2938,
-            2949,2959,2968,2976,2983,2989,2994,2998,3001,3003)
-over.stat_names <- paste0("over.stat", 1:3003)
-over.stat_names_diagonal<-paste0("over.stat",diagonal)
-over.stat_names_final<-setdiff(over.stat_names,over.stat_names_diagonal)
-
-##Calculating mean over all iterations for niche overlap
-for (i in 1:length(over.stat_names_final)){
-  assign(paste('over.mean',i, sep = ''), apply(get(over.stat_names_final[i]), c(1,2), mean)*100)
-}
-
-####################################################################################################
-##########PLOTTING##################################################################################
-####################################################################################################
-
-#Creating dataframe for plotting
-all_species4df<-data.frame(spp1,spp2)
-#another clumsy solution for removing same species comparison (diagonal)
-species4df<-all_species4df[-c(1,78,154,229,303,376,448,519,589,658,726,793,859,924,988,
-                              1051,1113,1174,1234,1293,1351,1408,1464,1519,1573,1626,1678,1729,1779,
-                              1828,1876,1923,1969,2014,2058,2101,2143,2184,2224,2263,2301,2338,2374,
-                              2409,2443,2476,2508,2539,2569,2598,2626,2653,2679,2704,2728,
-                              2751,2773,2794,2814,2833,2851,2868,2884,2899,2913,2926,2938,
-                              2949,2959,2968,2976,2983,2989,2994,2998,3001,3003),]
-
-#Creating vectors with overlap mean calculated values for each species pair
-over.mean_names <- paste0("over.mean", 1:2926)
-overlap_mean_sp1to2=c()
-for (i in 1:length(over.mean_names)){
-  overlap_mean_sp1to2=c(overlap_mean_sp1to2, get(over.mean_names[i]) [2])
-}
-
-overlap_mean_sp2to1=c()
-for (i in 1:length(over.mean_names)){
-  overlap_mean_sp2to1=c(overlap_mean_sp2to1,  get(over.mean_names[i]) [3])
-}
-
-overlaps<-data.frame(overlap_mean_sp1to2, overlap_mean_sp2to1)
-plotting_df<-cbind(species4df,overlaps)
-
-write.csv(plotting_df, file = "~/Desktop/Palicourea/Manuscript/niche/plotting_df_revised.csv")
-
-##Creating dendrogram from phylogenetic tree for Heatmap
-setwd ("~/Desktop/Palicourea/Manuscript/niche")
-astral<-"rev_dendrogram.tre"
-astral01<-ape::read.tree(astral)
-astral01
-#tips2delete<-read.table("tips2delete4dendrogram.txt",header=F)
-tips2delete<-c("Pal_acuminata1","Pal_guianensis2","Pal_quinquepyrena")
-tree <- ape::drop.tip(astral01, tips2delete)
-#check label no. is the same as niche data
-tree$tip.label
-setwd ("~/Desktop/Palicourea/Manuscript/niche/")
-write.tree(tree,file="dendrogram.tre")
-#Manually check labels on dendrogram to labels on niche data then import
-dendro<-ape::read.tree("dendrogram_edited.tre")
-
-####Heatmap######
-#set dendrogram
-dendrogram<-as.dendrogram(dendro)
-#added values for same species to 100 overlap manually
-plotting_df<-read.csv("heatmap.csv",header=T)
-heatmap<-plotting_df[,2:78]
-heatmap<-as.matrix(heatmap)
-rownames(heatmap) = c("Palicourea_suerrensis","Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
-                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
-                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
-                      "Palicourea_acuminata","Palicourea_andina","Palicourea_didymocarpos","Palicourea_rhodothamna",
-                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
-                      "Palicourea_nitidella","Palicourea_macrobotrys","Palicourea_guianensis","Palicourea_marcgravii",
-                      "Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
-                      "Palicourea_deflexa","Palicourea_woronovii","Palicourea_bangii","Palicourea_flavifolia",
-                      "Palicourea_reticulata","Palicourea_stipularis","Palicourea_flavescens","Palicourea_stenosepala",
-                      "Palicourea_lineata","Palicourea_padifolia","Palicourea_lehmannii","Palicourea_thyrsiflora",
-                      "Palicourea_demissa","Palicourea_amethystina","Palicourea_standleyana","Palicourea_seemannii",
-                      "Palicourea_pyramidalis","Palicourea_luteonivea","Palicourea_sulphurea","Palicourea_apicata",
-                      "Palicourea_loxensis","Palicourea_angustifolia","Palicourea_tetragona","Palicourea_domingensis",
-                      "Palicourea_pubescens","Palicourea_correae","Palicourea_elata","Palicourea_berteroana",
-                      "Palicourea_petiolaris","Palicourea_timbiquensis","Palicourea_acanthacea","Palicourea_brachiata",
-                      "Palicourea_glomerulata","Palicourea_conephoroides","Palicourea_tinctoria","Palicourea_jelskii",
-                      "Palicourea_allenii","Palicourea_cyanococca","Palicourea_hazenii","Palicourea_tomentosa",
-                      "Psychotria_rosea","Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
-                      "Palicourea_divaricata","Palicourea_racemosa","Palicourea_subfusca","Palicourea_topoensis","Palicourea_brevicollis")
-colnames(heatmap) = c("Palicourea_suerrensis","Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
-                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
-                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
-                      "Palicourea_acuminata","Palicourea_andina","Palicourea_didymocarpos","Palicourea_rhodothamna",
-                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
-                      "Palicourea_nitidella","Palicourea_macrobotrys","Palicourea_guianensis","Palicourea_marcgravii",
-                      "Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
-                      "Palicourea_deflexa","Palicourea_woronovii","Palicourea_bangii","Palicourea_flavifolia",
-                      "Palicourea_reticulata","Palicourea_stipularis","Palicourea_flavescens","Palicourea_stenosepala",
-                      "Palicourea_lineata","Palicourea_padifolia","Palicourea_lehmannii","Palicourea_thyrsiflora",
-                      "Palicourea_demissa","Palicourea_amethystina","Palicourea_standleyana","Palicourea_seemannii",
-                      "Palicourea_pyramidalis","Palicourea_luteonivea","Palicourea_sulphurea","Palicourea_apicata",
-                      "Palicourea_loxensis","Palicourea_angustifolia","Palicourea_tetragona","Palicourea_domingensis",
-                      "Palicourea_pubescens","Palicourea_correae","Palicourea_elata","Palicourea_berteroana",
-                      "Palicourea_petiolaris","Palicourea_timbiquensis","Palicourea_acanthacea","Palicourea_brachiata",
-                      "Palicourea_glomerulata","Palicourea_conephoroides","Palicourea_tinctoria","Palicourea_jelskii",
-                      "Palicourea_allenii","Palicourea_cyanococca","Palicourea_hazenii","Palicourea_tomentosa",
-                      "Psychotria_rosea","Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
-                      "Palicourea_divaricata","Palicourea_racemosa","Palicourea_subfusca","Palicourea_topoensis","Palicourea_brevicollis")
-
-#col_fun = colorRamp2(c(0,50,100), c("#4EB265","#F7F056","#FE9929"))
-col_fun = colorRamp2(c(0,50,100), c("#F7F056","#FE9929","#DC050C"))
-
-Heatmap(heatmap, cluster_rows=dendrogram, cluster_columns=dendrogram, column_dend_height = unit(2, "cm"),
-        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
-#
-
-             
-#commands for each step above (no loops)
-#over.stat <- overlap(niche_data_complete.par300, nreps = 1000, nprob = 1e4, alpha = .95
-#over.mean <- apply(over.stat, c(1:2,1), mean)*100
-#round(over.mean, 2)
-#over.cred <- apply(over.stat*100, c(1:2, 4), quantile, prob = c(.025, .975), na.rm = TRUE)
-#round(over.cred[,,,1])
-#over.stat7 <- overlap(niche_data_complete.par7, nreps = nsamples, nprob = 1e4, alpha = .95)
-#overlap.plot(over.stat, col = clrs, mean.cred.col = "turquoise", equal.axis = TRUE,
-#             xlab = "Overlap Probability (%) -- Niche Region Size: 95%")
-
-
-
-########################################################################################################
-########################################################################################################
-########################SUBSET HEATMAP##################################################################
-########################################################################################################
-
-#heatmap_all<-read_csv("plotting_df.csv")
-
-#keep<-c("Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
-#        "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
-#        "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
-#        "Palicourea_acuminata","Palicourea_didymocarpos","Palicourea_rhodothamna","Palicourea_triphylla",
-#        "Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha","Palicourea_nitidella",
-#        "Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
-#        "Palicourea_deflexa","Palicourea_woronovii")
-
-
-
-#dendro_subset<-ape::read.tree("dendrogram_subset.tre")
-#dendro_subset<-as.dendrogram(dendro_subset)
-####Heatmap######
-
-#heatmap_subset<-read.csv("heatmap_subset.csv",header=T)
-#added values for same secies to 100 overlap manually
-#heatmap_subset<-heatmap_subset[,2:26]
-#heatmap_subset<-as.matrix(heatmap_subset)
-#rownames(heatmap_subset) = c("Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
-#                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
-#                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
-#                      "Palicourea_acuminata","Palicourea_didymocarpos","Palicourea_rhodothamna",
-#                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
-#                      "Palicourea_nitidella","Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
-#                      "Palicourea_deflexa","Palicourea_woronovii")
-#colnames(heatmap_subset) = c("Palicourea_justiciifolia","Palicourea_ostreophora","Palicourea_quadrifolia",
-#                      "Palicourea_corymbifera","Palicourea_winkleri","Palicourea_dichotoma","Palicourea_gracilenta",
-#                      "Palicourea_obliquinervia","Palicourea_prunifolia","Palicourea_callithrix","Palicourea_glabra",
-#                      "Palicourea_acuminata","Palicourea_didymocarpos","Palicourea_rhodothamna",
-#                      "Palicourea_triphylla","Palicourea_croceoides","Palicourea_crocea","Palicourea_lasiantha",
-#                      "Palicourea_nitidella","Palicourea_grandiflora","Palicourea_rigida","Palicourea_egensis","Palicourea_polycephala",
-#                      "Palicourea_deflexa","Palicourea_woronovii")
-
-#col_fun = colorRamp2(c(0,50,100), c("#4EB265","#F7F056","#FE9929"))
-#col_fun = colorRamp2(c(0,50,100), c("#F7F056","#FE9929","#DC050C"))
-
-#Heatmap(heatmap_subset, cluster_rows=dendro_subset, cluster_columns=dendro_subset, column_dend_height = unit(2, "cm"),
-#        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
-#
-
-#heatmap_subset2<-read.csv("heatmap_subsetF.csv",header=T)
-#added values for same secies to 100 overlap manually
-#heatmap_subset2<-heatmap_subset2[,2:6]
-#heatmap_subset2<-as.matrix(heatmap_subset2)
-#rownames(heatmap_subset2) = c("Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
-#                              "Palicourea_divaricata","Palicourea_brevicollis")
-#colnames(heatmap_subset2) = c("Psychotria_suterella","Palicourea_brachypoda","Palicourea_sessilis",
-#                              "Palicourea_divaricata","Palicourea_brevicollis")
-#dendro_subsetF<-ape::read.tree("dendrogram_subsetF.tre")
-#dendro_subsetF<-as.dendrogram(dendro_subsetF)
-
-#Heatmap(heatmap_subset2, cluster_rows=dendro_subsetF, cluster_columns=dendro_subsetF, column_dend_height = unit(2, "cm"),
-#        row_dend_width = unit(2, "cm"),column_names_gp = gpar(fontsize = 5), row_names_gp = gpar(fontsize = 5), col= colorRampPalette(brewer.pal(9, "OrRd"))(10))
-
-#################################################################
-##Proportion of taxa by inflorescence type per evaluated clades##
-#################################################################
-
-#inflorescence_types<-read.csv("~/Desktop/Submitted/palicourea/Manuscript/area_inflorescence.csv",header=T)
-#io <- inflorescence_types[, percentage := V2 / sum(V2) * 100, by=V3]
-#                                                                   labels = c("Short", "Medium", "Long", "Extra Long")))
-
-# Use the table() function to get the counts of each species
-#Amazon<-filter(inflorescence_types,area=='Amazon')
-#Andes<-filter(inflorescence_types,area=='Andes')
-#Central<-filter(inflorescence_types,area=='Central') not enough data
-#Lowland<-filter(inflorescence_types,area=='Lowland') not enough data
-#out<-filter(inflorescence_types,area=='out')
-
-#i0group_counts<-table(inflorescence_types)
-#<- inflorescence_types %>%
-#  group_by(V3) %>%
-#  summarise(percentage = n() / nrow(inflorescence_types))
