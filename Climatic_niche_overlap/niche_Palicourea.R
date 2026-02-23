@@ -33,34 +33,37 @@ library("phylogram")
 library("circlize")
 library('RColorBrewer')
 library('factoextra')
+library("sp")
 
 #source CANDI functions
-source("~/Applications/candi/R/get_occ_records.R")
-source("~/Applications/candi/R/get_both_occ_records.R")
-source("~/Applications/candi/R/get_bien_occ_records.R")
-source("~/Applications/candi/R/get_gbif_occ_records.R")
-source("~/Applications/candi/R/remove_dup_locs.R")
-source("~/Applications/candi/R/remove_ocean_points.R")
-source("~/Applications/candi/R/remove_perf_0_90_180.R")
-source("~/Applications/candi/R/remove_lessthan.R")
-source("~/Applications/candi/R/remove_null_items.R")
-source("~/Applications/candi/R/get_world_clim.R")
-source("~/Applications/candi/R/make_corr_matrix.R")
-source("~/Applications/candi/R/remove_corr_variables.R")
-source("~/Applications/candi/R/remove_points_outside_nat_range.R")
-source("~/Applications/candi/R/model_niches.R")
-source("~/Applications/candi/R/get_world_clim.R")
-source("~/Applications/candi/R/trim_to_shapefile.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_occ_records.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_both_occ_records.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_bien_occ_records.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_gbif_occ_records.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_dup_locs.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_ocean_points.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_perf_0_90_180.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_lessthan.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_null_items.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_world_clim.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/make_corr_matrix.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_corr_variables.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_points_outside_nat_range.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/model_niches.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_world_clim.R")
+source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/trim_to_shapefile.R")
 
 ## OCCURRENCE DATA PREP PATHWAY ##
 ##################################
 
 #load data# 
 #world map
-big_map <- rgdal::readOGR("gadm28_adm0/gadm28_adm0.shp")
+#big_map <- rgdal::readOGR("gadm28_adm0/gadm28_adm0.shp")
+big_map <- st_read("~/Bedoya Dropbox/Bedoya_Research_Group/Submitted/palicourea/Manuscript/niche/gadm28_adm0")
+big_map_sp <- as(big_map, "Spatial")
 #species range data
-read_csv("Palicourea_native_ranges.csv") %>%
-  dplyr::select(species, range) -> all_native_ranges
+#read_csv("Palicourea_native_ranges.csv") %>%
+#  dplyr::select(species, range) -> all_native_ranges
 #botanical map not used here 
 #kew_map_level_2 <- rgdal::readOGR("wgsrpd-master/level2/level2.shp")
 
@@ -76,8 +79,26 @@ my_species8<-c("Palicourea stipularis","Palicourea subfusca","Palicourea sulphur
 my_species9<-c("Palicourea topoensis","Palicourea triphylla","Palicourea sessilis","Palicourea woronovii","Palicourea brachypoda","Palicourea berteroana","Palicourea winkleri")
 my_species10<-c("Palicourea callithrix","Palicourea deflexa","Palicourea elata","Palicourea gracilenta","Palicourea justiciifolia","Palicourea ostreophora","Palicourea obliquinervia", "Psychotria rosea")
 my_species11<-c("Palicourea dichotoma","Palicourea tomentosa","Palicourea prunifolia","Palicourea pubescens","Palicourea reticulata","Palicourea suerrensis")
-my_species12<-c("Psychotria suterella","Palicourea glabra","Palicourea_jelskii","Palicourea_nitidella")
-
+my_species12<-c("Psychotria suterella","Palicourea glabra","Palicourea jelskii","Palicourea nitidella")
+my_species13<-c("Palicourea acetosoides","Palicourea aeneofusca","Palicourea aetantha", "Palicourea alagoana", "Palicourea albaniana","Palicourea albiflora","Palicourea albocaerulea")
+my_species14<-c("Palicourea amapaensis","Palicourea laxivenulosa","Palicourea amorimii","Palicourea amplissima","Palicourea anceps","Palicourea andaluciana","Palicourea anderssoniana")
+my_species15<-c("Palicourea andrei","Palicourea antioquiana","Palicourea antisanana","Palicourea aschersoniana","Palicourea atlantica","Palicourea azulina","Palicourea beachiana")
+my_species16<-c("Palicourea bella","Palicourea boqueronensis","Palicourea boraginoides","Palicourea botryocephala","Palicourea breedlovei","Palicourea caerulea","Palicourea calidicola")
+my_species17<-c("Palicourea calophylla","Palicourea calothyrsus","Palicourea canarina","Palicourea candida","Palicourea caprifoliacea","Palicourea cauligera","Palicourea cenepensis")
+my_species18<-c("Palicourea chignul","Palicourea colorata","Palicourea coriacea","Palicourea diminuta","Palicourea ernestii","Palicourea eurycarpa","Palicourea fanshawei")
+my_species19<-c("Palicourea flaviflora","Palicourea frontinoensis","Palicourea fuchsioides","Palicourea fulgens","Palicourea garciae","Palicourea gardenioides","Palicourea gemmiflora")
+my_species20<-c("Palicourea graciliflora","Palicourea grandiceps","Palicourea grandifructa","Palicourea grandistipula","Palicourea harlingii","Palicourea heterochroma","Palicourea huampamiensis")
+my_species21<-c("Palicourea hypochlorina","Palicourea jambosioides","Palicourea lachnantha","Palicourea lasiorrhachis","Palicourea liogieri","Palicourea lobbii","Palicourea locuples")
+my_species22<-c("Palicourea longiflora","Palicourea macarthurorum","Palicourea macbridei","Palicourea mansoana","Palicourea mediocris","Palicourea minutiflora","Palicourea nigricans")
+my_species23<-c("Palicourea officinalis","Palicourea palenquensis","Palicourea patens","Palicourea perquadrangularis","Palicourea persearum","Palicourea rigidifolia")
+my_species24<-c("Palicourea salicifolia","Palicourea skotakii","Palicourea sodiroi","Palicourea solitudinum","Palicourea sopkinii","Palicourea spathacea","Palicourea stenostachya")
+my_species25<-c("Palicourea subspicata","Palicourea sucllii","Palicourea thermydri","Palicourea trianae","Palicourea ulloana","Palicourea umbelliformis","Palicourea valerioana")
+my_species26<-c("Palicourea vesiculifera","Palicourea wolffiae","Palicourea yneziae","Psychotria bertieroides","Psychotria bolivarensis","Palicourea bracteocardia")
+my_species27<-c("Psychotria bremekampiana","Psychotria everardii","Psychotria hebeclada","Psychotria hemicephaelis","Psychotria limitanea","Psychotria lindenii")
+my_species28<-c("Psychotria luxurians","Psychotria marginata","Psychotria muscosa","Psychotria oblonga","Psychotria oinochrophylla","Psychotria panamensis")
+my_species29<-c("Psychotria paniculata","Psychotria patentinervia","Psychotria phyllocalymma","Psychotria prancei","Psychotria pseudinundata")
+my_species30<-c("Psychotria rhombibractea","Psychotria rhytidocarpa","Psychotria ruelliifolia","Psychotria spathicalyx","Psychotria stachyoides","Psychotria stipulosa")
+my_species31<-c("Psychotria ulviformis","Psychotria urceolata","Psychotria variegata","Psychotria venulosa")
 
 
 #download occurrence data from "bien" AND "gbif".
@@ -93,14 +114,36 @@ occ_data9 <- get_occ_records(species = my_species9, database = "both")
 occ_data10 <- get_occ_records(species = my_species10, database = "both")
 occ_data11 <- get_occ_records(species = my_species11, database = "both")
 occ_data12 <- get_occ_records(species = my_species12, database = "both")
+occ_data13 <- get_occ_records(species = my_species13, database = "both")
+occ_data14 <- get_occ_records(species = my_species14, database = "both")
+occ_data15 <- get_occ_records(species = my_species15, database = "both")
+occ_data16 <- get_occ_records(species = my_species16, database = "both")
+occ_data17 <- get_occ_records(species = my_species17, database = "both")
+occ_data18 <- get_occ_records(species = my_species18, database = "both")
+occ_data19 <- get_occ_records(species = my_species19, database = "both")
+occ_data20 <- get_occ_records(species = my_species20, database = "both")
+occ_data21 <- get_occ_records(species = my_species21, database = "both")
+occ_data22 <- get_occ_records(species = my_species22, database = "both")
+occ_data23 <- get_occ_records(species = my_species23, database = "both")
+occ_data24 <- get_occ_records(species = my_species24, database = "both")
+occ_data25 <- get_occ_records(species = my_species25, database = "both")
+occ_data26 <- get_occ_records(species = my_species26, database = "both")
+occ_data27 <- get_occ_records(species = my_species27, database = "both")
+occ_data28 <- get_occ_records(species = my_species28, database = "both")
+occ_data29 <- get_occ_records(species = my_species29, database = "both")
+occ_data30 <- get_occ_records(species = my_species30, database = "both")
+occ_data31 <- get_occ_records(species = my_species31, database = "both")
 
 occurrences<-c(occ_data1,occ_data2,occ_data3,occ_data4,occ_data5,occ_data6,occ_data7,
-               occ_data8,occ_data9,occ_data10,occ_data11,occ_data12)
-save(occurrences, file = "~/Desktop/Palicourea/Manuscript/niche/occurrences_raw.RData")
+               occ_data8,occ_data9,occ_data10,occ_data11,occ_data12,occ_data13,occ_data14,
+               occ_data15,occ_data16,occ_data17,occ_data18,occ_data19,occ_data20,occ_data21,
+               occ_data22,occ_data23,occ_data24,occ_data25,occ_data26,occ_data27,occ_data28,
+               occ_data29,occ_data30,occ_data31)
+save(occurrences, file = "~/Repos/Palicourea/Climatic_niche_overlap/occurrences_raw_allspp.RData")
 
 #data cleaning
 occurrences <- remove_dup_locs(occurrences)
-occurrences <- remove_ocean_points(occurrences, world_map = big_map)
+occurrences <- remove_ocean_points(occurrences, world_map = big_map_sp)
 occurrences <- remove_perf_0_90_180(occurrences)
 #occ_data <- remove_points_outside_nat_range(df = occurrences, 
 #                                           botan_map = kew_map_level_2, 
@@ -108,7 +151,7 @@ occurrences <- remove_perf_0_90_180(occurrences)
 occurrences <- remove_lessthan(occurrences, n = 10)
 occurrences <- remove_null_items(occurrences)
 
-save(occurrences, file = "~/Desktop/Palicourea/Manuscript/niche/occurrences_filtered.RData")
+save(occurrences, file = "~/Repos/Palicourea/Climatic_niche_overlap/occurrences_filtered_allspp.RData")
 
 ## CLIMATE DATA PREP PATHWAY ##
 ###############################
