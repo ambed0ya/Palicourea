@@ -2,7 +2,7 @@
 ### 1.Extracting and cleaning occurrence and environmental data for large datasets with CANDI pipeline###
 # Modified from Tribble et al. 2023.
 #########################################################################################################
-setwd("~/Desktop/Submitted/Palicourea/Manuscript/niche")
+#setwd("~/Desktop/Submitted/Palicourea/Manuscript/niche")
 
 require("rJava")
 library("rgdal")
@@ -34,6 +34,7 @@ library("circlize")
 library('RColorBrewer')
 library('factoextra')
 library("sp")
+library("geodata")
 
 #source CANDI functions
 source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_occ_records.R")
@@ -156,7 +157,7 @@ save(occurrences, file = "~/Repos/Palicourea/Climatic_niche_overlap/occurrences_
 ## CLIMATE DATA PREP PATHWAY ##
 ###############################
 
-load("~/Desktop/Submitted/Palicourea/Manuscript/niche/occurrences_filtered.RData")
+load("~/Repos/Palicourea/Climatic_niche_overlap/occurrences_filtered_allspp.RData")
 
 coords<-c("longitude","latitude")
 coordinates = lapply(occurrences, "[", , coords)
@@ -166,16 +167,16 @@ list2env(coordinates,envir=.GlobalEnv)
 climate_stack <- get_world_clim()
 
 #If the above does not work then download manually
-
+setwd("~/Repos/Palicourea/Climatic_niche_overlap/")
 #makes pdf of correlation matrix saved to working directory to pick out correlated variables
-matrix <- make_corr_matrix(occurrences = occurrences, environment_data = climate_stack)
+matrix <- make_corr_matrix(occurrences = occurrences, environment_data = climate_stack, abs_highlight = 0.8)
 
 #select variables to remove
-bad_vars <- c("bio10", "bio11", "bio13", "bio14", "bio15", "bio16", "bio17", "bio18",
-                             "bio19", "bio2", "bio3", "bio4", "bio7", "bio8", "bio9")
+bad_vars <- c("wc2.1_5m_bio_1","wc2.1~bio1", "wc2.1~bio3", "wc2.1~bio4", "wc2.1~bio6", "wc2.1~bio10", "wc2.1~bio11",
+                             "wc2.1~bio12", "wc2.1~bio16", "wc2.1~bio17")
 
 #remove variables selected by user
-uncorr_stack <- remove_corr_variables(raster_stack = climate_stack, variables_to_be_removed = bad_vars) 
+uncorr_stack <- remove_corr_variables(environment_data = climate_stack, variables_to_be_removed = bad_vars) 
 final_stack <- uncorr_stack
 #final_stack <- climate_stack
 
