@@ -37,22 +37,22 @@ library("sp")
 library("geodata")
 
 #source CANDI functions
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_occ_records.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_both_occ_records.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_bien_occ_records.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_gbif_occ_records.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_dup_locs.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_ocean_points.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_perf_0_90_180.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_lessthan.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_null_items.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_world_clim.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/make_corr_matrix.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_corr_variables.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/remove_points_outside_nat_range.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/model_niches.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/get_world_clim.R")
-source("~/Bedoya Dropbox/Bedoya_Research_Group/collabs/Tropical_Genomics/candi/trim_to_shapefile.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_both_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_bien_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_gbif_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_dup_locs.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_ocean_points.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_perf_0_90_180.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_lessthan.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_null_items.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_world_clim.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/make_corr_matrix.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_corr_variables.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_points_outside_nat_range.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/model_niches.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_world_clim.R")
+source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/trim_to_shapefile.R")
 
 ## OCCURRENCE DATA PREP PATHWAY ##
 ##################################
@@ -172,8 +172,8 @@ setwd("~/Repos/Palicourea/Climatic_niche_overlap/")
 matrix <- make_corr_matrix(occurrences = occurrences, environment_data = climate_stack, abs_highlight = 0.8)
 
 #select variables to remove
-bad_vars <- c("wc2.1_5m_bio_1","wc2.1~bio1", "wc2.1~bio3", "wc2.1~bio4", "wc2.1~bio6", "wc2.1~bio10", "wc2.1~bio11",
-                             "wc2.1~bio12", "wc2.1~bio16", "wc2.1~bio17")
+bad_vars <- c("wc2.1_5m_bio_1", "wc2.1_5m_bio_3", "wc2.1_5m_bio_4", "wc2.1_5m_bio_6", "wc2.1_5m_bio_10", "wc2.1_5m_bio_11",
+                             "wc2.1_5m_bio_12", "wc2.1_5m_bio_16", "wc2.1_5m_bio_17")
 
 #remove variables selected by user
 uncorr_stack <- remove_corr_variables(environment_data = climate_stack, variables_to_be_removed = bad_vars) 
@@ -183,8 +183,13 @@ final_stack <- uncorr_stack
 
 ##EXTRACTING BIOCLIM VALUES FROM OCCURRENCE POINTS##
 ####################################################
-points <- lapply(coordinates, function(x) SpatialPoints(x, proj4string = final_stack@crs))
-values <- lapply(points, function(x) extract(final_stack,x))
+#points <- lapply(coordinates, function(x) SpatialPoints(x, proj4string = final_stack@crs))
+points <- lapply(coordinates, function(x) {
+  sp::SpatialPoints(x, proj4string = sp::CRS(terra::crs(final_stack)))
+})
+points_v <- lapply(points, terra::vect)
+values <- lapply(points_v, function(p) terra::extract(final_stack, p))
+#values <- lapply(points, function(x) extract(final_stack,x))
 
 #bind lists into df
 values_df<-list.rbind(values)
@@ -208,14 +213,14 @@ df$elev <- extract(elev, long_lat)
 niche_data<-df[4:9]
 niche_data$species<-gsub(" ", "_", niche_data$species)
 niche_data_complete<-na.omit(niche_data)
-write.csv(niche_data_complete, "Palicourea_raw_climate_data_with_elev.csv", row.names = F)
+write.csv(niche_data_complete, "Palicourea_raw_climate_data_with_elev_final.csv", row.names = F)
 
 ##Calculationn of median value for cimatic variables for each species
 median_niche_values<-aggregate(niche_data_complete[2:6], niche_data_complete[1], median)
-write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev.csv", row.names=F)
+write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev_final.csv", row.names=F)
 #median_niche_values$species<-as.factor(median_niche_values$species)
 #load data
-median_niche_values<-read.csv("Palicourea_median_climate_data_with_elev.csv")
+median_niche_values<-read.csv("Palicourea_median_climate_data_with_elev_final.csv")
 
 #########################################################################################
 ##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
