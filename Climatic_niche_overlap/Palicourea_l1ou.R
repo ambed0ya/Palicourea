@@ -19,7 +19,7 @@ match_indices <- match(tree$tip.label, new_names$old_label)
 tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
 plot(tree)
 
-niche_dat <- read.table("Palicourea_median_climate_data_with_elev.csv", header = T, sep = "\t", row.names = "species")[,2:6] #all vars separate
+niche_dat <- read.table("Palicourea_median_climate_data_with_elev_final.csv", header = T, sep = "\t", row.names = "species")[,2:6] #all vars separate
 head(niche_dat, 10)
 
 pal <- adjust_data(tree, as.matrix(niche_dat))
