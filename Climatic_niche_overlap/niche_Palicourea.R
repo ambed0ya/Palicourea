@@ -99,7 +99,7 @@ my_species27<-c("Psychotria bremekampiana","Psychotria everardii","Psychotria he
 my_species28<-c("Psychotria luxurians","Psychotria marginata","Psychotria muscosa","Psychotria oblonga","Psychotria oinochrophylla","Psychotria panamensis")
 my_species29<-c("Psychotria paniculata","Psychotria patentinervia","Psychotria phyllocalymma","Psychotria prancei","Psychotria pseudinundata")
 my_species30<-c("Psychotria rhombibractea","Psychotria rhytidocarpa","Psychotria ruelliifolia","Psychotria spathicalyx","Psychotria stachyoides","Psychotria stipulosa")
-my_species31<-c("Psychotria ulviformis","Psychotria urceolata","Psychotria variegata","Psychotria venulosa")
+my_species31<-c("Psychotria ulviformis","Psychotria urceolata","Psychotria variegata","Psychotria venulosa","Carapichea urniformis")
 
 
 #download occurrence data from "bien" AND "gbif".
@@ -210,13 +210,13 @@ df$elev <- extract(elev, long_lat)
 #pal_sf <- sf::st_as_sf(df, coords = c("longitude", "latitude"), crs = 4326)
 #df$elev <- get_elev_point(locations = pal_sf, prj = 4326)
 
-niche_data<-df[4:9]
+niche_data<-df[3:15]
 niche_data$species<-gsub(" ", "_", niche_data$species)
 niche_data_complete<-na.omit(niche_data)
 write.csv(niche_data_complete, "Palicourea_raw_climate_data_with_elev_final.csv", row.names = F)
 
 ##Calculationn of median value for cimatic variables for each species
-median_niche_values<-aggregate(niche_data_complete[2:6], niche_data_complete[1], median)
+median_niche_values<-aggregate(niche_data_complete[3:13], niche_data_complete[1], median)
 write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev_final.csv", row.names=F)
 #median_niche_values$species<-as.factor(median_niche_values$species)
 #load data
@@ -231,7 +231,7 @@ median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=m
 #Convert dataframe to matrix
 matrix_median_niche_values<-data.matrix(median_niche_values_rownames)
 #Calculate and plot DTT across variables
-par( mfrow= c(5,1) )
+#par( mfrow= c(5,1) )
 
 
 ###Disparity among groups
@@ -274,47 +274,105 @@ Biogeography<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
      "Atlantic_Forest" = c("Psychotria_suterella","Palicourea_brachypoda",
                            "Palicourea_sessilis","Palicourea_divaricata"))
 
-Biogeography2<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
-                 "Palicourea_stipularis","Palicourea_flavescens",
-                 "Palicourea_padifolia","Palicourea_lehmannii",
-                 "Palicourea_thyrsiflora","Palicourea_demissa",
-                 "Palicourea_amethystina","Palicourea_standleyana",
-                 "Palicourea_seemannii","Palicourea_pyramidalis",
-                 "Palicourea_luteonivea","Palicourea_sulphurea",
-                 "Palicourea_apicata","Palicourea_loxensis",
-                 "Palicourea_angustifolia"
+Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
+                   "Palicourea_thyrsiflora","Palicourea_demissa",
+                   "Palicourea_frontinoensis", "Palicourea_angustifolia",
+                   "Palicourea_thermydri","Palicourea_stipularis",
+                   "Palicourea_flavescens","Palicourea_stenosepala",
+                   "Palicourea_albiflora","Palicourea_macbridei",
+                   "Palicourea_lineata","Palicourea_amethystina",
+                   "Palicourea_heterochroma","Palicourea_anceps",
+                   "Palicourea_perquadrangularis","Palicourea_albocaerulea",
+                   "Palicourea_antioquiana","Palicourea_acetosoides",
+                   "Palicourea_spathacea","Palicourea_skotakii",
+                   "Palicourea_bella","Palicourea_trianae",
+                   "Palicourea_seemannii","Palicourea_amplissima",
+                   "Palicourea_grandistipula","Palicourea_sopkinii",
+                   "Palicourea_standleyana", "Palicourea_candida",
+                   "Palicourea_andrei","Palicourea_sodiroi",
+                   "Palicourea_caprifoliacea","Palicourea_graciliflora",
+                   "Palicourea_lasiorrhachis","Palicourea_pyramidalis",
+                   "Palicourea_chignul","Palicourea_lobbii",
+                   "Palicourea_canarina","Palicourea_gemmiflora",
+                   "Palicourea_luteonivea","Palicourea_harlingii",
+                   "Palicourea_calothyrsus","Palicourea_anderssoniana",
+                   "Palicourea_garciae","Palicourea_andaluciana",
+                   "Palicourea_salicifolia","Palicourea_sulphurea",
+                   "Palicourea_apicata","Palicourea_sucllii",
+                   "Palicourea_azulina","Palicourea_loxensis",
+                   "Palicourea_ulloana","Palicourea_quinquepyrena",
+                   "Palicourea_rigidifolia","Palicourea_fuchsioides",
+                   "Palicourea_albaniana"
 #                 ,"Palicourea_flavifolia","Palicourea_bangii","Palicourea_reticulata"
                  ),
-     "Amazon" = c("Palicourea_suerrensis","Palicourea_justiciifolia",
-                  "Palicourea_ostreophora","Palicourea_quadrifolia",
-                  "Palicourea_corymbifera","Palicourea_winkleri",
+     "Amazon" = c("Psychotria_lupulina","Palicourea_suerrensis",
+                  "Psychotria_lindenii","Palicourea_ostreophora",
+                  "Palicourea_quadrifolia","Palicourea_corymbifera",
+                  "Palicourea_coriacea","Palicourea_winkleri",
                   "Palicourea_dichotoma","Palicourea_gracilenta",
-                  "Palicourea_obliquinervia","Palicourea_prunifolia",
-                  "Palicourea_callithrix","Palicourea_glabra",
+                  "Psychotria_paniculata","Palicourea_amorimii",
+                  "Psychotria_bremekampiana","Psychotria_prancei",
+                  "Palicourea_prunifolia","Psychotria_rhombibractea",
+                  "Psychotria_variegata","Palicourea_glabra",
+                  "Psychotria_ulviformis","Palicourea_callithrix",
+                  "Palicourea_rhodothamna","Palicourea_huampamiensis",
                   "Palicourea_didymocarpos","Palicourea_acuminata",
-                  "Palicourea_rhodothamna","Palicourea_andina",
+                  "Palicourea_boraginoides","Palicourea_andina",
+                  "Palicourea_diminuta","Palicourea_triphylla",
+                  "Palicourea_calophylla","Palicourea_subspicata",
                   "Palicourea_croceoides","Palicourea_crocea",
-                  "Palicourea_triphylla","Palicourea_lasiantha",
-                  "Palicourea_nitidella","Palicourea_macrobotrys",
-                  "Palicourea_guianensis","Palicourea_marcgravii",
-                  "Palicourea_grandiflora","Palicourea_rigida",
+                  "Palicourea_macrobotrys","Palicourea_guianensis",
+                  "Palicourea_mansoana","Palicourea_lasiantha",
+                  "Palicourea_lachnantha","Palicourea_officinalis",
+                  "Palicourea_nitidella","Palicourea_nigricans",
+                  "Palicourea_macarthurorum","Palicourea_grandiflora",
+                  "Palicourea_amapaensis","Palicourea_marcgravii",
+                  "Palicourea_aeneofusca","Palicourea_longiflora",
+                  "Palicourea_rigida","Palicourea_petiolaris",
+                  "Palicourea_aschersoniana","Psychotria_everardii",
+                  "Psychotria_bertieroides","Palicourea_laxivenulosa",
+                  "Psychotria_venulosa","Palicourea_deflexa",
                   "Palicourea_polycephala","Palicourea_egensis",
-                  "Palicourea_deflexa","Palicourea_woronovii"),
-     "Central" = c("Palicourea_tetragona","Palicourea_domingensis",
-                   "Palicourea_pubescens","Palicourea_elata",
-                   "Palicourea_correae","Palicourea_berteroana"),
-     "Lowland" = c("Palicourea_timbiquensis","Palicourea_acanthacea",
-                   "Palicourea_brachiata","Palicourea_glomerulata"),
-     "Atlantic_Forest" = c("Psychotria_suterella","Palicourea_brachypoda",
-                           "Palicourea_sessilis","Palicourea_divaricata"),
-     "out" = c("Palicourea_timbiquensis","Palicourea_acanthacea",
-               "Palicourea_brachiata","Palicourea_glomerulata",
-               "Palicourea_conephoroides","Palicourea_tinctoria",
-               "Palicourea_jelskii","Palicourea_allenii",
-               "Palicourea_tomentosa","Psychotria_rosea",
-               "Palicourea_hazenii","Palicourea_cyanococca",
-               "Psychotria_suterella","Palicourea_brachypoda",
-               "Palicourea_sessilis","Palicourea_divaricata"))
+                  "Psychotria_limitanea","Palicourea_woronovii",
+                  "Psychotria_oinochrophylla"),
+     "Central" = c("Palicourea_umbelliformis","Palicourea_calidicola",
+                   "Palicourea_eurycarpa","Palicourea_mediocris",
+                   "Palicourea_breedlovei","Palicourea_beachiana",
+                   "Palicourea_grandifructa","Palicourea_tetragona",
+                   "Palicourea_persearum","Psychotria_hebeclada",
+                   "Palicourea_pubescens", "Palicourea_elata",
+                   "Palicourea_correae","Palicourea_gardenioides",
+                   "Palicourea_domingensis","Psychotria_luxurians",
+                   "Psychotria_berteroana"),
+     "Amazon2" = c("Psychotria_oblonga","Psychotria_muscosa",
+                   "Palicourea_glomerulata","Psychotria_hemicephaelis",
+                   "Palicourea_fanshawei","Palicourea_aetantha",
+                   "Carapichea_urniformis","Psychotria_bolivarensis",
+                   "Palicourea_yneziae","Palicourea_grandiceps",
+                   "Palicourea_hypochlorina","Palicourea_conephoroides",
+                   "Palicourea_flaviflora", "Palicourea_cenepensis",
+                   "Palicourea_ernestii","Palicourea_locuples",
+                   "Palicourea_antisanana","Palicourea_caerulea",
+                   "Palicourea_brachiata","Palicourea_solitudinum",
+                   "Palicourea_timbiquensis","Palicourea_acanthacea",
+                   "Palicourea_palenquensis","Palicourea_allenii",
+                   "Palicourea_tinctoria","Palicourea_wolffiae",
+                   "Palicourea_jelskii","Palicourea_cauligera",
+                   "Palicourea_botryocephala","Palicourea_tomentosa",
+                   "Palicourea_bracteocardia","Palicourea_colorata",
+                   "Psychotria_urceolata","Palicourea_vesiculifera",
+                   "Palicourea_cyanococca","Palicourea_hazenii"),
+     "Atlantic_Forest" = c("Psychotria_stachyoides","Psychotria_ruelliifolia",
+                           "Palicourea_sessilis","Psychotria_rhytidocarpa",
+                           "Palicourea_fulgens","Psychotria_spathicalyx",
+                           "Psychotria_patentinervia","Psychotria_brachypoda",
+                           "Psychotria_suterella","Palicourea_jambosioides",
+                           "Palicourea_divaricata","Palicourea_atlantica",
+                           "Palicourea_alagoana","Psychotria_phyllocalymma"),
+     "out" = c("Palicourea_stenostachya","Palicourea_racemosa",
+               "Palicourea_subfusca","Palicourea_minutiflora",
+               "Palicourea_brevicollis","Palicourea_valerioana",
+               "Palicourea_topoensis","Palicourea_boqueronensis"))
 
 
 
@@ -322,7 +380,7 @@ Biogeography2<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
 #Regular PCA for dispRity analysis below
 #########################################
 
-pc <- prcomp(median_niche_values[,2:5],
+pc <- prcomp(median_niche_values[,2:11],
              center = TRUE,
              scale. = TRUE)
 attributes(pc)
@@ -343,9 +401,9 @@ pca_df <- data.frame(
 #write.table(pca_df, "Palicourea_niche_PCA.csv", quote = FALSE, sep = "\t", )
 #write.table(pca_df, "Palicourea_niche_PCA_with_elev.csv", quote = FALSE, sep = "\t", )
 pca_df_rownames <- data.frame(pca_df[,-1], row.names=pca_df[,1])
-pca_df_rownames<-pca_df_rownames[,1:2]
+pca_df_rownames_pc1<-pca_df_rownames[,1:2]
 pca_df_rownames_pc2<-pca_df_rownames[,2:3]
-matrix_pca_df<-as.matrix(pca_df_rownames)
+matrix_pca_df<-as.matrix(pca_df_rownames_pc1)
 matrix_pca_df_pc2<-as.matrix(pca_df_rownames_pc2)
 ##Plot the PCA results
 #ggplot(pca_df, aes(x = PC1, y = PC2, label = Species)) +
