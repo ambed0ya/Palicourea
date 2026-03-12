@@ -1,0 +1,44 @@
+Best-fit model: HKY+F+R3 chosen according to BIC
+model1_Assembly_000000002033_Contig_1_544_RUBxPmarginata.NT.fs.nex_reduced.fa
+
+Best-fit model: TPM3u+R3 chosen according to BIC
+model2_Assembly_000000112565_Contig_1_599_RUBxPipecacuanha.NT.fs.nex_reduced.fa
+
+Best-fit model: HKY+R3 chosen according to BIC
+model3
+
+Best-fit model: HKY+I+R3 chosen according to BIC
+model4
+
+Best-fit model: K2P+G4 chosen according to BIC
+model5
+
+Best-fit model: HKY+R3 chosen according to BIC
+model6
+
+Best-fit model: HKY+I+R2 chosen according to BIC
+model7
+
+Best-fit model: TN+F+I+R2 chosen according to BIC
+model8
+
+Best-fit model: TN+F+I+R2 chosen according to BIC
+model9
+
+Best-fit model: TIM2+F+G4 chosen according to BIC
+model10
+
+Best-fit model: TN+I+R3 chosen according to BIC
+model11
+
+Best-fit model: TPM3u+F+I+R2 chosen according to BIC
+model12
+
+Best-fit model: TN+F+I+R2 chosen according to BIC
+model13
+
+Best-fit model: TIM3+F+I+R3 chosen according to BIC
+model14
+
+Best-fit model: HKY+I+R2 chosen according to BIC
+model14

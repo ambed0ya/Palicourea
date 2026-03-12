@@ -238,41 +238,8 @@ matrix_median_niche_values<-data.matrix(median_niche_values_rownames)
 
 library("dispRity")
 
-#Assigning species to groups (Andes and Amazon)
+#Assigning species to groups
 
-Biogeography<-list("Andes" = c("Palicourea_stenosepala","Palicourea_lineata",
-                 "Palicourea_stipularis","Palicourea_flavescens",
-                 "Palicourea_padifolia","Palicourea_lehmannii",
-                 "Palicourea_thyrsiflora","Palicourea_demissa",
-                 "Palicourea_amethystina","Palicourea_standleyana",
-                 "Palicourea_seemannii","Palicourea_pyramidalis",
-                 "Palicourea_luteonivea","Palicourea_sulphurea",
-                 "Palicourea_apicata","Palicourea_loxensis",
-                 "Palicourea_angustifolia"
-#                 ,"Palicourea_flavifolia","Palicourea_bangii","Palicourea_reticulata"
-                 ),
-     "Amazon" = c("Palicourea_suerrensis","Palicourea_justiciifolia",
-                  "Palicourea_ostreophora","Palicourea_quadrifolia",
-                  "Palicourea_corymbifera","Palicourea_winkleri",
-                  "Palicourea_dichotoma","Palicourea_gracilenta",
-                  "Palicourea_obliquinervia","Palicourea_prunifolia",
-                  "Palicourea_callithrix","Palicourea_glabra",
-                  "Palicourea_didymocarpos","Palicourea_acuminata",
-                  "Palicourea_rhodothamna","Palicourea_andina",
-                  "Palicourea_croceoides","Palicourea_crocea",
-                  "Palicourea_triphylla","Palicourea_lasiantha",
-                  "Palicourea_nitidella","Palicourea_macrobotrys",
-                  "Palicourea_guianensis","Palicourea_marcgravii",
-                  "Palicourea_grandiflora","Palicourea_rigida",
-                  "Palicourea_polycephala","Palicourea_egensis",
-                  "Palicourea_deflexa","Palicourea_woronovii"),
-     "Central" = c("Palicourea_tetragona","Palicourea_domingensis",
-                   "Palicourea_pubescens","Palicourea_elata",
-                   "Palicourea_correae","Palicourea_berteroana"),
-     "Lowland" = c("Palicourea_timbiquensis","Palicourea_acanthacea",
-                   "Palicourea_brachiata","Palicourea_glomerulata"),
-     "Atlantic_Forest" = c("Psychotria_suterella","Palicourea_brachypoda",
-                           "Palicourea_sessilis","Palicourea_divaricata"))
 
 Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
                    "Palicourea_thyrsiflora","Palicourea_demissa",
@@ -434,7 +401,9 @@ disparity_rarefied
 summary(disparity_rarefied)
 
 #Plotting the results
+dev.off()
 plot(disparity_rarefied, observed =T)
+
 #plot(disparity, observed = list("pch" = 19, col = "blue", cex = 4))
 
 # Testing for the subset overlap
@@ -445,12 +414,13 @@ test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni")
 ###############################Phylogenetic PCA #########################################
 #########################################################################################
 
-##Principal Components Analysis
 ##Reading tree
-astral01 <- read.tree("rev_dendrogram.tre")
-tips2delete<-c("Pal_acuminata1","Pal_guianensis2","Pal_quinquepyrena")
+astral01 <- read.tree("../Resubmission/rev_dendrogram.tre")
+tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
+               "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana","Pal_laxivenulosa")
 tree <- ape::drop.tip(astral01, tips2delete)
 plot(tree)
+
 
 # Update tip labels so that they match the names in the niche data
 new_names <- read.csv("pal_name_updates.csv", header = T)
@@ -460,12 +430,16 @@ tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_lab
 plot(tree)
 
 #add Areas to highlight for plotting
-areas<-c("L","E","Other","A","E","A","A","Other","C","L","F","Other","E","Other",
-         "C","E","E","E","Other","E","A","E","E","F","C","E","C","A",
-         "Other","E","L","E","E","E","Other","Other","E","E","A","A","A","A",
-         "E","E","E","E","E","A","Other","E","E","C","A","E","Other","A",
-         "E","E","A","F","A","A","A","Other","E","A","C","A","L","Other",
-         "Other","Other","E","E","E","Other","F") ##clumsy but works. You make it better
+areas<-c(rep ("E2",2),"A",rep("E",2),"E2",rep("A",3),"E2","E","A","E",rep("A",4),"E",rep("A",3),
+         "E2","A","E","F","A","other","C","A","C","out","E",rep("E2",2),"F","E2","C","out",
+         "E2","C",rep("E",2),rep("A",4),"E2","A",rep("E2",2),"E","C",rep("E",3),"E2","E","A",rep("E",3),
+         "F","C","E","C","E2","C","E2","A","E2","other",rep("A",2),"F","A","C","A","E","E2","E","A",
+         "E2","E","C","A","E","A","E2","A","E","E2","F","E2",rep("E",3),rep("A",4),"E2","E",rep("A",2),
+         "E","A",rep("E",3),"C","out",rep("E",4),"A","E2","A","C",rep("E",3),"C","A","E","A","out","other",
+         rep("E",2),rep("A",3),"F",rep("A",2),"E2",rep("A",4),"out","A","out","E","A","E","A","C",rep("A",2),
+         rep("E2",3),"out","A","C","A","C","out",rep("E",2),"E2","E","E2",rep("E",2),"C","E2",rep("E",2),
+         "C",rep("E2",2),rep("E",2),rep("F",2),"E","other","E",rep("F",4),"other","F","E","E2",rep("E",2))
+
 median_niche_values$areas<-areas
 
 #convert Species column into row names
@@ -494,9 +468,10 @@ p2<-fviz_pca_var(obj, col.var="contrib",
 )
 
 p3<-fviz_pca_ind(obj,label="none", habillage=median_niche_values$areas,
-                 palette= c("deepskyblue","#FFFF00","forestgreen", 
-                            "yellowgreen", "darkorange1","grey" ), addEllipses=F, pointsize=3,
+                 palette= c("deepskyblue","#FFFF00","forestgreen", "purple",
+                            "yellowgreen","grey","black" ), addEllipses=F, pointsize=3,
                  repel=T, max.overlaps=100)
+
 
 plotnames <- p3$data$name %>% as.character()
 plotnames<-recode(plotnames, "Palicourea_divaricata"="Pal_dicarivata", 
@@ -505,6 +480,7 @@ plotnames<-recode(plotnames, "Palicourea_divaricata"="Pal_dicarivata",
 mylabels <- sapply(plotnames, function(x) ifelse(is.na(str_locate(x,"Pal_")[1]),
                                                  "", x)) %>% as.vector()
 p3<-p3 + geom_text(aes(label = mylabels))
+ggpubr::ggarrange(p1)
 ggpubr::ggarrange(p3)
 ggpubr::ggarrange(p2) #in supplements
 
