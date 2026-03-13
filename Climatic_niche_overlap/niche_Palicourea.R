@@ -495,7 +495,7 @@ ggpubr::ggarrange(p2) #in supplements
 ########################### Inflorescence type, climate, and elevation##################################
 #########################################################################################################
 
-data<-read.csv("Palicourea_median_climate_data_with_elev_pollination.csv")
+data<-read.csv("Palicourea_median_climate_data_with_elev_pollination_final.csv")
 #mean(data$elev)
 
 pollination<-data$Principal_pollinator
