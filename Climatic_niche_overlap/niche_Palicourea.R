@@ -215,7 +215,7 @@ niche_data$species<-gsub(" ", "_", niche_data$species)
 niche_data_complete<-na.omit(niche_data)
 write.csv(niche_data_complete, "Palicourea_raw_climate_data_with_elev_final.csv", row.names = F)
 
-##Calculationn of median value for cimatic variables for each species
+##Calculation of median value for climatic variables for each species
 median_niche_values<-aggregate(niche_data_complete[3:13], niche_data_complete[1], median)
 write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev_final.csv", row.names=F)
 #median_niche_values$species<-as.factor(median_niche_values$species)
@@ -399,7 +399,7 @@ matrix_pca_df_pc2<-as.matrix(pca_df_rownames_pc2)
 ##Disparity among groups using the average squared pairwise distance metric
 
 #Brootstrapping with rarefaction
-subsets<-custom.subsets(data=matrix_pca_df, group = Biogeography2)
+subsets<-custom.subsets(data=matrix_pca_df2, group = Biogeography2)
 boot<-boot.matrix(subsets, bootstraps = 1000,
             rarefaction = 4)
 
@@ -424,6 +424,8 @@ test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni")
 
 ##Reading tree
 astral01 <- read.tree("../Resubmission/rev_dendrogram.tre")
+#removing taxa for which there isnt enought climate data, or those that have moved outside of the areas where
+#the clade originated
 tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
                "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana",
                "Pal_laxivenulosa","Pal_padifolia","Pal_angustifolia1",
@@ -452,6 +454,18 @@ plot(tree)
 
 write.tree(tree, file = "~/Desktop/tree.tre")
 #median_niche_values$areas<-areas
+#Check that tree and data have same species
+tree_species <- tree$tip.label
+data_species <- unique(median_niche_values$species)               
+
+
+data_not_in_tree <- setdiff(data_species, tree_species)
+length(data_not_in_tree)
+head(data_not_in_tree)
+
+tree_not_in_data <- setdiff(tree_species, data_species)
+length(tree_not_in_data)
+head(tree_not_in_data)
 
 #convert Species column into row names
 median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=median_niche_values[,1])
