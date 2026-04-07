@@ -45,7 +45,7 @@ Psy_rhytidocarpa,Psychotria_rhytidocarpa
 Pal_sessilis,Palicourea_sessilis
 Psy_ruelliifolia,Psychotria_ruelliifolia
 Psy_stachyoides,Psychotria_stachyoides
-Psy_brachypoda,Palicourea_brachypoda
+Psy_brachypoda,Psychotria_brachypoda
 Psy_patentinervia,Psychotria_patentinervia
 Psy_spathicalyx,Psychotria_spathicalyx
 Psy_suterella,Psychotria_suterella
@@ -84,7 +84,7 @@ Pal_candida,Palicourea_candida
 Pal_caprifoliacea,Palicourea_caprifoliacea
 Pal_sodiroi,Palicourea_sodiroi
 Pal_graciliflora,Palicourea_graciliflora
-Pal_lasiorrhachis,Palicourea_lasiorrachis
+Pal_lasiorrhachis,Palicourea_lasiorrhachis
 Pal_chignul,Palicourea_chignul
 Pal_pyramidalis,Palicourea_pyramidalis
 Pal_anderssoniana,Palicourea_anderssoniana
@@ -141,7 +141,8 @@ Pal_coriacea,Palicourea_coriacea
 Pal_corymbifera,Palicourea_corymbifera
 Pal_quadrifolia,Palicourea_quadrifolia
 Psy_lindenii,Psychotria_lindenii
-Psy_lupulina,Palicourea_justiciifolia
+Psy_lupulina,Palicourea_lupulina
+Pal_lupulina,Palicourea_lupulina
 Pal_suerrensis,Palicourea_suerrensis
 Pal_ostreophora,Palicourea_ostreophora
 Psy_bremekampiana,Psychotria_bremekampiana

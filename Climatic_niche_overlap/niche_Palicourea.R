@@ -220,7 +220,7 @@ median_niche_values<-aggregate(niche_data_complete[3:13], niche_data_complete[1]
 write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev_final.csv", row.names=F)
 #median_niche_values$species<-as.factor(median_niche_values$species)
 #load data
-median_niche_values<-read.csv("Palicourea_median_climate_data_with_elev_final.csv")
+median_niche_values<-read.csv("Palicourea_median_climate_data_with_elev__clades_final.csv")
 
 #########################################################################################
 ##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
@@ -241,30 +241,35 @@ library("dispRity")
 #Assigning species to groups
 
 
-Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
+Biogeography2<-list("Andes" = c(#"Palicourea_padifolia",
+                   "Palicourea_lehmannii",
                    "Palicourea_thyrsiflora","Palicourea_demissa",
-                   "Palicourea_frontinoensis", "Palicourea_angustifolia",
+                   "Palicourea_frontinoensis", #"Palicourea_angustifolia",
                    "Palicourea_thermydri","Palicourea_stipularis",
                    "Palicourea_flavescens","Palicourea_stenosepala",
                    "Palicourea_albiflora","Palicourea_macbridei",
                    "Palicourea_lineata","Palicourea_amethystina",
                    "Palicourea_heterochroma","Palicourea_anceps",
-                   "Palicourea_perquadrangularis","Palicourea_albocaerulea",
+                   "Palicourea_perquadrangularis",#"Palicourea_albocaerulea",
                    "Palicourea_antioquiana","Palicourea_acetosoides",
-                   "Palicourea_spathacea","Palicourea_skotakii",
-                   "Palicourea_bella","Palicourea_trianae",
-                   "Palicourea_seemannii","Palicourea_amplissima",
-                   "Palicourea_grandistipula","Palicourea_sopkinii",
+                   #"Palicourea_spathacea","Palicourea_skotakii",
+                   #"Palicourea_bella",
+                   "Palicourea_trianae",
+                   #"Palicourea_seemannii","Palicourea_amplissima",
+                   #"Palicourea_grandistipula",
+                   "Palicourea_sopkinii",
                    "Palicourea_standleyana", "Palicourea_candida",
                    "Palicourea_andrei","Palicourea_sodiroi",
                    "Palicourea_caprifoliacea","Palicourea_graciliflora",
                    "Palicourea_lasiorrhachis","Palicourea_pyramidalis",
-                   "Palicourea_chignul","Palicourea_lobbii",
+                   #"Palicourea_chignul",
+                   "Palicourea_lobbii",
                    "Palicourea_canarina","Palicourea_gemmiflora",
                    "Palicourea_luteonivea","Palicourea_harlingii",
                    "Palicourea_calothyrsus","Palicourea_anderssoniana",
                    "Palicourea_garciae","Palicourea_andaluciana",
-                   "Palicourea_salicifolia","Palicourea_sulphurea",
+                   #"Palicourea_salicifolia",
+                   "Palicourea_sulphurea",
                    "Palicourea_apicata","Palicourea_sucllii",
                    "Palicourea_azulina","Palicourea_loxensis",
                    "Palicourea_ulloana","Palicourea_quinquepyrena",
@@ -272,7 +277,7 @@ Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
                    "Palicourea_albaniana"
 #                 ,"Palicourea_flavifolia","Palicourea_bangii","Palicourea_reticulata"
                  ),
-     "Amazon" = c("Palicourea_justiciifolia","Palicourea_suerrensis",
+     "Amazon" = c("Palicourea_lupulina",#"Palicourea_suerrensis",
                   "Psychotria_lindenii","Palicourea_ostreophora",
                   "Palicourea_quadrifolia","Palicourea_corymbifera",
                   "Palicourea_coriacea","Palicourea_winkleri",
@@ -284,9 +289,9 @@ Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
                   "Psychotria_ulviformis","Palicourea_callithrix",
                   "Palicourea_rhodothamna","Palicourea_huampamiensis",
                   "Palicourea_didymocarpos","Palicourea_acuminata",
-                  "Palicourea_boraginoides","Palicourea_andina",
+                  #"Palicourea_boraginoides","Palicourea_andina",
                   "Palicourea_diminuta","Palicourea_triphylla",
-                  "Palicourea_calophylla","Palicourea_subspicata",
+                  "Palicourea_calophylla",#"Palicourea_subspicata",
                   "Palicourea_croceoides","Palicourea_crocea",
                   "Palicourea_macrobotrys","Palicourea_guianensis",
                   "Palicourea_mansoana","Palicourea_lasiantha",
@@ -295,8 +300,9 @@ Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
                   "Palicourea_macarthurorum","Palicourea_grandiflora",
                   "Palicourea_amapaensis","Palicourea_marcgravii",
                   "Palicourea_aeneofusca","Palicourea_longiflora",
-                  "Palicourea_rigida","Palicourea_petiolaris",
-                  "Palicourea_aschersoniana","Psychotria_everardii",
+                  "Palicourea_rigida",#"Palicourea_petiolaris",
+                  #"Palicourea_aschersoniana",
+                  "Psychotria_everardii",
                   "Psychotria_bertieroides",
                   #"Palicourea_laxivenulosa",
                   "Psychotria_venulosa","Palicourea_deflexa",
@@ -313,26 +319,28 @@ Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
                    "Palicourea_domingensis","Psychotria_luxurians",
                    "Psychotria_berteroana"),
      "Amazon2" = c("Psychotria_oblonga","Psychotria_muscosa",
-                   "Palicourea_glomerulata","Psychotria_hemicephaelis",
+                   #"Palicourea_glomerulata",
+                   "Psychotria_hemicephaelis",
                    "Palicourea_fanshawei","Palicourea_aetantha",
                    "Carapichea_urniformis","Psychotria_bolivarensis",
                    "Palicourea_yneziae","Palicourea_grandiceps",
                    "Palicourea_hypochlorina","Palicourea_conephoroides",
                    "Palicourea_flaviflora", "Palicourea_cenepensis",
-                   "Palicourea_ernestii","Palicourea_locuples",
-                   "Palicourea_antisanana","Palicourea_caerulea",
-                   "Palicourea_brachiata","Palicourea_solitudinum",
-                   "Palicourea_timbiquensis","Palicourea_acanthacea",
-                   "Palicourea_palenquensis","Palicourea_allenii",
-                   "Palicourea_tinctoria",
+                   "Palicourea_ernestii",#"Palicourea_locuples",
+                   #"Palicourea_antisanana","Palicourea_caerulea",
+                   #"Palicourea_brachiata","Palicourea_solitudinum",
+                   #"Palicourea_timbiquensis","Palicourea_acanthacea",
+                   #"Palicourea_palenquensis","Palicourea_allenii",
+                   #"Palicourea_tinctoria",
                    #"Palicourea_wolffiae",
-                   "Palicourea_jelskii",
+                   #"Palicourea_jelskii",
                    #"Palicourea_cauligera",
                    "Palicourea_botryocephala","Palicourea_tomentosa",
                    "Palicourea_bracteocardia","Palicourea_colorata",
-                   "Psychotria_urceolata",
+                   "Psychotria_urceolata"
                    #"Palicourea_vesiculifera",
-                   "Palicourea_cyanococca","Palicourea_hazenii"),
+                   #"Palicourea_cyanococca","Palicourea_hazenii"
+                   ),
      "Atlantic_Forest" = c("Psychotria_stachyoides","Psychotria_ruelliifolia",
                            "Palicourea_sessilis","Psychotria_rhytidocarpa",
                            "Palicourea_fulgens","Psychotria_spathicalyx",
@@ -341,7 +349,7 @@ Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
                            "Palicourea_divaricata","Palicourea_atlantica",
                            #"Palicourea_alagoana",
                            "Psychotria_phyllocalymma"),
-     "out" = c("Palicourea_stenostachya","Palicourea_racemosa",
+     "unstructured" = c("Palicourea_stenostachya","Palicourea_racemosa",
                "Palicourea_subfusca","Palicourea_minutiflora",
                "Palicourea_brevicollis","Palicourea_valerioana",
                "Palicourea_topoensis","Palicourea_boqueronensis"))
@@ -352,7 +360,7 @@ Biogeography2<-list("Andes" = c("Palicourea_padifolia","Palicourea_lehmannii",
 #Regular PCA for dispRity analysis below
 #########################################
 
-pc <- prcomp(median_niche_values[,2:11],
+pc <- prcomp(median_niche_values[,3:12],
              center = TRUE,
              scale. = TRUE)
 attributes(pc)
@@ -392,7 +400,7 @@ matrix_pca_df_pc2<-as.matrix(pca_df_rownames_pc2)
 
 #Brootstrapping with rarefaction
 subsets<-custom.subsets(data=matrix_pca_df, group = Biogeography2)
-boot<-boot.matrix(subsets, bootstraps = 100,
+boot<-boot.matrix(subsets, bootstraps = 1000,
             rarefaction = 4)
 
 #Estimating disparity
@@ -417,30 +425,33 @@ test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni")
 ##Reading tree
 astral01 <- read.tree("../Resubmission/rev_dendrogram.tre")
 tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
-               "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana","Pal_laxivenulosa")
+               "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana",
+               "Pal_laxivenulosa","Pal_padifolia","Pal_angustifolia1",
+               "Pal_albocaerulea","Pal_spathacea","Pal_skotakii",
+               "Pal_bella","Pal_seemannii","Pal_amplissima",
+               "Pal_grandistipula","Pal_chignul","Pal_salicifolia",
+               "Pal_flavifolia","Pal_bangii","Pal_reticulata",
+               "Pal_suerrensis","Pal_boraginoides","Pal_andina",
+               "Pal_subspicata","Pal_petiolaris","Pal_aschersoniana",
+               "Pal_glomerulata","Pal_locuples","Pal_antisanana","Pal_caerulea",
+               "Pal_brachiata1","Pal_solitudinum","Pal_timbiquensis",
+               "Pal_acanthacea","Pal_palenquensis","Pal_allenii",
+               "Pal_tinctoria","Pal_wolffiae","Pal_jelskii",
+               "Pal_cauligera","Pal_cyanococca","Pal_hazenii",
+               "Pal_alagoana", "Psy_stipulosa", "Psy_pseudinundata")
 tree <- ape::drop.tip(astral01, tips2delete)
 plot(tree)
 
 
 # Update tip labels so that they match the names in the niche data
-new_names <- read.csv("pal_name_updates.csv", header = T)
+new_names <- read.csv("~/Repos/Palicourea/Climatic_niche_overlap/pal_name_updates.csv", header = T)
 match_indices <- match(tree$tip.label, new_names$old_label)
 # Replace names in tree$tip.label vector
 tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
 plot(tree)
 
-#add Areas to highlight for plotting
-areas<-c(rep ("E2",2),"A",rep("E",2),"E2",rep("A",3),"E2","E","A","E",rep("A",4),"E",rep("A",3),
-         "E2","A","E","F","A","other","C","A","C","out","E",rep("E2",2),"F","E2","C","out",
-         "E2","C",rep("E",2),rep("A",4),"E2","A",rep("E2",2),"E","C",rep("E",3),"E2","E","A",rep("E",3),
-         "F","C","E","C","E2","C","E2","A","E2","other",rep("A",2),"F","A","C","A","E","E2","E","A",
-         "E2","E","C","A","E","A","E2","A","E","E2","F","E2",rep("E",3),rep("A",4),"E2","E",rep("A",2),
-         "E","A",rep("E",3),"C","out",rep("E",4),"A","E2","A","C",rep("E",3),"C","A","E","A","out","other",
-         rep("E",2),rep("A",3),"F",rep("A",2),"E2",rep("A",4),"out","A","out","E","A","E","A","C",rep("A",2),
-         rep("E2",3),"out","A","C","A","C","out",rep("E",2),"E2","E","E2",rep("E",2),"C","E2",rep("E",2),
-         "C",rep("E2",2),rep("E",2),rep("F",2),"E","other","E",rep("F",4),"other","F","E","E2",rep("E",2))
-
-median_niche_values$areas<-areas
+write.tree(tree, file = "~/Desktop/tree.tre")
+#median_niche_values$areas<-areas
 
 #convert Species column into row names
 median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=median_niche_values[,1])
@@ -449,7 +460,7 @@ median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=m
 matrix_median_niche_values<-data.matrix(median_niche_values_rownames)
 
 #Phylogenetic PCA
-pPCA<-phyl.pca(tree, matrix_median_niche_values[,1:4])
+pPCA<-phyl.pca(tree, matrix_median_niche_values[,2:11])
 
 attributes(pPCA)
 print(pPCA)
@@ -467,7 +478,7 @@ p2<-fviz_pca_var(obj, col.var="contrib",
                  repel = TRUE # Avoid text overlapping
 )
 
-p3<-fviz_pca_ind(obj,label="none", habillage=median_niche_values$areas,
+p3<-fviz_pca_ind(obj,label="none", habillage=median_niche_values$area,
                  palette= c("deepskyblue","#FFFF00","forestgreen", "purple",
                             "yellowgreen","grey","black" ), addEllipses=F, pointsize=3,
                  repel=T, max.overlaps=100)
@@ -504,7 +515,31 @@ pollination<- setNames(pollination, species)
 
 elevation<-data$elev
 elevation<- setNames(elevation, species)
+astral01 <- read.tree("../Resubmission/rev_dendrogram.tre")
 
+tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
+               "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana",
+               "Pal_laxivenulosa","Pal_angustifolia1","Pal_wolffiae","Pal_cauligera")
+tree <- ape::drop.tip(astral01, tips2delete)
+plot(tree)
+new_names <- read.csv("~/Repos/Palicourea/Climatic_niche_overlap/pal_name_updates.csv", header = T)
+match_indices <- match(tree$tip.label, new_names$old_label)
+# Replace names in tree$tip.label vector
+tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
+plot(tree)
+
+#Check that tree and data have same species
+tree_species <- tree$tip.label
+data_species <- unique(data$species)               
+
+
+data_not_in_tree <- setdiff(data_species, tree_species)
+length(data_not_in_tree)
+head(data_not_in_tree)
+
+tree_not_in_data <- setdiff(tree_species, data_species)
+length(tree_not_in_data)
+head(tree_not_in_data)
 #convert Species column into row names
 
 phylANOVA(tree, pollination, elevation)
@@ -521,26 +556,78 @@ print(levene_test)
 #phylANOVA(tree, pollination, bio12)
 
 ##reading data for proportion of pollinators at given elevation
-proportions<-read.csv("Palicourea_pollination_prop_elev.csv")
-reggression<-lm(proportion ~ elev, data = proportions)
+df<-read.csv("Palicourea_raw_climate_data_with_elev_pollinators_prop.csv")
+
+
+bin_width <- 50
+
+result <- df %>%
+  filter(!is.na(elev), !is.na(species), !is.na(pollinator)) %>%
+  mutate(
+    # Bin index
+    bin_id = case_when(
+      elev <= 50 ~ 0,
+      TRUE ~ floor((elev - 1) / bin_width)
+    ),
+    
+    # Bin boundaries
+    bin_start = case_when(
+      bin_id == 0 ~ 0,
+      TRUE ~ bin_id * bin_width + 1
+    ),
+    bin_end = (bin_id + 1) * bin_width,
+    
+    elev_bin = paste0(bin_start, "-", bin_end),
+    
+    is_hummingbird = grepl("hummingbird", pollinator, ignore.case = TRUE)
+  ) %>%
+  distinct(species, bin_id, elev_bin, bin_start, bin_end, is_hummingbird) %>%
+  group_by(bin_id, elev_bin, bin_start, bin_end) %>%
+  summarise(
+    n_species = n_distinct(species),
+    n_hummingbird_species = n_distinct(species[is_hummingbird]),
+    prop_hummingbird = n_hummingbird_species / n_species,
+    .groups = "drop"
+  ) %>%
+  arrange(bin_id)
+
+write_csv(result, "hummingbird_proportion_by_elevation_bin.csv")
+
+proportions<-read_csv("hummingbird_proportion_by_elevation_bin.csv")
+reggression<-lm(prop_hummingbird ~ bin_end, data = proportions)
 summary(reggression)
-plot(proportions, pch=16, col="grey")
-abline(reggression)
+
+ggplot(result, aes(x = bin_end, y = prop_hummingbird)) +
+  geom_point(size = 2, color = "grey70") +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  labs(
+    x = "Elevation (m)",
+    y = "Proportion (hummingbird pollinated / all species)"
+  ) +
+  theme_minimal()
+############################
+############################
+###########################
+
+
+
+
+
 
 ###########################################################################
 ##Testing for the effect of spp. with broad elevation ranges on phylANOVA##
 ###########################################################################
 
-niche_data_complete<-read.csv("Palicourea_raw_climate_data_with_elev.csv")
+niche_data_complete<-read.csv("Palicourea_raw_climate_data_with_elev_pollinators_prop.csv")
 
 #Estimate standard deviation (SD) of elevation for each species
-sd_niche_values<-aggregate(niche_data_complete[2:6], niche_data_complete[1], sd)
-#write.csv(sd_niche_values, "Palicourea_sd_climate_data_with_elev.csv", row.names=F)
+sd_niche_values<-aggregate(niche_data_complete[2:14], niche_data_complete[1], sd)
+write.csv(sd_niche_values, "Palicourea_sd_climate_data_with_elev_pollinators_prop.csv", row.names=F)
 
 #Remove species with SD above the average SD across species
-mean(sd_niche_values$elev) #467.8977
+mean(sd_niche_values$elev) #438.8847
 
-broad_elev_removed = sd_niche_values[sd_niche_values$elev > 467.8977,]
+broad_elev_removed = sd_niche_values[sd_niche_values$elev > 438.8847,]
 
 new_names <- read.csv("pal_name_updates.csv", header = T)
 match_indices <- match(tree$tip.label, new_names$old_label)
