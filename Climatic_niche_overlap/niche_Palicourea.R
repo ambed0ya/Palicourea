@@ -399,7 +399,7 @@ matrix_pca_df_pc2<-as.matrix(pca_df_rownames_pc2)
 ##Disparity among groups using the average squared pairwise distance metric
 
 #Brootstrapping with rarefaction
-subsets<-custom.subsets(data=matrix_pca_df2, group = Biogeography2)
+subsets<-custom.subsets(data=matrix_pca_df_pc2, group = Biogeography2)
 boot<-boot.matrix(subsets, bootstraps = 1000,
             rarefaction = 4)
 
