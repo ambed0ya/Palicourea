@@ -172,8 +172,10 @@ setwd("~/Repos/Palicourea/Climatic_niche_overlap/")
 matrix <- make_corr_matrix(occurrences = occurrences, environment_data = climate_stack, abs_highlight = 0.8)
 
 #select variables to remove
-bad_vars <- c("wc2.1_5m_bio_1", "wc2.1_5m_bio_3", "wc2.1_5m_bio_4", "wc2.1_5m_bio_6", "wc2.1_5m_bio_10", "wc2.1_5m_bio_11",
-                             "wc2.1_5m_bio_12", "wc2.1_5m_bio_16", "wc2.1_5m_bio_17")
+bad_vars <- c("wc2.1_5m_bio_2", "wc2.1_5m_bio_3", "wc2.1_5m_bio_6", "wc2.1_5m_bio_7",
+              "wc2.1_5m_bio_8", "wc2.1_5m_bio_9","wc2.1_5m_bio_10","wc2.1_5m_bio_11",
+              "wc2.1_5m_bio_13", "wc2.1_5m_bio_14", "wc2.1_5m_bio_15","wc2.1_5m_bio_16","wc2.1_5m_bio_17",
+              "wc2.1_5m_bio_18","wc2.1_5m_bio_19") #test
 
 #remove variables selected by user
 uncorr_stack <- remove_corr_variables(environment_data = climate_stack, variables_to_be_removed = bad_vars) 
@@ -210,18 +212,20 @@ df$elev <- extract(elev, long_lat)
 #pal_sf <- sf::st_as_sf(df, coords = c("longitude", "latitude"), crs = 4326)
 #df$elev <- get_elev_point(locations = pal_sf, prj = 4326)
 
-niche_data<-df[3:15]
+niche_data<-df[3:9]
+
 niche_data$species<-gsub(" ", "_", niche_data$species)
 niche_data_complete<-na.omit(niche_data)
 write.csv(niche_data_complete, "Palicourea_raw_climate_data_with_elev_final.csv", row.names = F)
 
 ##Calculation of median value for climatic variables for each species
-median_niche_values<-aggregate(niche_data_complete[3:13], niche_data_complete[1], median)
+median_niche_values<-aggregate(niche_data_complete[3:7], niche_data_complete[1], median)
+
 write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev_final.csv", row.names=F)
 #median_niche_values$species<-as.factor(median_niche_values$species)
 #load data
-median_niche_values<-read.csv("Palicourea_median_climate_data_with_elev__clades_final.csv")
 
+median_niche_values<-read.csv("Palicourea_median_climate_data_clades_final.csv")
 #########################################################################################
 ##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
 #########################################################################################
@@ -359,10 +363,12 @@ Biogeography2<-list("Andes" = c(#"Palicourea_padifolia",
 #########################################
 #Regular PCA for dispRity analysis below
 #########################################
-
-pc <- prcomp(median_niche_values[,3:12],
+pc <- prcomp(median_niche_values[,3:6],
              center = TRUE,
              scale. = TRUE)
+#pc <- prcomp(median_niche_values[,3:12],
+#             center = TRUE,
+#             scale. = TRUE)
 attributes(pc)
 print(pc)
 summary(pc)
@@ -371,6 +377,7 @@ var <- get_pca_var(pc)
 var$contrib
 
 ##Create a dataframe for PCA results
+
 pca_df <- data.frame(
   Species = median_niche_values$species,
   PC1 = pc$x[,1],
@@ -381,10 +388,10 @@ pca_df <- data.frame(
 #write.table(pca_df, "Palicourea_niche_PCA.csv", quote = FALSE, sep = "\t", )
 #write.table(pca_df, "Palicourea_niche_PCA_with_elev.csv", quote = FALSE, sep = "\t", )
 pca_df_rownames <- data.frame(pca_df[,-1], row.names=pca_df[,1])
-pca_df_rownames_pc1<-pca_df_rownames[,1:2]
-pca_df_rownames_pc2<-pca_df_rownames[,2:3]
-matrix_pca_df<-as.matrix(pca_df_rownames_pc1)
-matrix_pca_df_pc2<-as.matrix(pca_df_rownames_pc2)
+#pca_df_rownames_pc1<-pca_df_rownames[,1:2]
+#pca_df_rownames_pc2<-pca_df_rownames[,2:3]
+matrix_pca_df<-as.matrix(pca_df_rownames[, "PC1", drop = FALSE])
+matrix_pca_df_pc2<-as.matrix(pca_df_rownames[, "PC2", drop = FALSE])
 ##Plot the PCA results
 #ggplot(pca_df, aes(x = PC1, y = PC2, label = Species)) +
 #  geom_point(size = 3) +
@@ -409,7 +416,7 @@ disparity_rarefied
 summary(disparity_rarefied)
 
 #Plotting the results
-dev.off()
+#dev.off()
 plot(disparity_rarefied, observed =T)
 
 #plot(disparity, observed = list("pch" = 19, col = "blue", cex = 4))
@@ -474,7 +481,7 @@ median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=m
 matrix_median_niche_values<-data.matrix(median_niche_values_rownames)
 
 #Phylogenetic PCA
-pPCA<-phyl.pca(tree, matrix_median_niche_values[,2:11])
+pPCA<-phyl.pca(tree, matrix_median_niche_values[,2:5])
 
 attributes(pPCA)
 print(pPCA)
@@ -635,7 +642,7 @@ ggplot(result, aes(x = bin_end, y = prop_hummingbird)) +
 niche_data_complete<-read.csv("Palicourea_raw_climate_data_with_elev_pollinators_prop.csv")
 
 #Estimate standard deviation (SD) of elevation for each species
-sd_niche_values<-aggregate(niche_data_complete[2:14], niche_data_complete[1], sd)
+sd_niche_values<-aggregate(niche_data_complete[2:3], niche_data_complete[1], sd)
 write.csv(sd_niche_values, "Palicourea_sd_climate_data_with_elev_pollinators_prop.csv", row.names=F)
 
 #Remove species with SD above the average SD across species
