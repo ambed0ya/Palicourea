@@ -406,7 +406,7 @@ matrix_pca_df_pc2<-as.matrix(pca_df_rownames[, "PC2", drop = FALSE])
 ##Disparity among groups using the average squared pairwise distance metric
 
 #Brootstrapping with rarefaction
-subsets<-custom.subsets(data=matrix_pca_df_pc2, group = Biogeography2)
+subsets<-custom.subsets(data=matrix_pca_df, group = Biogeography2)
 boot<-boot.matrix(subsets, bootstraps = 1000,
             rarefaction = 4)
 
@@ -657,26 +657,69 @@ tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_lab
 
 spp2remove<-broad_elev_removed$species
 
-new_data <- subset(data, !(species %in% spp2remove))
+new_data <- subset(niche_data_complete, !(species %in% spp2remove))
 
-new_pollination<-new_data$Principal_pollinator
+new_pollination<-new_data$pollinator
 new_species<-new_data$species
 new_pollination<- setNames(new_pollination, new_species)
 
 new_elevation<-new_data$elev
 new_elevation<- setNames(new_elevation, new_species)
 
-new_tree <- ape::drop.tip(tree, spp2remove)
+#new_tree <- ape::drop.tip(tree, spp2remove)
 
-phylANOVA(new_tree, new_pollination, new_elevation)
+new_data_species <- new_data %>%
+  group_by(species) %>%
+  summarise(
+    pollinator = first(pollinator),
+    mean_elev = mean(elev, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(pollinator), !is.na(mean_elev))
 
-new_p <- ggplot(new_data, aes(x=Principal_pollinator, y=elev, color=Principal_pollinator)) + # fill=name allow to automatically dedicate a color for each group
+
+species_keep <- intersect(tree$tip.label, new_data_species$species)
+
+# Drop from tree everything not in filtered data
+new_tree_clean <- ape::drop.tip(
+  tree,
+  setdiff(tree$tip.label, species_keep)
+)
+
+# Make named vectors matching tree tips
+new_pollination <- setNames(
+  new_data_species$pollinator,
+  new_data_species$species
+)
+
+new_elevation <- setNames(
+  new_data_species$mean_elev,
+  new_data_species$species
+)
+
+new_pollination_clean <- new_pollination[new_tree_clean$tip.label]
+new_elevation_clean <- new_elevation[new_tree_clean$tip.label]
+
+# Check before running
+sum(is.na(new_pollination_clean))
+sum(is.na(new_elevation_clean))
+all(names(new_pollination_clean) == new_tree_clean$tip.label)
+all(names(new_elevation_clean) == new_tree_clean$tip.label)
+
+# Run phylogenetic ANOVA
+phylANOVA(
+  new_tree_clean,
+  new_pollination_clean,
+  new_elevation_clean
+)
+
+new_p <- ggplot(new_data_species, aes(x=pollinator, y=mean_elev, color=pollinator)) + # fill=name allow to automatically dedicate a color for each group
   geom_boxplot()
 new_p
 
 library("car")
 
-new_levene_test = leveneTest(elev ~ Principal_pollinator, new_data)
+new_levene_test = leveneTest(mean_elev ~ pollinator, new_data_species)
 
 print(new_levene_test)
 
