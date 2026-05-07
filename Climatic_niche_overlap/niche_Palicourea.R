@@ -435,19 +435,8 @@ astral01 <- read.tree("../Resubmission/rev_dendrogram.tre")
 #the clade originated
 tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
                "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana",
-               "Pal_laxivenulosa","Pal_padifolia","Pal_angustifolia1",
-               "Pal_albocaerulea","Pal_spathacea","Pal_skotakii",
-               "Pal_bella","Pal_seemannii","Pal_amplissima",
-               "Pal_grandistipula","Pal_chignul","Pal_salicifolia",
-               "Pal_flavifolia","Pal_bangii","Pal_reticulata",
-               "Pal_suerrensis","Pal_boraginoides","Pal_andina",
-               "Pal_subspicata","Pal_petiolaris","Pal_aschersoniana",
-               "Pal_glomerulata","Pal_locuples","Pal_antisanana","Pal_caerulea",
-               "Pal_brachiata1","Pal_solitudinum","Pal_timbiquensis",
-               "Pal_acanthacea","Pal_palenquensis","Pal_allenii",
-               "Pal_tinctoria","Pal_wolffiae","Pal_jelskii",
-               "Pal_cauligera","Pal_cyanococca","Pal_hazenii",
-               "Pal_alagoana", "Psy_stipulosa", "Psy_pseudinundata")
+               "Pal_laxivenulosa","Pal_angustifolia1","Pal_allenii","Pal_caerulea",
+               "Psy_stipulosa", "Psy_pseudinundata","Pal_suerrensis","Pal_subspicata")
 tree <- ape::drop.tip(astral01, tips2delete)
 plot(tree)
 
@@ -474,6 +463,7 @@ tree_not_in_data <- setdiff(tree_species, data_species)
 length(tree_not_in_data)
 head(tree_not_in_data)
 
+median_niche_values<-read.csv("Palicourea_median_climate_data_clades_final_ppca.csv")
 #convert Species column into row names
 median_niche_values_rownames <- data.frame(median_niche_values[,-1], row.names=median_niche_values[,1])
 
@@ -501,7 +491,7 @@ p2<-fviz_pca_var(obj, col.var="contrib",
 
 p3<-fviz_pca_ind(obj,label="none", habillage=median_niche_values$area,
                  palette= c("deepskyblue","#FFFF00","forestgreen", "purple",
-                            "yellowgreen","grey","black" ), addEllipses=F, pointsize=3,
+                            "yellowgreen","grey","black","orange","pink","brown" ), addEllipses=F, pointsize=3,
                  repel=T, max.overlaps=100)
 
 
