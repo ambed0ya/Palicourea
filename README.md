@@ -7,7 +7,7 @@ Code for phylogenomics, climatic niche overlap, biogeography and character state
  * [Quartet Sampling Score data and code](https://github.com/ambed0ya/Palicourea/blob/main/Quartet_Sampling_Score "Quartet Sampling Score data and code")
  * [Divergence dating data and code](https://github.com/ambed0ya/Palicourea/blob/main/Divergence_dating "Divergence Dating data and code")
  * [Biogeographic_modeling data and code](https://github.com/ambed0ya/Palicourea/blob/main/Biogeographic_modeling "Biogeographic modeling data and code")
- * [ASR Inflorescence morphology](https://github.com/ambed0ya/Palicourea/blob/main/Inflorescence_ASE "ASR Inflorescence morphology")
+ * [ASR Inflorescence type](https://github.com/ambed0ya/Palicourea/blob/main/Inflorescence_ASE "ASR Inflorescence morphology")
  * [Environmental preferences and elevation analyses](https://github.com/ambed0ya/Palicourea/blob/main/Climatic_niche_overlap "Environmental preference disparity, shifts, and correlation between elevation and hummingbird pollination")
  
 
