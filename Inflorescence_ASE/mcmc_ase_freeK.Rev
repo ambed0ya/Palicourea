@@ -11,12 +11,12 @@
 #######################
 # Reading in the Data #
 #######################
-
+setwd("/Users/aislinnmumford/Desktop/InflorRecon")
 CHARACTER = "palicourea.inflorescence_type"
 NUM_STATES = 4
 
 # Import the morphological character matrix #
-morpho <- readDiscreteCharacterData("palicourea.inflorescence_type.nex")
+morpho <- readDiscreteCharacterData("/Users/aislinnmumford/Desktop/InflorRecon/palicourea_inflor_type_resub.nex")
 
 # Create some vector for the moves and monitors of this analysis
 moves    = VectorMoves()
@@ -29,7 +29,7 @@ monitors = VectorMonitors()
 # Here we use a fixed tree topology of Paliocurea
 # Note that the readTrees function always returns a vector of trees,
 # so we simple take the first tree
-phylogeny <- readTrees("../Biogeographic_modeling/rev_dendrogram.tre")[1]
+phylogeny <- readTrees("/Users/aislinnmumford/Desktop/InflorRecon/rev_dendrogram.tre")[1]
 
 
 #########################

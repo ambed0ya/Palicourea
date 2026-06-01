@@ -1,9 +1,9 @@
 #!/usr/bin/rb
 
 # filenames
-range_fn = "simple/palicourea.range.nex"
-tree_fn  = "simple/rev_dendrogram.tre"
-out_fn   = "simple/rev_DTE"
+range_fn = "/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/palicourea.range_noPsy.nex"
+tree_fn  = "/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/rev_dendrogram.tre"
+out_fn   = "/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output"
 
 # read binary (01) presence-absence range data
 dat_range_01 = readDiscreteCharacterData(range_fn)
@@ -34,7 +34,7 @@ write(state_desc_str, file=out_fn+".state_labels.txt")
 # helper variables
 moves = VectorMoves()
 monitors = VectorMonitors()
-n_gen = 10000
+n_gen = 30000
 
 ###############
 # Tree models #
@@ -84,7 +84,7 @@ Q_DEC := fnDECRateMatrix(dispersalRates=dr,
 # build cladogenetic transition probabilities
 clado_event_types <- [ "s", "a" ]
 clado_event_probs <- simplex(1,1)
-P_DEC :=nDECCladoProbs(eventProbs=clado_event_probs,
+P_DEC :=fnDECCladoProbs(eventProbs=clado_event_probs,
                          eventTypes=clado_event_types,
                          numCharacters=n_areas)
 
@@ -137,7 +137,7 @@ out_tree_fn = out_str + ".tre"
 out_mcc_fn = out_str + ".mcc.tre"
 
 #build MCC tree and discard burnin fraction
-tree_trace = readTreeTrace(file=out_tree_fn, treetype="clock")
+tree_trace = readTreeTrace(file="/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output.trees", treetype="clock")
 tree_trace.setBurnin(0.25)
 n_burn = tree_trace.getBurnin()
 
@@ -145,10 +145,10 @@ n_burn = tree_trace.getBurnin()
 mcc_tree = mccTree(tree_trace, file=out_mcc_fn)
 
 #get ancestral state trace
-state_trace = readAncestralStateTrace(file=out_state_fn)
+state_trace = readAncestralStateTrace(file="/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output.states.log")
 
 #get ancestral state tree trace
-tree_trace = readAncestralStateTreeTrace(file=out_tree_fn, treetype="clock")
+tree_trace = readAncestralStateTreeTrace(file="/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output.trees", treetype="clock")
 
 #compute and save the ancestral state tree
 anc_tree = ancestralStateTree(tree=mcc_tree,
