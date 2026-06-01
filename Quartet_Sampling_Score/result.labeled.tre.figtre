@@ -1,0 +1,344 @@
+#NEXUS
+begin taxa;
+	dimensions ntax=242;
+	taxlabels
+	BAL_stormae_Vasquez1081
+	COS_grandiflora_Tyson904
+	Car_affinis_Gentry29147
+	Car_guianensis_Gonzalez2158
+	Car_urniformis_Radosauljevic103
+	Carapichea_ipecacuhana_Croat15117
+	Eum_boliviana_Campbell22035
+	HAM_patens_LB54
+	HIL_parasitica_Jiminez2189
+	HOF_phoenicopoda_Wendt3392
+	Not_epiphytica_Neill15737
+	Not_uliginosa_Stevens37138
+	Pal_acanthacea_Monsalve352
+	Pal_acetosoides_Croat70064
+	Pal_acuminata_Fonnegra6968
+	Pal_acuminata_Lachenaud966
+	Pal_acuminata_Suazo4616
+	'Pal_aeneafusca_Alcantaras.n.'
+	Pal_aetantha_Wurdack4349
+	Pal_alagoana_Thomas12434
+	Pal_albaniana_Campos6416
+	Pal_albiflora_Renjito241
+	Pal_allenii_Clark243
+	Pal_allocaerulea_Dietzsch14176
+	Pal_amapaensis_Granville14332
+	Pal_amethystina_Jaramillo1989
+	Pal_amita_Clark7037
+	Pal_amorimii_Moraes4231
+	Pal_amplissima_Edwards671
+	Pal_anceps_Zarucchi6347
+	Pal_andalucia_Jimenez1796
+	Pal_anderssoniana_Pelprete6485
+	Pal_andina_Dzieziech149
+	Pal_andrei_Neill13440
+	Pal_angustifolia_Testo2594
+	Pal_angustifolia_Wolff16
+	Pal_antioquiana_Gentry76143
+	Pal_antisanana_Nicolalde1191
+	Pal_apicata_Stergios2543
+	Pal_aschersoniana_Giraldo-Gensini948
+	Pal_atlantica_Amorim4512
+	Pal_azulina_Valenzuela21241
+	Pal_bangii_Fuentes12864
+	Pal_barchiata_Taylor11718
+	Pal_beachiana_Thomsen689
+	Pal_bella_McPherson12326
+	Pal_boqueronensis_Betancur7106
+	Pal_boraginoides_Croat75174
+	Pal_botryocephala_CornellTrop8
+	Pal_brachiata_Davidse36906
+	Pal_breedlovei_Breedlove53417
+	Pal_brevicollis_Zardini15831
+	Pal_caerulea_Korning47423
+	Pal_calidicola_Will13089998
+	Pal_calophylla_Jansen-Jacobs6296
+	Pal_calothyrsus_Vargas231
+	Pal_canarina_Harling26313
+	Pal_candida_Palacios5475
+	Pal_caprifoliaceae_Butz38
+	Pal_cauligera_Ceron16742
+	Pal_cenepensis_Rojas100
+	Pal_chignul_Luteyn5084
+	Pal_conephoroides_Quizhpe672
+	Pal_coriacea_Killen6202
+	Pal_correae_Dwyer1968
+	Pal_corymbifera_Grimes3319
+	Pal_crocea_Merello1713
+	Pal_croceoides_Taylor11640
+	Pal_cyanococca_Stevens30807
+	Pal_demissa_Zak3081
+	Pal_demissa_var_demissa_Bernardi17180
+	Pal_didymocarpos_Nee35839
+	Pal_diminuta_Pipoly8205
+	Pal_divaricata_Carvalho6490
+	Pal_domingensis_Axelrod1028
+	Pal_egensis_Liesner7059
+	Pal_elata_Ibarra-Manriquez5301
+	Pal_ernestii_Clarke11676
+	Pal_eurycarpa_Herrera8947
+	Pal_fanshawei_Radosaulijevic281
+	Pal_flavescens_vanDerWerff10948
+	Pal_flaviflora_Tirado43
+	Pal_flavifolia_Maldonado2948
+	Pal_frontinoensis_Zarucchi5651
+	Pal_fuchsioides_Clark1384
+	Pal_fulgens_Folli3398
+	Pal_garciae_Escobar7531
+	Pal_gardenioides_Calzada1508
+	Pal_gemmiflora_Homeier1498
+	Pal_glomerulata_Berger1481
+	Pal_graciliflora_Vasquez25261
+	Pal_grandiceps_Palacios5826
+	Pal_grandifolia_Liesner6534
+	Pal_grandifructa_Berger1417
+	Pal_grandistipula_Monsalve945
+	Pal_guianensis_Redden2302
+	Pal_guianensis_deLaQuintana257
+	Pal_harlingii_Quizhpe447
+	Pal_hazenni_Freire1098
+	Pal_heterochroma_Silverston-Sopkin1171
+	Pal_huampamiensis_Romoleroux2815
+	Pal_hypochlorina_Grandez2149
+	Pal_jambosioides_Hatschbach68469
+	Pal_jelskii_Fuentes12894
+	Pal_lachnantha_McDaniel23601
+	Pal_lasiantha_Graham199
+	Pal_lasiorachis_Callejas11469
+	Pal_lehmannii_Silverstone8396
+	Pal_lineata_Garcia112
+	Pal_liogieri_Clase3539
+	Pal_lobbii_Gustafsson8
+	Pal_locuples_Vasquez26296
+	Pal_longiflora_Gonzalez1934
+	Pal_loxensis_Neill16912
+	Pal_lutconivea_Dziedzioch62
+	Pal_luteonivea_Cayola2534
+	Pal_macarthurorum_Harling26051
+	Pal_macartrurorum_Freire591
+	Pal_macbriedei_Smith4191
+	Pal_macrobotrys_Gatti17549
+	Pal_mansoana_Seidel7661
+	Pal_marcgravii_VasconcelosSN
+	Pal_mediocris_Contreras10198
+	Pal_minutiflora_Thomas14147
+	Pal_nigricans_Romoleroux2109
+	Pal_nitidella_Liesner6369
+	Pal_officinalis_Delprete9185
+	Pal_padifolia_Dietzch1390
+	Pal_palenquensis_Palacios16485
+	Pal_perquadrangularis_Montgomery31
+	Pal_persearum_Stevens22179
+	Pal_petiolaris_Ortega3101
+	Pal_polycephala_Ehringhaus56
+	Pal_pyramidalis_Hartado1015
+	Pal_quadrifolia_Ricard76
+	Pal_quinquepyrena_Rodriguez1748
+	Pal_racemosa_Rivero265
+	Pal_rhodothamna_Rimachi7296
+	Pal_rigida_Gillepsie1715
+	Pal_rigida_Gillespie1715
+	Pal_rigida_Subieta322
+	Pal_rigidifolia_Nevers8427
+	Pal_salicifolia_Morales4511
+	Pal_seemannii_Juncosa556
+	Pal_sessilis_Lamberti4659
+	Pal_skotakii_Berger1647
+	Pal_sodiroi_Clark10970
+	Pal_solitudinum_Duke5262
+	Pal_sopkinii_Silverston-Sopkin4960
+	Pal_spathacea_Acosta347
+	Pal_standleyana_Gentry63598
+	Pal_stenosepala_Link13
+	Pal_stenostachya_Bonino362
+	Pal_stipularis_Leiva15000
+	Pal_subfusca_Parada996
+	Pal_subspicata_Lewis12506
+	Pal_sucllii_Beck14862
+	Pal_sulphurea_Palacios9594
+	Pal_tetragona_Beach1469
+	Pal_tetragona_Davidse36909
+	Pal_thermydri_Cardona255
+	Pal_thyrsiflora_Homeier5199
+	Pal_timbiguensis_Hoover4120
+	Pal_tinctoria_Cornejo149
+	Pal_topoensis_Zak3747
+	Pal_trianae_Croat83446
+	Pal_triphylla_Killeen6548
+	Pal_triphylla_Nee46793
+	Pal_triphylla_Stevens36461
+	Pal_ulloana_Link46
+	Pal_ulloana_Neill13476
+	Pal_umbelliformis_Mori_7918
+	Pal_valerioana_Pennys178
+	Pal_vellosizana_Fiaschi2844
+	Pal_vesiculifera_Devia2577
+	Pal_wolffiae_Homeier609
+	Pal_woronovii_vanDerWerff20100
+	Pal_yneziae_Rodriguez1494
+	Psy_arrabidae_Silva1622
+	Psy_berteroana_Taylor11646
+	Psy_berteroana_Tellez8459
+	Psy_bertieroides_McDaniel19021
+	Psy_bolivarensis_Pipoly15086
+	Psy_brachteocardia_Diaz3138
+	Psy_bremekampiana_Granville11150
+	Psy_buchtienii_Stevens37485
+	Psy_callithrix_Granville13399
+	Psy_carthagenensis_Araujo2124
+	Psy_correrae_MacDougal6258
+	Psy_deflexa_Meave1172
+	Psy_deflexa_Taylor11717
+	Psy_elata_Stevens36104
+	Psy_everandii_Liesner18061
+	Psy_gracilenta_Croat102206
+	Psy_grandis_Taylor11745
+	Psy_hebeclada_Hammel11854
+	Psy_hemicephaelis_Henkel5969
+	Psy_horizontalis_Stevens32733
+	Psy_jinotegensis_Stevens33549
+	Psy_limitanea_Gentry65838
+	Psy_limonensis_Stevens31580
+	Psy_lindenii_Valverde1018
+	Psy_lupulina_Gutierrez534
+	Psy_luxuriana_Hammel1035
+	Psy_mapourioides_Merello1711
+	Psy_marginata_Stevens32781
+	Psy_muscosa_Croat101829
+	Psy_nervosa_Stevens32362
+	Psy_oblonga_Acevedo-Rodreguez5933
+	Psy_oinochrophylla_Fonnegra3039
+	Psy_ostreophora_Schunke8366
+	Psy_panamensis_Stevens32285
+	Psy_paniculata_Clarke1268
+	Psy_pateninerva_Kirizawa3194
+	Psy_patens_Vuilleumier30
+	Psy_phyllocalymma_Thomas13326
+	Psy_platypoda_Maceda1475
+	Psy_poeppigiana_Araujo1546
+	Psy_prancei_Nee42697
+	Psy_prunifolia_Nee41304
+	Psy_pseudinundata_Andersson1953
+	Psy_pubescens_Stevens21197
+	Psy_pubescens_Taylor316
+	Psy_reticulata_Zambrana5775
+	Psy_rhombibractea_Freitas4
+	Psy_rhytidocarpa_Lombardi1559
+	Psy_rosea_LiesnerSN
+	Psy_ruellifolia_Baitello776
+	Psy_spathicalyx_Lombardi240
+	Psy_stachyoides_Harley5990
+	Psy_stipulosa_Zappi984
+	Psy_subsessilis_Stevens31494
+	Psy_suerrensis_McPherson15864
+	Psy_suerrensis_Stevens36741
+	Psy_suterella_Souza8789
+	Psy_trichocephala_Schunke7495
+	Psy_ulviformis_Hammel21638
+	Psy_urceolata_Granville8653
+	Psy_variegata_Delprete7131
+	Psy_venulosa_Liesner6131
+	Rud_cornifolia_deGracias818
+	Rud_hostmanniana_Croat102313
+;
+end;
+
+begin trees;
+	tree tree1 = [&R] (((((((((((((((((((((((Pal_lehmannii_Silverstone8396[&qf=0.40159271899886234]:1.0,Pal_padifolia_Dietzch1390[&qf=0.4437726723095526]:1.0)[&label="QS22",freq=0.43,qc=0.026,qd=0.82,qi=0.88,reps=200.0,score="0.026/0.82/0.88"]:0.034518,Pal_thyrsiflora_Homeier5199[&qf=0.45714285714285713]:1.0)[&label="QS21",freq=0.74,qc=0.36,qd=0.4,qi=0.96,reps=200.0,score="0.36/0.4/0.96"]:0.14955,Pal_demissa_Zak3081[&qf=0.42889137737961924]:1.0)[&label="QS20",freq=0.12,qc=-0.12,qd=0.87,qi=0.99,reps=200.0,score="-0.12/0.87/0.99"]:0.027166,((Pal_frontinoensis_Zarucchi5651[&qf=0.3962040332147094]:1.0,Pal_angustifolia_Testo2594[&qf=0.3896595208070618]:1.0)[&label="QS24",freq=0.53,qc=0.24,qd=0.17,qi=0.98,reps=200.0,score="0.24/0.17/0.98"]:0.134078,Pal_thermydri_Cardona255[&qf=0.4236559139784946]:1.0)[&label="QS23",freq=0.29,qc=-0.059,qd=0.59,qi=0.97,reps=200.0,score="-0.059/0.59/0.97"]:0.092644)[&label="QS19",freq=0.39,qc=-0.03,qd=0.71,qi=0.96,reps=200.0,score="-0.03/0.71/0.96"]:0.054222,((((Pal_stipularis_Leiva15000[&qf=0.4019607843137255]:1.0,Pal_flavescens_vanDerWerff10948[&qf=0.3773809523809524]:1.0)[&label="QS28",freq=0.32,qc=-0.093,qd=0,qi=0.93,reps=200.0,score="-0.093/0/0.93"]:0.270068,Pal_demissa_var_demissa_Bernardi17180[&qf=0.3853503184713376]:1.0)[&label="QS27",freq=0.51,qc=0.31,qd=0.065,qi=0.94,reps=200.0,score="0.31/0.065/0.94"]:0.005652,Pal_stenosepala_Link13[&qf=0.399098083427283]:1.0)[&label="QS26",freq=0.18,qc=-0.057,qd=0.88,qi=0.98,reps=200.0,score="-0.057/0.88/0.98"]:0.046963,Pal_albiflora_Renjito241[&qf=0.3658243080625752]:1.0)[&label="QS25",freq=0.44,qc=0.056,qd=0.64,qi=0.94,reps=200.0,score="0.056/0.64/0.94"]:0.069083)[&label="QS18",freq=0.33,qc=-2.3E-4,qd=0.98,qi=0.94,reps=200.0,score="-0.00023/0.98/0.94"]:0.074203,((Pal_lineata_Garcia112[&qf=0.3288409703504043]:1.0,Pal_macbriedei_Smith4191[&qf=0.37393767705382436]:1.0)[&label="QS30",freq=0.24,qc=-0.41,qd=0.056,qi=0.94,reps=200.0,score="-0.41/0.056/0.94"]:0.275742,Pal_amethystina_Jaramillo1989[&qf=0.4046783625730994]:1.0)[&label="QS29",freq=0.44,qc=0.043,qd=0.71,qi=0.95,reps=200.0,score="0.043/0.71/0.95"]:0.038491)[&label="QS17",freq=0.25,qc=-0.17,qd=0.36,qi=0.97,reps=200.0,score="-0.17/0.36/0.97"]:0.037328,Pal_heterochroma_Silverston-Sopkin1171[&qf=0.36507936507936506]:1.0)[&label="QS16",freq=0.27,qc=-0.2,qd=0.28,qi=0.96,reps=200.0,score="-0.2/0.28/0.96"]:0.031719,Pal_anceps_Zarucchi6347[&qf=0.4038748137108793]:1.0)[&label="QS15",freq=0.42,qc=0.015,qd=0.96,qi=0.96,reps=200.0,score="0.015/0.96/0.96"]:0.021453,(((Pal_allocaerulea_Dietzsch14176[&qf=0.5664335664335665]:1.0,Pal_perquadrangularis_Montgomery31[&qf=0.5321477428180574]:1.0)[&label="QS33",freq=0.75,qc=0.43,qd=0.13,qi=0.91,reps=200.0,score="0.43/0.13/0.91"]:0.105326,Pal_antioquiana_Gentry76143[&qf=0.6113207547169811]:1.0)[&label="QS32",freq=0.94,qc=0.67,qd=0,qi=0.99,reps=200.0,score="0.67/0/0.99"]:0.194536,Pal_acetosoides_Croat70064[&qf=0.5246113989637305]:1.0)[&label="QS31",freq=0.27,qc=-0.082,qd=0.54,qi=0.95,reps=200.0,score="-0.082/0.54/0.95"]:0.0)[&label="QS14",freq=0.33,qc=-0.0075,qd=0.84,qi=0.95,reps=200.0,score="-0.0075/0.84/0.95"]:0.375374,((((((((Pal_skotakii_Berger1647[&qf=0.2443653618030842]:1.0,Pal_spathacea_Acosta347[&qf=0.32272727272727275]:1.0)[&label="QS41",freq=0.025,qc=-0.31,qd=0.72,qi=0.98,reps=200.0,score="-0.31/0.72/0.98"]:0.047927,Pal_bella_McPherson12326[&qf=0.30926724137931033]:1.0)[&label="QS40",freq=0.18,qc=-0.37,qd=0.15,qi=0.96,reps=200.0,score="-0.37/0.15/0.96"]:0.184133,Pal_trianae_Croat83446[&qf=0.40420819490586934]:1.0)[&label="QS39",freq=0.57,qc=0.11,qd=1,qi=0.95,reps=200.0,score="0.11/1/0.95"]:0.02809,((Pal_seemannii_Juncosa556[&qf=0.36014851485148514]:1.0,Pal_amplissima_Edwards671[&qf=0.3988165680473373]:1.0)[&label="QS43",freq=0.27,qc=-0.44,qd=0.014,qi=0.96,reps=200.0,score="-0.44/0.014/0.96"]:0.076228,Pal_grandistipula_Monsalve945[&qf=0.3470982142857143]:1.0)[&label="QS42",freq=0.38,qc=0.015,qd=0.81,qi=0.98,reps=200.0,score="0.015/0.81/0.98"]:0.390996)[&label="QS38",freq=0.33,qc=-0.091,qd=0.47,qi=0.95,reps=200.0,score="-0.091/0.47/0.95"]:0.043019,Pal_sopkinii_Silverston-Sopkin4960[&qf=0.33155792276964047]:1.0)[&label="QS37",freq=0.046,qc=-0.72,qd=0.054,qi=0.97,reps=200.0,score="-0.72/0.054/0.97"]:0.065505,Pal_standleyana_Gentry63598[&qf=0.34354194407456723]:1.0)[&label="QS36",freq=0.55,qc=0.1,qd=0.78,qi=0.92,reps=200.0,score="0.1/0.78/0.92"]:0.074329,(Pal_candida_Palacios5475[&qf=0.388646288209607]:1.0,Pal_andrei_Neill13440[&qf=0.3742857142857143]:1.0)[&label="QS44",freq=0.26,qc=-0.024,qd=0.8,qi=0.95,reps=200.0,score="-0.024/0.8/0.95"]:0.55687)[&label="QS35",freq=0.4,qc=0.014,qd=0.86,qi=0.87,reps=200.0,score="0.014/0.86/0.87"]:0.139297,((((Pal_sodiroi_Clark10970[&qf=0.5045045045045045]:1.0,Pal_caprifoliaceae_Butz38[&qf=0.47713226205191595]:1.0)[&label="QS48",freq=0.9,qc=0.65,qd=0.5,qi=1,reps=200.0,score="0.65/0.5/1"]:0.155106,Pal_graciliflora_Vasquez25261[&qf=0.43105446118192353]:1.0)[&label="QS47",freq=0.076,qc=-0.67,qd=0.044,qi=0.98,reps=200.0,score="-0.67/0.044/0.98"]:0.108683,Pal_lasiorachis_Callejas11469[&qf=0.3264058679706601]:1.0)[&label="QS46",freq=0.43,qc=0.017,qd=0.98,qi=0.96,reps=200.0,score="0.017/0.98/0.96"]:0.047497,(Pal_pyramidalis_Hartado1015[&qf=0.33429394812680113]:1.0,Pal_chignul_Luteyn5084[&qf=0.3351278600269179]:1.0)[&label="QS49",freq=0.16,qc=-0.33,qd=0.23,qi=0.88,reps=200.0,score="-0.33/0.23/0.88"]:0.16868)[&label="QS45",freq=0.41,qc=0.025,qd=0.79,qi=0.93,reps=200.0,score="0.025/0.79/0.93"]:0.292658)[&label="QS34",freq=0.31,qc=-0.0025,qd=0.93,qi=0.91,reps=200.0,score="-0.0025/0.93/0.91"]:0.043033)[&label="QS13",freq=0.36,qc=0.0019,qd=0.94,qi=0.97,reps=200.0,score="0.0019/0.94/0.97"]:0.013447,(((((Pal_canarina_Harling26313[&qf=0.4002389486260454]:1.0,Pal_lobbii_Gustafsson8[&qf=0.3967459324155194]:1.0)[&label="QS54",freq=0.01,qc=-0.54,qd=0.34,qi=0.99,reps=200.0,score="-0.54/0.34/0.99"]:0.071738,Pal_gemmiflora_Homeier1498[&qf=0.4663101604278075]:1.0)[&label="QS53",freq=0.91,qc=0.69,qd=0.47,qi=0.97,reps=200.0,score="0.69/0.47/0.97"]:0.127002,(Pal_lutconivea_Dziedzioch62[&qf=0.5154241645244216]:1.0,Pal_luteonivea_Cayola2534[&qf=0.5050377833753149]:1.0)[&label="QS55",freq=0.5,qc=0.17,qd=0.33,qi=0.96,reps=200.0,score="0.17/0.33/0.96"]:0.992077)[&label="QS52",freq=0.24,qc=-0.035,qd=0.8,qi=0.94,reps=200.0,score="-0.035/0.8/0.94"]:0.089445,Pal_harlingii_Quizhpe447[&qf=0.4357615894039735]:1.0)[&label="QS51",freq=0.51,qc=0.16,qd=0.37,qi=0.94,reps=200.0,score="0.16/0.37/0.94"]:0.190289,(Pal_anderssoniana_Pelprete6485[&qf=0.5842857142857143]:1.0,Pal_calothyrsus_Vargas231[&qf=0.6051873198847262]:1.0)[&label="QS56",freq=0.95,qc=0.82,qd=0.22,qi=0.98,reps=200.0,score="0.82/0.22/0.98"]:0.685021)[&label="QS50",freq=0.3,qc=-0.0024,qd=0.97,qi=0.94,reps=200.0,score="-0.0024/0.97/0.94"]:0.068294)[&label="QS12",freq=0.47,qc=0.038,qd=0.95,qi=0.95,reps=200.0,score="0.038/0.95/0.95"]:0.502314,((((Pal_andalucia_Jimenez1796[&qf=0.4654320987654321]:1.0,Pal_garciae_Escobar7531[&qf=0.5185676392572944]:1.0)[&label="QS60",freq=0.84,qc=0.36,qd=0,qi=0.94,reps=200.0,score="0.36/0/0.94"]:0.05776,Pal_salicifolia_Morales4511[&qf=0.4705251875669882]:1.0)[&label="QS59",freq=0.32,qc=-0.076,qd=0.52,qi=0.92,reps=200.0,score="-0.076/0.52/0.92"]:0.385202,(Pal_apicata_Stergios2543[&qf=0.3704206241519674]:1.0,Pal_sulphurea_Palacios9594[&qf=0.35405405405405405]:1.0)[&label="QS61",freq=0.17,qc=-0.066,qd=0.89,qi=0.94,reps=200.0,score="-0.066/0.89/0.94"]:0.236933)[&label="QS58",freq=0.49,qc=0.05,qd=1,qi=0.95,reps=200.0,score="0.05/1/0.95"]:0.0,((Pal_sucllii_Beck14862[&qf=0.4209770114942529]:1.0,Pal_azulina_Valenzuela21241[&qf=0.3895184135977337]:1.0)[&label="QS63",freq=0.41,qc=0.053,qd=0.61,qi=0.97,reps=200.0,score="0.053/0.61/0.97"]:0.153816,Pal_loxensis_Neill16912[&qf=0.39383155397390274]:1.0)[&label="QS62",freq=0.23,qc=-0.096,qd=0.54,qi=0.96,reps=200.0,score="-0.096/0.54/0.96"]:0.161916)[&label="QS57",freq=0.42,qc=0.016,qd=0.99,qi=0.94,reps=200.0,score="0.016/0.99/0.94"]:0.543802)[&label="QS11",freq=0.35,qc=-0.0089,qd=0.83,qi=0.93,reps=200.0,score="-0.0089/0.83/0.93"]:0.083692,(((Pal_ulloana_Neill13476[&qf=0.5456919060052219]:1.0,Pal_ulloana_Link46[&qf=0.5390070921985816]:1.0)[&label="QS66",freq=0.62,qc=0.22,qd=0.42,qi=0.96,reps=200.0,score="0.22/0.42/0.96"]:0.043305,Pal_quinquepyrena_Rodriguez1748[&qf=0.5969626168224299]:1.0)[&label="QS65",freq=0.93,qc=0.74,qd=0.46,qi=0.97,reps=200.0,score="0.74/0.46/0.97"]:0.649172,(Pal_angustifolia_Wolff16[&qf=0.496996996996997]:1.0,Pal_rigidifolia_Nevers8427[&qf=0.5576368876080692]:1.0)[&label="QS67",freq=0.49,qc=-0.34,qd=0.02,qi=0.97,reps=200.0,score="-0.34/0.02/0.97"]:0.534188)[&label="QS64",freq=0.34,qc=-0.0029,qd=0.9,qi=0.94,reps=200.0,score="-0.0029/0.9/0.94"]:0.501571)[&label="QS10",freq=0.34,qc=-0.0013,qd=0.94,qi=0.94,reps=200.0,score="-0.0013/0.94/0.94"]:0.0,(Pal_fuchsioides_Clark1384[&qf=0.5125628140703518]:1.0,Pal_albaniana_Campos6416[&qf=0.5022970903522205]:1.0)[&label="QS68",freq=0.66,qc=0.21,qd=0.97,qi=0.92,reps=200.0,score="0.21/0.97/0.92"]:0.091315)[&label="QS9",freq=0.47,qc=0.039,qd=0.93,qi=0.94,reps=200.0,score="0.039/0.93/0.94"]:0.093914,((((((((((Pal_umbelliformis_Mori_7918[&qf=0.562268803945746]:1.0,Pal_calidicola_Will13089998[&qf=0.5378346915017462]:1.0)[&label="QS78",freq=0.93,qc=0.63,qd=0,qi=0.98,reps=200.0,score="0.63/0/0.98"]:0.12794,Pal_eurycarpa_Herrera8947[&qf=0.5308510638297872]:1.0)[&label="QS77",freq=0.29,qc=-0.2,qd=0.26,qi=0.93,reps=200.0,score="-0.2/0.26/0.93"]:0.06739,Pal_mediocris_Contreras10198[&qf=0.3831242873432155]:1.0)[&label="QS76",freq=0.19,qc=-0.28,qd=0.25,qi=0.97,reps=200.0,score="-0.28/0.25/0.97"]:0.089872,Pal_breedlovei_Breedlove53417[&qf=0.3912529550827423]:1.0)[&label="QS75",freq=0.58,qc=0.29,qd=0.12,qi=0.98,reps=200.0,score="0.29/0.12/0.98"]:0.075992,Pal_beachiana_Thomsen689[&qf=0.4969021065675341]:1.0)[&label="QS74",freq=0.37,qc=-0.017,qd=0.77,qi=0.94,reps=200.0,score="-0.017/0.77/0.94"]:0.165835,Pal_grandifructa_Berger1417[&qf=0.43546284224250326]:1.0)[&label="QS73",freq=0.5,qc=0.076,qd=0.69,qi=0.96,reps=200.0,score="0.076/0.69/0.96"]:0.0,(Pal_tetragona_Beach1469[&qf=0.5599435825105783]:1.0,Pal_tetragona_Davidse36909[&qf=0.5665294924554184]:1.0)[&label="QS79",freq=0.94,qc=0.79,qd=0.18,qi=0.99,reps=200.0,score="0.79/0.18/0.99"]:0.982052)[&label="QS72",freq=0.22,qc=-0.075,qd=0.65,qi=0.93,reps=200.0,score="-0.075/0.65/0.93"]:0.477005,Pal_persearum_Stevens22179[&qf=0.38130563798219586]:1.0)[&label="QS71",freq=0.45,qc=0.048,qd=0.72,qi=0.92,reps=200.0,score="0.048/0.72/0.92"]:0.0,((((Psy_elata_Stevens36104[&qf=0.49882903981264637]:1.0,Pal_elata_Ibarra-Manriquez5301[&qf=0.4831199068684517]:1.0)[&label="QS83",freq=0.45,qc=-0.16,qd=0.31,qi=0.89,reps=200.0,score="-0.16/0.31/0.89"]:0.400105,(Pal_correae_Dwyer1968[&qf=0.5129716981132075]:1.0,Psy_correrae_MacDougal6258[&qf=0.40979689366786143]:1.0)[&label="QS84",freq=0.32,qc=-0.38,qd=0.031,qi=0.95,reps=200.0,score="-0.38/0.031/0.95"]:0.251583)[&label="QS82",freq=0.88,qc=0.62,qd=0.35,qi=0.96,reps=200.0,score="0.62/0.35/0.96"]:1.481483,((Psy_pubescens_Taylor316[&qf=0.646606914212548]:1.0,Psy_pubescens_Stevens21197[&qf=0.6797966963151207]:1.0)[&label="QS86",freq=0.98,qc=0.89,qd=0,qi=0.98,reps=200.0,score="0.89/0/0.98"]:0.421574,Psy_hebeclada_Hammel11854[&qf=0.6300448430493274]:1.0)[&label="QS85",freq=0.57,qc=0.29,qd=0.12,qi=0.95,reps=200.0,score="0.29/0.12/0.95"]:1.42963)[&label="QS81",freq=0.62,qc=0.17,qd=0.78,qi=0.92,reps=200.0,score="0.17/0.78/0.92"]:0.063024,(Pal_gardenioides_Calzada1508[&qf=0.4958217270194986]:1.0,Pal_domingensis_Axelrod1028[&qf=0.48175182481751827]:1.0)[&label="QS87",freq=0.54,qc=0.12,qd=0.57,qi=0.95,reps=200.0,score="0.12/0.57/0.95"]:0.903113)[&label="QS80",freq=0.3,qc=-0.033,qd=0.69,qi=0.91,reps=200.0,score="-0.033/0.69/0.91"]:0.070869)[&label="QS70",freq=0.39,qc=0.0072,qd=0.97,qi=0.93,reps=200.0,score="0.0072/0.97/0.93"]:0.051646,((Psy_berteroana_Taylor11646[&qf=0.3546875]:1.0,Psy_berteroana_Tellez8459[&qf=0.3848439821693908]:1.0)[&label="QS89",freq=0.037,qc=-0.55,qd=0.23,qi=0.95,reps=200.0,score="-0.55/0.23/0.95"]:0.282452,Psy_luxuriana_Hammel1035[&qf=0.36649214659685864]:1.0)[&label="QS88",freq=0.75,qc=0.33,qd=0.83,qi=0.92,reps=200.0,score="0.33/0.83/0.92"]:0.540551)[&label="QS69",freq=0.39,qc=0.017,qd=0.8,qi=0.88,reps=200.0,score="0.017/0.8/0.88"]:0.350221)[&label="QS8",freq=0.41,qc=0.016,qd=0.86,qi=0.94,reps=200.0,score="0.016/0.86/0.94"]:0.257888,(((((((((((((((((Psy_suerrensis_Stevens36741[&qf=0.5617715617715617]:1.0,Psy_suerrensis_McPherson15864[&qf=0.5662100456621004]:1.0)[&label="QS106",freq=0.99,qc=0.95,qd=0,qi=0.99,reps=200.0,score="0.95/0/0.99"]:0.56873,Psy_lupulina_Gutierrez534[&qf=0.5689828801611279]:1.0)[&label="QS105",freq=0.038,qc=-0.25,qd=0.95,qi=0.91,reps=200.0,score="-0.25/0.95/0.91"]:0.080005,Psy_lindenii_Valverde1018[&qf=0.4485294117647059]:1.0)[&label="QS104",freq=0.58,qc=0.22,qd=0.29,qi=0.96,reps=200.0,score="0.22/0.29/0.96"]:0.11362,Psy_ostreophora_Schunke8366[&qf=0.6436107854630715]:1.0)[&label="QS103",freq=0.99,qc=0.95,qd=0,qi=1,reps=200.0,score="0.95/0/1"]:1.281281,((Pal_corymbifera_Grimes3319[&qf=0.5836477987421383]:1.0,Pal_quadrifolia_Ricard76[&qf=0.6453143534994069]:1.0)[&label="QS108",freq=0.81,qc=0.31,qd=0,qi=0.97,reps=200.0,score="0.31/0/0.97"]:1.03926,Pal_coriacea_Killen6202[&qf=0.5720384204909285]:1.0)[&label="QS107",freq=0.44,qc=0.026,qd=0.9,qi=0.94,reps=200.0,score="0.026/0.9/0.94"]:0.67064)[&label="QS102",freq=0.55,qc=0.14,qd=0.52,qi=0.91,reps=200.0,score="0.14/0.52/0.91"]:0.200073,((((Psy_platypoda_Maceda1475[&qf=0.4234752589182969]:1.0,Psy_buchtienii_Stevens37485[&qf=0.4192355117139334]:1.0)[&label="QS112",freq=0.097,qc=-0.14,qd=0.93,qi=0.82,reps=200.0,score="-0.14/0.93/0.82"]:0.043725,Psy_gracilenta_Croat102206[&qf=0.38238573021181715]:1.0)[&label="QS111",freq=0.55,qc=0.095,qd=0.81,qi=0.85,reps=200.0,score="0.095/0.81/0.85"]:0.120678,Psy_paniculata_Clarke1268[&qf=0.48645465253239106]:1.0)[&label="QS110",freq=0.49,qc=0.13,qd=0.43,qi=0.86,reps=200.0,score="0.13/0.43/0.86"]:0.292379,Pal_amorimii_Moraes4231[&qf=0.5575980392156863]:1.0)[&label="QS109",freq=0.81,qc=0.48,qd=0.33,qi=0.96,reps=200.0,score="0.48/0.33/0.96"]:0.7126)[&label="QS101",freq=0.74,qc=0.33,qd=0.67,qi=0.93,reps=200.0,score="0.33/0.67/0.93"]:0.56589,Psy_bremekampiana_Granville11150[&qf=0.4778523489932886]:1.0)[&label="QS100",freq=0.3,qc=-0.056,qd=0.59,qi=0.92,reps=200.0,score="-0.056/0.59/0.92"]:0.091973,((Psy_prunifolia_Nee41304[&qf=0.44689655172413795]:1.0,Psy_prancei_Nee42697[&qf=0.4780821917808219]:1.0)[&label="QS114",freq=0.53,qc=0.23,qd=0.2,qi=0.94,reps=200.0,score="0.23/0.2/0.94"]:0.235594,Psy_rhombibractea_Freitas4[&qf=0.4752714113389626]:1.0)[&label="QS113",freq=0.49,qc=0.064,qd=0.74,qi=0.88,reps=200.0,score="0.064/0.74/0.88"]:0.332876)[&label="QS99",freq=0.47,qc=0.05,qd=0.76,qi=0.84,reps=200.0,score="0.05/0.76/0.84"]:0.187844,Psy_variegata_Delprete7131[&qf=0.40998487140695916]:1.0)[&label="QS98",freq=0.33,qc=-3.2E-4,qd=0.97,qi=0.8,reps=200.0,score="-0.00032/0.97/0.8"]:0.012057,Psy_trichocephala_Schunke7495[&qf=0.45925925925925926]:1.0)[&label="QS97",freq=0.66,qc=0.22,qd=0.74,qi=0.8,reps=200.0,score="0.22/0.74/0.8"]:0.217061,Psy_ulviformis_Hammel21638[&qf=0.3978328173374613]:1.0)[&label="QS96",freq=0.26,qc=-0.031,qd=0.77,qi=0.7,reps=200.0,score="-0.031/0.77/0.7"]:0.02567,Psy_callithrix_Granville13399[&qf=0.38837920489296635]:1.0)[&label="QS95",freq=0.48,qc=0.046,qd=0.89,qi=0.87,reps=200.0,score="0.046/0.89/0.87"]:0.114601,(((((Pal_acuminata_Fonnegra6968[&qf=0.4676753782668501]:1.0,Pal_acuminata_Suazo4616[&qf=0.5523932729624839]:1.0)[&label="QS119",freq=0.31,qc=-0.21,qd=0.24,qi=0.96,reps=200.0,score="-0.21/0.24/0.96"]:0.80807,Pal_andina_Dzieziech149[&qf=0.4590909090909091]:1.0)[&label="QS118",freq=0.6,qc=0.15,qd=0.73,qi=0.92,reps=200.0,score="0.15/0.73/0.92"]:0.236833,Pal_boraginoides_Croat75174[&qf=0.6408364083640836]:1.0)[&label="QS117",freq=0.92,qc=0.61,qd=0,qi=0.96,reps=200.0,score="0.61/0/0.96"]:1.371611,((Pal_acuminata_Lachenaud966[&qf=0.6687422166874222]:1.0,Pal_didymocarpos_Nee35839[&qf=0.6119951040391677]:1.0)[&label="QS121",freq=0.95,qc=0.81,qd=0.44,qi=1,reps=200.0,score="0.81/0.44/1"]:0.280529,(Pal_rhodothamna_Rimachi7296[&qf=0.5913154533844189]:1.0,Pal_huampamiensis_Romoleroux2815[&qf=0.5435897435897435]:1.0)[&label="QS122",freq=0.42,qc=-0.22,qd=0.19,qi=0.93,reps=200.0,score="-0.22/0.19/0.93"]:0.15181)[&label="QS120",freq=0.72,qc=0.35,qd=0.3,qi=0.95,reps=200.0,score="0.35/0.3/0.95"]:0.793906)[&label="QS116",freq=0.23,qc=-0.46,qd=0.027,qi=0.95,reps=200.0,score="-0.46/0.027/0.95"]:0.22976,Pal_diminuta_Pipoly8205[&qf=0.5083798882681564]:1.0)[&label="QS115",freq=0.92,qc=0.7,qd=0.5,qi=0.97,reps=200.0,score="0.7/0.5/0.97"]:1.066774)[&label="QS94",freq=0.45,qc=0.025,qd=0.94,qi=0.86,reps=200.0,score="0.025/0.94/0.86"]:0.149111,(((((((((Pal_triphylla_Nee46793[&qf=0.5564705882352942]:1.0,Pal_triphylla_Stevens36461[&qf=0.5533333333333333]:1.0)[&label="QS131",freq=0.99,qc=0.92,qd=0,qi=0.99,reps=200.0,score="0.92/0/0.99"]:1.051626,Pal_triphylla_Killeen6548[&qf=0.5812053115423902]:1.0)[&label="QS130",freq=0.31,qc=-0.11,qd=0,qi=0.98,reps=200.0,score="-0.11/0/0.98"]:0.620927,Pal_calophylla_Jansen-Jacobs6296[&qf=0.40288568257491675]:1.0)[&label="QS129",freq=0.15,qc=-0.38,qd=0,qi=0.79,reps=200.0,score="-0.38/0/0.79"]:0.241347,Pal_subspicata_Lewis12506[&qf=0.4232987312572088]:1.0)[&label="QS128",freq=0.55,qc=0.23,qd=0.23,qi=0.95,reps=200.0,score="0.23/0.23/0.95"]:0.029233,(Pal_crocea_Merello1713[&qf=0.6057818659658344]:1.0,Pal_croceoides_Taylor11640[&qf=0.6097883597883598]:1.0)[&label="QS132",freq=0.93,qc=0.72,qd=0.53,qi=1,reps=200.0,score="0.72/0.53/1"]:1.764412)[&label="QS127",freq=0.24,qc=-0.13,qd=0.45,qi=0.96,reps=200.0,score="-0.13/0.45/0.96"]:0.281366,(Pal_macrobotrys_Gatti17549[&qf=0.5860655737704918]:1.0,Pal_guianensis_deLaQuintana257[&qf=0.5514809590973202]:1.0)[&label="QS133",freq=0.96,qc=0.84,qd=0.86,qi=0.98,reps=200.0,score="0.84/0.86/0.98"]:2.234083)[&label="QS126",freq=0.47,qc=0.035,qd=0.96,qi=0.92,reps=200.0,score="0.035/0.96/0.92"]:0.128986,((((Pal_lasiantha_Graham199[&qf=0.6623711340206185]:1.0,Pal_mansoana_Seidel7661[&qf=0.6299112801013942]:1.0)[&label="QS137",freq=1,qc=1,qd="NA",qi=0.99,reps=200.0,score="1/NA/0.99"]:0.520304,Pal_lachnantha_McDaniel23601[&qf=0.6481700118063755]:1.0)[&label="QS136",freq=0.85,qc=0.59,qd=0.069,qi=0.94,reps=200.0,score="0.59/0.069/0.94"]:0.365639,Pal_officinalis_Delprete9185[&qf=0.48451053283767037]:1.0)[&label="QS135",freq=0.18,qc=-0.16,qd=0.48,qi=0.74,reps=200.0,score="-0.16/0.48/0.74"]:0.153887,Pal_nitidella_Liesner6369[&qf=0.49872773536895676]:1.0)[&label="QS134",freq=0.88,qc=0.62,qd=0.45,qi=0.94,reps=200.0,score="0.62/0.45/0.94"]:0.013004)[&label="QS125",freq=0.5,qc=0.054,qd=0.92,qi=0.97,reps=200.0,score="0.054/0.92/0.97"]:0.738437,(((((Pal_macarthurorum_Harling26051[&qf=0.31343283582089554]:1.0,Pal_macartrurorum_Freire591[&qf=0.43]:1.0)[&label="QS142",freq=0.17,qc=-0.34,qd=0,qi=0.97,reps=200.0,score="-0.34/0/0.97"]:0.079483,Pal_nigricans_Romoleroux2109[&qf=0.34030837004405284]:1.0)[&label="QS141",freq=0.4,qc=0.011,qd=0.93,qi=0.97,reps=200.0,score="0.011/0.93/0.97"]:0.105051,Pal_grandifolia_Liesner6534[&qf=0.3691588785046729]:1.0)[&label="QS140",freq=0.03,qc=-0.54,qd=0.25,qi=0.98,reps=200.0,score="-0.54/0.25/0.98"]:0.194933,Pal_amapaensis_Granville14332[&qf=0.4049159120310479]:1.0)[&label="QS139",freq=0.71,qc=0.28,qd=0.86,qi=0.98,reps=200.0,score="0.28/0.86/0.98"]:0.504828,((Pal_marcgravii_VasconcelosSN[&qf=0.548472775564409]:1.0,'Pal_aeneafusca_Alcantaras.n.'[&qf=0.5484764542936288]:1.0)[&label="QS144",freq=0.7,qc=0.33,qd=0.28,qi=0.96,reps=200.0,score="0.33/0.28/0.96"]:0.168388,Pal_longiflora_Gonzalez1934[&qf=0.5220048899755502]:1.0)[&label="QS143",freq=0.46,qc=0.037,qd=0.86,qi=0.97,reps=200.0,score="0.037/0.86/0.97"]:1.096043)[&label="QS138",freq=0.37,qc=0.0031,qd=0.99,qi=0.9,reps=200.0,score="0.0031/0.99/0.9"]:0.20873)[&label="QS124",freq=0.32,qc=-0.0013,qd=0.94,qi=0.92,reps=200.0,score="-0.0013/0.94/0.92"]:0.141609,(((Pal_rigida_Subieta322[&qf=0.44931506849315067]:1.0,Pal_rigida_Gillepsie1715[&qf=0.427536231884058]:1.0)[&label="QS147",freq=0.056,qc=-0.78,qd=0.011,qi=0.98,reps=200.0,score="-0.78/0.011/0.98"]:0.242724,Pal_rigida_Gillespie1715[&qf=0.4878980891719745]:1.0)[&label="QS146",freq=0.96,qc=0.78,qd=0,qi=0.99,reps=200.0,score="0.78/0/0.99"]:1.093302,Pal_guianensis_Redden2302[&qf=0.602510460251046]:1.0)[&label="QS145",freq=0.45,qc=0.064,qd=0.62,qi=0.97,reps=200.0,score="0.064/0.62/0.97"]:1.045044)[&label="QS123",freq=0.74,qc=0.31,qd=0.96,qi=0.95,reps=200.0,score="0.31/0.96/0.95"]:1.495717)[&label="QS93",freq=0.32,qc=-0.0029,qd=0.91,qi=0.89,reps=200.0,score="-0.0029/0.91/0.89"]:0.062714,((Pal_petiolaris_Ortega3101[&qf=0.49765258215962443]:1.0,Pal_aschersoniana_Giraldo-Gensini948[&qf=0.5454545454545454]:1.0)[&label="QS149",freq=0.67,qc=0.4,qd=0.034,qi=0.89,reps=200.0,score="0.4/0.034/0.89"]:0.289278,Psy_everandii_Liesner18061[&qf=0.5094086021505376]:1.0)[&label="QS148",freq=0.66,qc=0.22,qd=0.66,qi=0.89,reps=200.0,score="0.22/0.66/0.89"]:0.020943)[&label="QS92",freq=0.36,qc=0.0057,qd=0.88,qi=0.87,reps=200.0,score="0.0057/0.88/0.87"]:0.06182,(((((((Psy_deflexa_Taylor11717[&qf=0.4085889570552147]:1.0,Psy_deflexa_Meave1172[&qf=0.45742092457420924]:1.0)[&label="QS156",freq=0.12,qc=-0.12,qd=0.88,qi=0.92,reps=200.0,score="-0.12/0.88/0.92"]:0.904654,Psy_patens_Vuilleumier30[&qf=0.45444444444444443]:1.0)[&label="QS155",freq=0.73,qc=0.3,qd=0.94,qi=0.91,reps=200.0,score="0.3/0.94/0.91"]:0.227452,((Pal_amita_Clark7037[&qf=0.5531400966183575]:1.0,Psy_bertieroides_McDaniel19021[&qf=0.6054254007398274]:1.0)[&label="QS158",freq=0.79,qc=0.26,qd=0,qi=0.98,reps=200.0,score="0.26/0/0.98"]:0.812254,Psy_venulosa_Liesner6131[&qf=0.6090146750524109]:1.0)[&label="QS157",freq=0.68,qc=0.24,qd=0.71,qi=0.93,reps=200.0,score="0.24/0.71/0.93"]:0.104606)[&label="QS154",freq=0.52,qc=0.068,qd=0.9,qi=0.96,reps=200.0,score="0.068/0.9/0.96"]:0.109123,(Pal_polycephala_Ehringhaus56[&qf=0.41714285714285715]:1.0,Pal_egensis_Liesner7059[&qf=0.42296918767507]:1.0)[&label="QS159",freq=0.45,qc=0.045,qd=0.72,qi=0.97,reps=200.0,score="0.045/0.72/0.97"]:0.875221)[&label="QS153",freq=0.22,qc=-0.11,qd=0.54,qi=0.94,reps=200.0,score="-0.11/0.54/0.94"]:0.229705,Psy_limitanea_Gentry65838[&qf=0.3849624060150376]:1.0)[&label="QS152",freq=0.61,qc=0.14,qd=0.99,qi=0.93,reps=200.0,score="0.14/0.99/0.93"]:0.110106,Pal_woronovii_vanDerWerff20100[&qf=0.4239290989660266]:1.0)[&label="QS151",freq=0.28,qc=-0.021,qd=0.79,qi=0.72,reps=200.0,score="-0.021/0.79/0.72"]:0.263967,Psy_oinochrophylla_Fonnegra3039[&qf=0.36617647058823527]:1.0)[&label="QS150",freq=0.61,qc=0.16,qd=0.71,qi=0.83,reps=200.0,score="0.16/0.71/0.83"]:0.638731)[&label="QS91",freq=0.49,qc=0.089,qd=0.58,qi=0.91,reps=200.0,score="0.089/0.58/0.91"]:0.253913,((Pal_bangii_Fuentes12864[&qf=0.6295180722891566]:1.0,Pal_flavifolia_Maldonado2948[&qf=0.6296851574212894]:1.0)[&label="QS161",freq=0.9,qc=0.64,qd=0.95,qi=0.94,reps=200.0,score="0.64/0.95/0.94"]:0.054141,Psy_reticulata_Zambrana5775[&qf=0.6528925619834711]:1.0)[&label="QS160",freq=0.72,qc=0.29,qd=0.92,qi=0.93,reps=200.0,score="0.29/0.92/0.93"]:0.823995)[&label="QS90",freq=0.62,qc=0.17,qd=0.84,qi=0.92,reps=200.0,score="0.17/0.84/0.92"]:0.043802)[&label="QS7",freq=0.45,qc=0.1,qd=0.46,qi=0.92,reps=200.0,score="0.1/0.46/0.92"]:0.208706,(((((((((((Psy_oblonga_Acevedo-Rodreguez5933[&qf=0.6023255813953489]:1.0,Psy_muscosa_Croat101829[&qf=0.5990453460620525]:1.0)[&label="QS172",freq=0.84,qc=0.5,qd=0.62,qi=0.97,reps=200.0,score="0.5/0.62/0.97"]:0.350306,Pal_glomerulata_Berger1481[&qf=0.6422319474835886]:1.0)[&label="QS171",freq=0.85,qc=0.58,qd=0.14,qi=0.97,reps=200.0,score="0.58/0.14/0.97"]:0.938907,Psy_hemicephaelis_Henkel5969[&qf=0.61437125748503]:1.0)[&label="QS170",freq=0.74,qc=0.32,qd=0.68,qi=0.95,reps=200.0,score="0.32/0.68/0.95"]:0.543342,((Pal_aetantha_Wurdack4349[&qf=0.6501210653753027]:1.0,Pal_fanshawei_Radosaulijevic281[&qf=0.6097867001254705]:1.0)[&label="QS174",freq=0.98,qc=0.89,qd=0,qi=0.98,reps=200.0,score="0.89/0/0.98"]:0.705246,Car_urniformis_Radosauljevic103[&qf=0.6531073446327683]:1.0)[&label="QS173",freq=0.73,qc=0.37,qd=0.26,qi=0.97,reps=200.0,score="0.37/0.26/0.97"]:0.115474)[&label="QS169",freq=0.01,qc=-0.5,qd=0.4,qi=0.95,reps=200.0,score="-0.5/0.4/0.95"]:0.019959,Psy_bolivarensis_Pipoly15086[&qf=0.3616133518776078]:1.0)[&label="QS168",freq=0.61,qc=0.17,qd=0.65,qi=0.95,reps=200.0,score="0.17/0.65/0.95"]:0.162647,(((((Pal_grandiceps_Palacios5826[&qf=0.4666666666666667]:1.0,Pal_yneziae_Rodriguez1494[&qf=0.42962056303549573]:1.0)[&label="QS179",freq=0.34,qc=-0.3,qd=0.094,qi=0.96,reps=200.0,score="-0.3/0.094/0.96"]:0.026741,Pal_hypochlorina_Grandez2149[&qf=0.43915343915343913]:1.0)[&label="QS178",freq=0.66,qc=0.39,qd=0.031,qi=0.94,reps=200.0,score="0.39/0.031/0.94"]:0.121647,Pal_conephoroides_Quizhpe672[&qf=0.5028058361391695]:1.0)[&label="QS177",freq=0.36,qc=-0.0083,qd=0.84,qi=0.94,reps=200.0,score="-0.0083/0.84/0.94"]:0.12924,(Pal_cenepensis_Rojas100[&qf=0.46941323345817726]:1.0,Pal_flaviflora_Tirado43[&qf=0.48230668414154654]:1.0)[&label="QS180",freq=0.67,qc=0.26,qd=0.47,qi=0.96,reps=200.0,score="0.26/0.47/0.96"]:0.856486)[&label="QS176",freq=0.24,qc=-0.061,qd=0.66,qi=0.95,reps=200.0,score="-0.061/0.66/0.95"]:0.121689,Pal_ernestii_Clarke11676[&qf=0.4844804318488529]:1.0)[&label="QS175",freq=0.76,qc=0.34,qd=1,qi=0.94,reps=200.0,score="0.34/1/0.94"]:0.676379)[&label="QS167",freq=0.4,qc=0.0094,qd=0.95,qi=0.93,reps=200.0,score="0.0094/0.95/0.93"]:0.0,(((((Pal_locuples_Vasquez26296[&qf=0.43827859569648925]:1.0,Pal_antisanana_Nicolalde1191[&qf=0.43601895734597157]:1.0)[&label="QS185",freq=0,qc=-0.61,qd=0.15,qi=0.97,reps=200.0,score="-0.61/0.15/0.97"]:0.044488,Pal_caerulea_Korning47423[&qf=0.49417989417989416]:1.0)[&label="QS184",freq=0.84,qc=0.51,qd=0.9,qi=0.99,reps=200.0,score="0.51/0.9/0.99"]:0.153218,(Pal_brachiata_Davidse36906[&qf=0.6311787072243346]:1.0,Pal_barchiata_Taylor11718[&qf=0.648936170212766]:1.0)[&label="QS186",freq=0.99,qc=0.92,qd=0,qi=0.99,reps=200.0,score="0.92/0/0.99"]:0.7809)[&label="QS183",freq=0.36,qc=0.0046,qd=0.9,qi=0.91,reps=200.0,score="0.0046/0.9/0.91"]:0.115157,Pal_solitudinum_Duke5262[&qf=0.4481012658227848]:1.0)[&label="QS182",freq=0.6,qc=0.17,qd=0.59,qi=0.94,reps=200.0,score="0.17/0.59/0.94"]:0.610149,(Pal_timbiguensis_Hoover4120[&qf=0.5724331926863573]:1.0,Pal_acanthacea_Monsalve352[&qf=0.6061026352288488]:1.0)[&label="QS187",freq=0.83,qc=0.5,qd=0.55,qi=0.99,reps=200.0,score="0.5/0.55/0.99"]:1.624605)[&label="QS181",freq=0.41,qc=0.047,qd=0.64,qi=0.95,reps=200.0,score="0.047/0.64/0.95"]:0.272636)[&label="QS166",freq=0.33,qc=-0.016,qd=0.77,qi=0.93,reps=200.0,score="-0.016/0.77/0.93"]:0.100108,(((Pal_allenii_Clark243[&qf=0.6037267080745342]:1.0,Pal_palenquensis_Palacios16485[&qf=0.6074270557029178]:1.0)[&label="QS190",freq=0.94,qc=0.69,qd=0,qi=0.97,reps=200.0,score="0.69/0/0.97"]:0.60307,Pal_tinctoria_Cornejo149[&qf=0.5739231664726426]:1.0)[&label="QS189",freq=0.44,qc=0.069,qd=0.58,qi=0.93,reps=200.0,score="0.069/0.58/0.93"]:0.130028,(Pal_jelskii_Fuentes12894[&qf=0.5304101838755304]:1.0,Pal_wolffiae_Homeier609[&qf=0.5381471389645777]:1.0)[&label="QS191",freq=0.89,qc=0.51,qd=0,qi=0.99,reps=200.0,score="0.51/0/0.99"]:1.159356)[&label="QS188",freq=0.28,qc=-0.0086,qd=0.9,qi=0.94,reps=200.0,score="-0.0086/0.9/0.94"]:0.320396)[&label="QS165",freq=0.38,qc=0.011,qd=0.86,qi=0.91,reps=200.0,score="0.011/0.86/0.91"]:0.243902,((Pal_cauligera_Ceron16742[&qf=0.41379310344827586]:1.0,Pal_botryocephala_CornellTrop8[&qf=0.4130105900151286]:1.0)[&label="QS193",freq=0.1,qc=-0.19,qd=0.63,qi=0.94,reps=200.0,score="-0.19/0.63/0.94"]:0.155234,Pal_liogieri_Clase3539[&qf=0.4492753623188406]:1.0)[&label="QS192",freq=0.83,qc=0.47,qd=0.85,qi=0.95,reps=200.0,score="0.47/0.85/0.95"]:0.921489)[&label="QS164",freq=0.39,qc=0.01,qd=0.88,qi=0.93,reps=200.0,score="0.01/0.88/0.93"]:0.103358,((((Psy_poeppigiana_Araujo1546[&qf=0.5326842837273992]:1.0,Psy_brachteocardia_Diaz3138[&qf=0.5364583333333334]:1.0)[&label="QS197",freq=0.73,qc=0.3,qd=0.75,qi=0.89,reps=200.0,score="0.3/0.75/0.89"]:0.176571,Psy_rosea_LiesnerSN[&qf=0.5173611111111112]:1.0)[&label="QS196",freq=0.29,qc=-0.14,qd=0,qi=0.96,reps=200.0,score="-0.14/0/0.96"]:0.4093,Psy_urceolata_Granville8653[&qf=0.5144736842105263]:1.0)[&label="QS195",freq=0.79,qc=0.4,qd=1,qi=0.96,reps=200.0,score="0.4/1/0.96"]:0.714798,((Pal_vesiculifera_Devia2577[&qf=0.6489795918367347]:1.0,Pal_cyanococca_Stevens30807[&qf=0.7047353760445683]:1.0)[&label="QS199",freq=0.97,qc=0.83,qd=0,qi=0.97,reps=200.0,score="0.83/0/0.97"]:0.83669,Pal_hazenni_Freire1098[&qf=0.6682808716707022]:1.0)[&label="QS198",freq=0.74,qc=0.32,qd=0.84,qi=0.96,reps=200.0,score="0.32/0.84/0.96"]:0.980761)[&label="QS194",freq=0.64,qc=0.18,qd=0.97,qi=0.92,reps=200.0,score="0.18/0.97/0.92"]:0.171358)[&label="QS163",freq=0.48,qc=0.041,qd=0.96,qi=0.94,reps=200.0,score="0.041/0.96/0.94"]:0.081526,(((((Psy_stachyoides_Harley5990[&qf=0.6124694376528117]:1.0,Psy_ruellifolia_Baitello776[&qf=0.5598591549295775]:1.0)[&label="QS204",freq=0.95,qc=0.73,qd=0,qi=0.98,reps=200.0,score="0.73/0/0.98"]:0.302563,(Pal_sessilis_Lamberti4659[&qf=0.5865384615384616]:1.0,Pal_vellosizana_Fiaschi2844[&qf=0.5452436194895591]:1.0)[&label="QS205",freq=0.76,qc=0.2,qd=0,qi=0.99,reps=200.0,score="0.2/0/0.99"]:0.656986)[&label="QS203",freq=0.24,qc=-0.029,qd=0.83,qi=0.95,reps=200.0,score="-0.029/0.83/0.95"]:0.168441,(Pal_fulgens_Folli3398[&qf=0.4063745019920319]:1.0,Psy_rhytidocarpa_Lombardi1559[&qf=0.4491525423728814]:1.0)[&label="QS206",freq=0.29,qc=-0.084,qd=0.51,qi=0.94,reps=200.0,score="-0.084/0.51/0.94"]:0.108932)[&label="QS202",freq=0.74,qc=0.31,qd=0.92,qi=0.96,reps=200.0,score="0.31/0.92/0.96"]:0.385291,(((Psy_spathicalyx_Lombardi240[&qf=0.33070866141732286]:1.0,Psy_pateninerva_Kirizawa3194[&qf=0.3917241379310345]:1.0)[&label="QS209",freq=0.12,qc=-0.11,qd=0.92,qi=0.93,reps=200.0,score="-0.11/0.92/0.93"]:0.239913,Psy_arrabidae_Silva1622[&qf=0.39203860072376356]:1.0)[&label="QS208",freq=0.41,qc=0.024,qd=0.78,qi=0.97,reps=200.0,score="0.024/0.78/0.97"]:0.066946,Psy_suterella_Souza8789[&qf=0.4502551020408163]:1.0)[&label="QS207",freq=0.43,qc=0.017,qd=0.99,qi=0.95,reps=200.0,score="0.017/0.99/0.95"]:0.361081)[&label="QS201",freq=0.48,qc=0.042,qd=0.95,qi=0.93,reps=200.0,score="0.042/0.95/0.93"]:0.273211,((((Pal_divaricata_Carvalho6490[&qf=0.41483516483516486]:1.0,Pal_jambosioides_Hatschbach68469[&qf=0.3807588075880759]:1.0)[&label="QS213",freq=0.12,qc=-0.12,qd=0.85,qi=0.95,reps=200.0,score="-0.12/0.85/0.95"]:0.147998,Pal_atlantica_Amorim4512[&qf=0.47072879330943845]:1.0)[&label="QS212",freq=0.84,qc=0.37,qd=0,qi=0.99,reps=200.0,score="0.37/0/0.99"]:0.75344,Pal_alagoana_Thomas12434[&qf=0.4947089947089947]:1.0)[&label="QS211",freq=0.16,qc=-0.1,qd=0.74,qi=0.9,reps=200.0,score="-0.1/0.74/0.9"]:0.155526,Psy_phyllocalymma_Thomas13326[&qf=0.34573002754820936]:1.0)[&label="QS210",freq=0.46,qc=0.036,qd=0.9,qi=0.92,reps=200.0,score="0.036/0.9/0.92"]:0.132821)[&label="QS200",freq=0.43,qc=0.02,qd=0.94,qi=0.94,reps=200.0,score="0.02/0.94/0.94"]:0.386631)[&label="QS162",freq=0.42,qc=0.015,qd=0.93,qi=0.86,reps=200.0,score="0.015/0.93/0.86"]:0.051159)[&label="QS6",freq=0.36,qc=0.002,qd=0.98,qi=0.86,reps=200.0,score="0.002/0.98/0.86"]:0.123141,((((Pal_stenostachya_Bonino362[&qf=0.523447401774398]:1.0,Pal_racemosa_Rivero265[&qf=0.50125]:1.0)[&label="QS217",freq=0.41,qc=-0.12,qd=0.39,qi=0.92,reps=200.0,score="-0.12/0.39/0.92"]:0.271115,Pal_subfusca_Parada996[&qf=0.5486425339366516]:1.0)[&label="QS216",freq=0.95,qc=0.81,qd=0.44,qi=0.99,reps=200.0,score="0.81/0.44/0.99"]:0.827557,(Pal_brevicollis_Zardini15831[&qf=0.4933862433862434]:1.0,Pal_minutiflora_Thomas14147[&qf=0.5013297872340425]:1.0)[&label="QS218",freq=0.13,qc=-0.13,qd=0.74,qi=0.94,reps=200.0,score="-0.13/0.74/0.94"]:0.325488)[&label="QS215",freq=0.66,qc=0.22,qd=0.72,qi=0.99,reps=200.0,score="0.22/0.72/0.99"]:0.115,((Pal_valerioana_Pennys178[&qf=0.4839609483960948]:1.0,Pal_topoensis_Zak3747[&qf=0.3696883852691218]:1.0)[&label="QS220",freq=0.091,qc=-0.4,qd=0.27,qi=0.99,reps=200.0,score="-0.4/0.27/0.99"]:0.152489,Pal_boqueronensis_Betancur7106[&qf=0.46035805626598464]:1.0)[&label="QS219",freq=0.65,qc=0.26,qd=0.36,qi=0.95,reps=200.0,score="0.26/0.36/0.95"]:0.226875)[&label="QS214",freq=0.84,qc=0.52,qd=0.53,qi=0.94,reps=200.0,score="0.52/0.53/0.94"]:1.676813)[&label="QS5",freq=0.38,qc=0.0051,qd=0.95,qi=0.88,reps=200.0,score="0.0051/0.95/0.88"]:0.059286,(Psy_pseudinundata_Andersson1953[&qf=0.691437802907916]:1.0,Psy_stipulosa_Zappi984[&qf=0.6838905775075987]:1.0)[&label="QS221",freq=0.98,qc=0.9,qd=0.5,qi=0.97,reps=200.0,score="0.9/0.5/0.97"]:2.763758)[&label="QS4",freq=0.89,qc=0.64,qd=0.57,qi=0.99,reps=200.0,score="0.64/0.57/0.99"]:3.554208,((Rud_hostmanniana_Croat102313[&qf=0.5868102288021534]:1.0,Rud_cornifolia_deGracias818[&qf=0.8053333333333333]:1.0)[&label="QS223",freq=1,qc=1,qd="NA",qi=1,reps=200.0,score="1/NA/1"]:0.908926,(Not_uliginosa_Stevens37138[&qf=0.7284768211920529]:1.0,Not_epiphytica_Neill15737[&qf=0.7566489361702128]:1.0)[&label="QS224",freq=1,qc=1,qd="NA",qi=1,reps=200.0,score="1/NA/1"]:2.544043)[&label="QS222",freq=0.51,qc=0.3,qd=0.07,qi=0.88,reps=200.0,score="0.3/0.07/0.88"]:0.546169)[&label="QS3",freq=0.87,qc=0.56,qd=0.88,qi=0.95,reps=200.0,score="0.56/0.88/0.95"]:0.081077,(((Car_affinis_Gentry29147[&qf=0.760522496371553]:1.0,Car_guianensis_Gonzalez2158[&qf=0.7576974564926372]:1.0)[&label="QS227",freq=1,qc=1,qd="NA",qi=0.96,reps=200.0,score="1/NA/0.96"]:0.319522,Carapichea_ipecacuhana_Croat15117[&qf=0.7542168674698795]:1.0)[&label="QS226",freq=0.9,qc=0.54,qd=0,qi=0.97,reps=200.0,score="0.54/0/0.97"]:0.704544,Eum_boliviana_Campbell22035[&qf=0.7335907335907336]:1.0)[&label="QS225",freq=0.97,qc=0.82,qd=0,qi=0.93,reps=200.0,score="0.82/0/0.93"]:0.737939)[&label="QS2",freq=0.81,qc=0.43,qd=0.84,qi=0.8,reps=200.0,score="0.43/0.84/0.8"]:0.192685,((((Psy_panamensis_Stevens32285[&qf=0.6543352601156069]:1.0,Psy_limonensis_Stevens31580[&qf=0.6578108395324124]:1.0)[&label="QS231",freq=0.9,qc=0.53,qd=0,qi=0.96,reps=200.0,score="0.53/0/0.96"]:0.426371,(Psy_nervosa_Stevens32362[&qf=0.6233611442193087]:1.0,Psy_jinotegensis_Stevens33549[&qf=0.6689265536723163]:1.0)[&label="QS232",freq=0.71,qc=0.13,qd=0,qi=0.93,reps=200.0,score="0.13/0/0.93"]:0.8158)[&label="QS230",freq=0.37,qc=-0.024,qd=0.73,qi=0.67,reps=200.0,score="-0.024/0.73/0.67"]:0.029492,Psy_grandis_Taylor11745[&qf=0.6041162227602905]:1.0)[&label="QS229",freq=0.89,qc=0.61,qd=0.73,qi=0.96,reps=200.0,score="0.61/0.73/0.96"]:0.403641,(((Psy_mapourioides_Merello1711[&qf=0.7396593673965937]:1.0,Psy_carthagenensis_Araujo2124[&qf=0.7748267898383372]:1.0)[&label="QS235",freq=0.99,qc=0.95,qd=0,qi=0.99,reps=200.0,score="0.95/0/0.99"]:0.750654,Psy_marginata_Stevens32781[&qf=0.7601990049751244]:1.0)[&label="QS234",freq=0.91,qc=0.68,qd=0.71,qi=0.99,reps=200.0,score="0.68/0.71/0.99"]:0.35264,(Psy_horizontalis_Stevens32733[&qf=0.7022058823529411]:1.0,Psy_subsessilis_Stevens31494[&qf=0.6847058823529412]:1.0)[&label="QS236",freq=0.74,qc=0.31,qd=0.96,qi=0.88,reps=200.0,score="0.31/0.96/0.88"]:0.161466)[&label="QS233",freq=0.83,qc=0.47,qd=0.81,qi=0.93,reps=200.0,score="0.47/0.81/0.93"]:0.408201)[&label="QS228",freq=1,qc=1,qd="NA",qi=1,reps=200.0,score="1/NA/1"]:2.781622)[&label="QS1",freq=1,qc=1,qd="NA",qi=1,reps=200.0,score="1/NA/1"]:1.847755,((((HIL_parasitica_Jiminez2189[&qf=0.7812895069532237]:1.0,BAL_stormae_Vasquez1081[&qf=0.6486796785304249]:1.0)[&label="QS240",freq=0.97,qc=0.79,qd=0,qi=0.89,reps=200.0,score="0.79/0/0.89"]:0.21257,COS_grandiflora_Tyson904[&qf=0.7281449893390192]:1.0)[&label="QS239",freq=1,qc=1,qd="NA",qi=0.99,reps=200.0,score="1/NA/0.99"]:0.707345,HAM_patens_LB54[&qf=0.7168539325842697]:1.0)[&label="QS238",freq=0.67,qc=0.31,qd=0.25,qi=0.84,reps=200.0,score="0.31/0.25/0.84"]:0.667984,HOF_phoenicopoda_Wendt3392[&qf=0.7323383084577114]:1.0)[&label="QS237",freq=1,qc=1,qd="NA",qi=1,reps=200.0,score="1/NA/1"]:1.847755);
+end;
+
+begin figtree;
+	set appearance.backgroundColorAttribute="Default";
+	set appearance.backgroundColour=#ffffff;
+	set appearance.branchColorAttribute="freq";
+	set appearance.branchColorGradient=false;
+	set appearance.branchLineWidth=1.0;
+	set appearance.branchMinLineWidth=0.0;
+	set appearance.branchWidthAttribute="Fixed";
+	set appearance.foregroundColour=#000000;
+	set appearance.hilightingGradient=false;
+	set appearance.selectionColour=#2d3680;
+	set branchLabels.colorAttribute="User selection";
+	set branchLabels.displayAttribute="qi";
+	set branchLabels.fontName="sansserif";
+	set branchLabels.fontSize=8;
+	set branchLabels.fontStyle=0;
+	set branchLabels.isShown=true;
+	set branchLabels.significantDigits=4;
+	set layout.expansion=465;
+	set layout.layoutType="RECTILINEAR";
+	set layout.zoom=0;
+	set legend.attribute=null;
+	set legend.fontSize=10.0;
+	set legend.isShown=false;
+	set legend.significantDigits=4;
+	set nodeBars.barWidth=4.0;
+	set nodeBars.displayAttribute=null;
+	set nodeBars.isShown=false;
+	set nodeLabels.colorAttribute="User selection";
+	set nodeLabels.displayAttribute="label";
+	set nodeLabels.fontName="sansserif";
+	set nodeLabels.fontSize=8;
+	set nodeLabels.fontStyle=0;
+	set nodeLabels.isShown=false;
+	set nodeLabels.significantDigits=4;
+	set nodeShapeExternal.colourAttribute=null;
+	set nodeShapeExternal.isShown=false;
+	set nodeShapeExternal.minSize=10.0;
+	set nodeShapeExternal.scaleType=Width;
+	set nodeShapeExternal.shapeType=Circle;
+	set nodeShapeExternal.size=4.0;
+	set nodeShapeExternal.sizeAttribute=null;
+	set nodeShapeInternal.colourAttribute=null;
+	set nodeShapeInternal.isShown=false;
+	set nodeShapeInternal.minSize=10.0;
+	set nodeShapeInternal.scaleType=Width;
+	set nodeShapeInternal.shapeType=Circle;
+	set nodeShapeInternal.size=4.0;
+	set nodeShapeInternal.sizeAttribute=null;
+	set polarLayout.alignTipLabels=false;
+	set polarLayout.angularRange=0;
+	set polarLayout.rootAngle=0;
+	set polarLayout.rootLength=100;
+	set polarLayout.showRoot=true;
+	set radialLayout.spread=0.0;
+	set rectilinearLayout.alignTipLabels=false;
+	set rectilinearLayout.curvature=0;
+	set rectilinearLayout.rootLength=100;
+	set scale.offsetAge=0.0;
+	set scale.rootAge=1.0;
+	set scale.scaleFactor=1.0;
+	set scale.scaleRoot=false;
+	set scaleAxis.automaticScale=true;
+	set scaleAxis.fontSize=8.0;
+	set scaleAxis.isShown=false;
+	set scaleAxis.lineWidth=1.0;
+	set scaleAxis.majorTicks=1.0;
+	set scaleAxis.minorTicks=0.5;
+	set scaleAxis.origin=0.0;
+	set scaleAxis.reverseAxis=false;
+	set scaleAxis.showGrid=true;
+	set scaleBar.automaticScale=true;
+	set scaleBar.fontSize=10.0;
+	set scaleBar.isShown=true;
+	set scaleBar.lineWidth=1.0;
+	set scaleBar.scaleRange=0.0;
+	set tipLabels.colorAttribute="User selection";
+	set tipLabels.displayAttribute="Names";
+	set tipLabels.fontName="sansserif";
+	set tipLabels.fontSize=8;
+	set tipLabels.fontStyle=0;
+	set tipLabels.isShown=true;
+	set tipLabels.significantDigits=4;
+	set trees.order=true;
+	set trees.orderType="increasing";
+	set trees.rooting=true;
+	set trees.rootingType="User Selection";
+	set trees.transform=true;
+	set trees.transformType="cladogram";
+end;
+
