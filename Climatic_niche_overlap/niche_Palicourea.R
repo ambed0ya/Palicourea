@@ -430,7 +430,7 @@ test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni")
 #########################################################################################
 
 ##Reading tree
-astral01 <- read.tree("../Resubmission/rev_dendrogram.tre")
+astral01 <- read.tree("../Biogeographic_modeling/rev_dendrogram.tre")
 #removing taxa for which there isnt enought climate data, or those that have moved outside of the areas where
 #the clade originated
 tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
@@ -526,7 +526,7 @@ pollination<- setNames(pollination, species)
 
 elevation<-data$elev
 elevation<- setNames(elevation, species)
-astral01 <- read.tree("../Resubmission/rev_dendrogram.tre")
+astral01 <- read.tree("../Biogeographic_modeling/rev_dendrogram.tre")
 
 tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
                "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana",
@@ -616,3 +616,62 @@ ggplot(result, aes(x = bin_end, y = prop_hummingbird)) +
     y = "Proportion (hummingbird pollinated / all species)"
   ) +
   theme_minimal()
+
+#####################################################
+### Phylogenetic path analyses ######################
+
+#merge PC2 and elevation data
+
+pc2_dat <- data.frame(
+  species = rownames(pca_df_rownames),
+  PC2 = pca_df_rownames$PC2
+)
+
+dat <- merge(
+  pc2_dat,
+  data[, c("species","elev")],
+  by = "species"
+)
+
+head(dat)
+rownames(dat) <- dat$species
+dat <- dat[tree$tip.label, ]
+
+
+#Test for correlation of 
+library(phylolm)
+
+
+head(tree$tip.label)
+head(rownames(dat))
+
+#Testing if climatic niche varies with elevation
+fit <- phylolm(
+  PC2 ~ elev,
+  data = dat,
+  phy = tree,
+  model = "lambda"
+)
+
+
+#Check data
+dat_complete <- dat[complete.cases(dat[, c("PC2", "elev")]), ]
+nrow(dat_complete)
+setdiff(tree$tip.label, rownames(dat_complete))
+
+summary(fit)
+
+#Testing if PC2 varies in Andean vs extra Andean spp
+write.csv(dat,"data4phyml.csv", row.names= FALSE)
+#Added the binary area codings by hand
+
+data4phyml<-read.csv("data4phyml.csv")
+rownames(data4phyml) <- data4phyml$species
+data4phyml$Area <- factor(data4phyml$Area)
+fit <- phylolm(
+  elevation ~ Area,
+  data = data4phyml,
+  phy = tree,
+  model = "lambda"
+)
+summary(fit)
