@@ -225,7 +225,8 @@ write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev_final.c
 #median_niche_values$species<-as.factor(median_niche_values$species)
 #load data
 
-median_niche_values<-read.csv("Palicourea_median_climate_data_clades_final.csv")
+median_niche_values<-read.csv("Climatic_niche_overlap/Palicourea_median_climate_data_clades_final.csv")
+#median_niche_values<-read.csv("Climatic_niche_overlap/Palicourea_median_climate_data_with_elev_pollination_final.csv") for PPA
 #########################################################################################
 ##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
 #########################################################################################
@@ -517,7 +518,7 @@ ggpubr::ggarrange(p2) #in supplements
 ########################### Inflorescence type, climate, and elevation##################################
 #########################################################################################################
 
-data<-read.csv("Palicourea_median_climate_data_with_elev_pollination_final.csv")
+data<-read.csv("Climatic_niche_overlap/Palicourea_median_climate_data_with_elev_pollination_final.csv")
 #mean(data$elev)
 
 pollination<-data$Principal_pollinator
@@ -622,57 +623,145 @@ ggplot(result, aes(x = bin_end, y = prop_hummingbird)) +
 
 #merge PC2 and elevation data
 
+pc1_dat <- data.frame(
+  species = rownames(pca_df_rownames),
+  PC1 = pca_df_rownames$PC1
+)
 pc2_dat <- data.frame(
   species = rownames(pca_df_rownames),
   PC2 = pca_df_rownames$PC2
 )
 
+
+# merge PC1 and PC2
 dat <- merge(
+  pc1_dat,
   pc2_dat,
-  data[, c("species","elev")],
   by = "species"
 )
 
-head(dat)
-rownames(dat) <- dat$species
-dat <- dat[tree$tip.label, ]
+# add elevation
+dat <- merge(
+  dat,
+  data[, c("species", "elev", "Principal_pollinator")],
+  by = "species"
+)
+
+write.csv(dat,"Climatic_niche_overlap/data4_phylm_prelim.csv",row.names = F)
 
 
 #Test for correlation of 
 library(phylolm)
 
+data4phylm<-read.csv("Climatic_niche_overlap/data4phylm.csv")
+rownames(data4phylm) <- data4phylm$species
 
 head(tree$tip.label)
-head(rownames(dat))
+head(rownames(data4phylm))
 
 #Testing if climatic niche varies with elevation
+
 fit <- phylolm(
-  PC2 ~ elev,
-  data = dat,
+  PC1 ~ elev,
+  data = data4phylm,
   phy = tree,
   model = "lambda"
 )
 
-
 #Check data
-dat_complete <- dat[complete.cases(dat[, c("PC2", "elev")]), ]
+dat_complete <- data4phylm[complete.cases(data4phylm[, c("PC1", "elev")]), ]
 nrow(dat_complete)
 setdiff(tree$tip.label, rownames(dat_complete))
 
 summary(fit)
 
-#Testing if PC2 varies in Andean vs extra Andean spp
-write.csv(dat,"data4phyml.csv", row.names= FALSE)
-#Added the binary area codings by hand
+library(phylopath)
+library(dplyr)
+library(graph)
 
-data4phyml<-read.csv("data4phyml.csv")
-rownames(data4phyml) <- data4phyml$species
-data4phyml$Area <- factor(data4phyml$Area)
-fit <- phylolm(
-  elevation ~ Area,
-  data = data4phyml,
-  phy = tree,
-  model = "lambda"
+
+# Checking that variables are correctly formatted
+data4phylm$Area <- factor(data4phylm$Area)        # Andean vs extra-Andean
+data4phylm$Infl_prp_poll <- factor(data4phylm$Infl_prp_poll)        # inflorescence type / pollination proxy
+data4phylm$PC1  <- as.numeric(data4phylm$PC1)     # climatic niche axis PC1
+
+rownames(data4phylm) <- data4phylm$species
+
+#PPA model definition
+
+models_main <- define_model_set(
+  
+  H1_area_to_infl = c(
+    Infl_prp_poll ~ Area,
+    PC1  ~ PC1
+  ),
+  
+  H2_area_to_climate = c(
+    PC1  ~ Area,
+    Infl_prp_poll ~ Infl_prp_poll
+  ),
+  
+  H3_area_climate_infl = c(
+    PC1  ~ Area,
+    Infl_prp_poll ~ PC1
+  ),
+  
+  H4_area_infl_climate = c(
+    Infl_prp_poll ~ Area,
+    PC1  ~ Infl_prp_poll
+  ),
+  
+  H5_area_independent = c(
+    Infl_prp_poll ~ Area,
+    PC1  ~ Area
+  ),
+  
+  H6_all_independent = c(
+    Infl_prp_poll ~ Area + PC1
+  )
+  
 )
-summary(fit)
+
+##plotting to check model specification
+#plot(models_main$H1_area_to_infl)
+#plot(models_main$H2_area_to_climate)
+#plot(models_main$H3_area_climate_infl)
+#plot(models_main$H4_area_infl_climate)
+#plot(models_main$H5_area_independent)
+#plot(models_main$H6_all_independent)
+
+
+path_main <- phylo_path(
+  model_set = models_main,
+  data = data4phylm,
+  tree = tree,
+  model = "lambda",
+  method = "logistic_MPLE",
+  na.rm = TRUE
+)
+
+summary(path_main)
+
+table(data4phylm$Infl_prp_poll)
+levels(data4phylm$Infl_prp_poll)
+
+data4phylm$Humm_bin <- ifelse(
+  data4phylm$Infl_prp_poll == "Hummingbird",
+  1,
+  0
+)
+
+table(data4phylm$Infl_prp_poll, data4phylm$Humm_bin)
+
+table(data4phylm$Infl_bin)
+
+
+fit_PC1_humm <- phyloglm(
+  Humm_bin ~ Area + PC1,
+  phy = tree,
+  data = data4phylm,
+  method = "logistic_MPLE"
+)
+
+summary(fit_PC1_humm)
 
