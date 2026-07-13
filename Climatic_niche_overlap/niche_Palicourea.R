@@ -675,6 +675,16 @@ setdiff(tree$tip.label, rownames(dat_complete))
 
 summary(fit)
 
+ggplot(data4phylm, aes(x = elev, y = PC1)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", color = "red") +
+  theme_classic() +
+  labs(
+    x = "Elevation (m)",
+    y = "Climate PC1"
+  )
+
+
 library(phylopath)
 library(dplyr)
 library(graph)
@@ -745,23 +755,23 @@ summary(path_main)
 table(data4phylm$Infl_prp_poll)
 levels(data4phylm$Infl_prp_poll)
 
-data4phylm$Humm_bin <- ifelse(
+data4phylm$Infl_bin <- ifelse(
   data4phylm$Infl_prp_poll == "Hummingbird",
   1,
   0
 )
 
-table(data4phylm$Infl_prp_poll, data4phylm$Humm_bin)
+table(data4phylm$Infl_prp_poll, data4phylm$Infl_bin)
 
 table(data4phylm$Infl_bin)
 
 
-fit_PC1_humm <- phyloglm(
-  Humm_bin ~ Area + PC1,
+fit_PC1_Infl <- phyloglm(
+  Infl_bin ~ Area + PC1,
   phy = tree,
   data = data4phylm,
   method = "logistic_MPLE"
 )
 
-summary(fit_PC1_humm)
+summary(fit_PC1_Infl)
 
