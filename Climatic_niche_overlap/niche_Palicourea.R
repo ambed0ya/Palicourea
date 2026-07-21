@@ -623,31 +623,30 @@ ggplot(result, aes(x = bin_end, y = prop_hummingbird)) +
 
 #merge PC2 and elevation data
 
-pc1_dat <- data.frame(
-  species = rownames(pca_df_rownames),
-  PC1 = pca_df_rownames$PC1
-)
-pc2_dat <- data.frame(
-  species = rownames(pca_df_rownames),
-  PC2 = pca_df_rownames$PC2
-)
-
+#pc1_dat <- data.frame(
+#  species = rownames(pca_df_rownames),
+#  PC1 = pca_df_rownames$PC1
+#)
+#pc2_dat <- data.frame(
+#  species = rownames(pca_df_rownames),
+#  PC2 = pca_df_rownames$PC2
+#)
 
 # merge PC1 and PC2
-dat <- merge(
-  pc1_dat,
-  pc2_dat,
-  by = "species"
-)
+#dat <- merge(
+#  pc1_dat,
+#  pc2_dat,
+#  by = "species"
+#)
 
 # add elevation
-dat <- merge(
-  dat,
-  data[, c("species", "elev", "Principal_pollinator")],
-  by = "species"
-)
+#dat <- merge(
+#  dat,
+#  data[, c("species", "elev", "Principal_pollinator")],
+#  by = "species"
+#)
 
-write.csv(dat,"Climatic_niche_overlap/data4_phylm_prelim.csv",row.names = F)
+#write.csv(dat,"Climatic_niche_overlap/data4_phylm_prelim.csv",row.names = F)
 
 
 #Test for correlation of 
@@ -662,7 +661,7 @@ head(rownames(data4phylm))
 #Testing if climatic niche varies with elevation
 
 fit <- phylolm(
-  PC1 ~ elev,
+  PC2 ~ elev,
   data = data4phylm,
   phy = tree,
   model = "lambda"
@@ -675,7 +674,7 @@ setdiff(tree$tip.label, rownames(dat_complete))
 
 summary(fit)
 
-ggplot(data4phylm, aes(x = elev, y = PC1)) +
+ggplot(data4phylm, aes(x = elev, y = PC2)) +
   geom_point(size = 3) +
   geom_smooth(method = "lm", color = "red") +
   theme_classic() +
@@ -691,9 +690,20 @@ library(graph)
 
 
 # Checking that variables are correctly formatted
-data4phylm$Area <- factor(data4phylm$Area)        # Andean vs extra-Andean
-data4phylm$Infl_prp_poll <- factor(data4phylm$Infl_prp_poll)        # inflorescence type / pollination proxy
-data4phylm$PC1  <- as.numeric(data4phylm$PC1)     # climatic niche axis PC1
+
+data4phylm$Area_bin <- ifelse(
+  data4phylm$Area == "Andean",
+  1,
+  0
+) # Andean vs extra-Andean
+
+data4phylm$Infl_bin <- ifelse(
+  data4phylm$Infl_prp_poll == "Hummingbird",
+  1,
+  0
+) # inflorescence type / pollination proxy
+data4phylm$PC2  <- as.numeric(data4phylm$PC2) # climatic niche axis PC1/PC2
+data4phylm$elev  <- as.numeric(data4phylm$elev) # elevation
 
 rownames(data4phylm) <- data4phylm$species
 
@@ -701,33 +711,73 @@ rownames(data4phylm) <- data4phylm$species
 
 models_main <- define_model_set(
   
-  H1_area_to_infl = c(
-    Infl_prp_poll ~ Area,
+  H1 = c(
+    Infl_bin ~ Area_bin,
     PC1  ~ PC1
   ),
   
-  H2_area_to_climate = c(
-    PC1  ~ Area,
-    Infl_prp_poll ~ Infl_prp_poll
+  H2 = c(
+    Area_bin ~ PC1,
+    Infl_bin ~ Area_bin
   ),
   
-  H3_area_climate_infl = c(
-    PC1  ~ Area,
-    Infl_prp_poll ~ PC1
+  H3 = c(
+    Infl_bin ~ Area_bin,
+    PC1  ~ Infl_bin
   ),
   
-  H4_area_infl_climate = c(
-    Infl_prp_poll ~ Area,
-    PC1  ~ Infl_prp_poll
+  H4 = c(
+    Infl_bin ~ Area_bin,
+    PC1  ~ Area_bin
   ),
   
-  H5_area_independent = c(
-    Infl_prp_poll ~ Area,
-    PC1  ~ Area
+  H5 = c(
+    Infl_bin ~ PC1,
+    Area_bin  ~ Area_bin
   ),
   
-  H6_all_independent = c(
-    Infl_prp_poll ~ Area + PC1
+  H6 = c(
+    PC1  ~ Area_bin,
+    Infl_bin ~ PC1
+  ),
+  
+  H7 = c(
+    Infl_bin ~ PC1,
+    Area_bin  ~ Infl_bin
+  ),
+  
+  H8 = c(
+    Infl_bin ~ PC1,
+    Area_bin  ~ PC1
+  ),
+  
+  H9 = c(
+    Infl_bin ~ Area_bin + PC1
+  ),
+  
+  H10 = c(
+    PC1  ~ Area_bin,
+    Infl_bin ~ Infl_bin
+  ),
+
+  H11 = c(
+    Area_bin ~ PC1,
+    Infl_bin ~ Infl_bin
+  ),
+  
+  H12 = c(
+    Area_bin ~ Infl_bin,
+    PC1 ~ PC1
+  ),
+  
+  H13 = c(
+    PC1 ~ Infl_bin,
+    Area_bin ~ Area_bin
+  ),
+  
+  H14 = c(
+    Area_bin ~ Infl_bin,
+    PC1 ~ Infl_bin
   )
   
 )
@@ -752,26 +802,38 @@ path_main <- phylo_path(
 
 summary(path_main)
 
-table(data4phylm$Infl_prp_poll)
-levels(data4phylm$Infl_prp_poll)
+#Extracting raw coefficients for the best model:
+best_fit <- best(path_main)
 
-data4phylm$Infl_bin <- ifelse(
-  data4phylm$Infl_prp_poll == "Hummingbird",
-  1,
-  0
+#Extracting standardized coefficients for the best model (and raw for continuous data):
+data_std <- data4phylm
+data_std$PC1_z <- as.numeric(scale(data_std$PC1))
+
+fit_PC1 <- phylolm(
+  Infl_bin ~ PC1_z,
+  phy = tree,
+  data = data_std,
+  model = "lambda"
 )
 
-table(data4phylm$Infl_prp_poll, data4phylm$Infl_bin)
+summary(fit_PC1)
+coef(fit_PC1)
 
-table(data4phylm$Infl_bin)
-
-
-fit_PC1_Infl <- phyloglm(
-  Infl_bin ~ Area + PC1,
+fit_poll <- phyloglm(
+  Area_bin ~ PC1,
   phy = tree,
-  data = data4phylm,
+  data = data_std,
+  method = "logistic_MPLE"
+)
+summary(fit_poll)
+coef(fit_poll)
+
+fit_PC2_Infl <- phyloglm(
+  Infl_bin ~ PC2_z,
+  phy = tree,
+  data = data_std,
   method = "logistic_MPLE"
 )
 
-summary(fit_PC1_Infl)
-
+summary(fit_PC2_Infl)
+coef(fit_PC2_Infl)
