@@ -37,22 +37,22 @@ library("sp")
 library("geodata")
 
 #source CANDI functions
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_occ_records.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_both_occ_records.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_bien_occ_records.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_gbif_occ_records.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_dup_locs.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_ocean_points.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_perf_0_90_180.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_lessthan.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_null_items.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_world_clim.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/make_corr_matrix.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_corr_variables.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/remove_points_outside_nat_range.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/model_niches.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/get_world_clim.R")
-source("~/Repos/Palicourea/Climatic_niche_overlap/modified_candi/trim_to_shapefile.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/get_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/get_both_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/get_bien_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/get_gbif_occ_records.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/remove_dup_locs.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/remove_ocean_points.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/remove_perf_0_90_180.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/remove_lessthan.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/remove_null_items.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/get_world_clim.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/make_corr_matrix.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/remove_corr_variables.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/remove_points_outside_nat_range.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/model_niches.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/get_world_clim.R")
+source("~/Repos/Palicourea/Climatic_niche/modified_candi/trim_to_shapefile.R")
 
 ## OCCURRENCE DATA PREP PATHWAY ##
 ##################################
@@ -140,7 +140,7 @@ occurrences<-c(occ_data1,occ_data2,occ_data3,occ_data4,occ_data5,occ_data6,occ_d
                occ_data15,occ_data16,occ_data17,occ_data18,occ_data19,occ_data20,occ_data21,
                occ_data22,occ_data23,occ_data24,occ_data25,occ_data26,occ_data27,occ_data28,
                occ_data29,occ_data30,occ_data31)
-save(occurrences, file = "~/Repos/Palicourea/Climatic_niche_overlap/occurrences_raw_allspp.RData")
+save(occurrences, file = "~/Repos/Palicourea/Climatic_niche/occurrences_raw_allspp.RData")
 
 #data cleaning
 occurrences <- remove_dup_locs(occurrences)
@@ -152,12 +152,12 @@ occurrences <- remove_perf_0_90_180(occurrences)
 occurrences <- remove_lessthan(occurrences, n = 10)
 occurrences <- remove_null_items(occurrences)
 
-save(occurrences, file = "~/Repos/Palicourea/Climatic_niche_overlap/occurrences_filtered_allspp.RData")
+save(occurrences, file = "~/Repos/Palicourea/Climatic_niche/occurrences_filtered_allspp.RData")
 
 ## CLIMATE DATA PREP PATHWAY ##
 ###############################
 
-load("~/Repos/Palicourea/Climatic_niche_overlap/occurrences_filtered_allspp.RData")
+load("~/Repos/Palicourea/Climatic_niche/occurrences_filtered_allspp.RData")
 
 coords<-c("longitude","latitude")
 coordinates = lapply(occurrences, "[", , coords)
@@ -167,7 +167,7 @@ list2env(coordinates,envir=.GlobalEnv)
 climate_stack <- get_world_clim()
 
 #If the above does not work then download manually
-setwd("~/Repos/Palicourea/Climatic_niche_overlap/")
+setwd("~/Repos/Palicourea/Climatic_niche/")
 #makes pdf of correlation matrix saved to working directory to pick out correlated variables
 matrix <- make_corr_matrix(occurrences = occurrences, environment_data = climate_stack, abs_highlight = 0.8)
 
@@ -225,8 +225,8 @@ write.csv(median_niche_values, "Palicourea_median_climate_data_with_elev_final.c
 #median_niche_values$species<-as.factor(median_niche_values$species)
 #load data
 
-median_niche_values<-read.csv("Climatic_niche_overlap/Palicourea_median_climate_data_clades_final.csv")
-#median_niche_values<-read.csv("Climatic_niche_overlap/Palicourea_median_climate_data_with_elev_pollination_final.csv") for PPA
+median_niche_values<-read.csv("Climatic_niche/Palicourea_median_climate_data_clades_final.csv")
+#median_niche_values<-read.csv("Climatic_niche/Palicourea_median_climate_data_with_elev_pollination_final.csv") for PPA
 #########################################################################################
 ##################DISPARITY ACROSS GROUPS AND THROUGH TIME###############################
 #########################################################################################
@@ -443,7 +443,7 @@ plot(tree)
 
 
 # Update tip labels so that they match the names in the niche data
-new_names <- read.csv("~/Repos/Palicourea/Climatic_niche_overlap/pal_name_updates.csv", header = T)
+new_names <- read.csv("~/Repos/Palicourea/Climatic_niche/pal_name_updates.csv", header = T)
 match_indices <- match(tree$tip.label, new_names$old_label)
 # Replace names in tree$tip.label vector
 tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
@@ -518,7 +518,7 @@ ggpubr::ggarrange(p2) #in supplements
 ########################### Inflorescence type, climate, and elevation##################################
 #########################################################################################################
 
-data<-read.csv("Climatic_niche_overlap/Palicourea_median_climate_data_with_elev_pollination_final.csv")
+data<-read.csv("Climatic_niche/Palicourea_median_climate_data_with_elev_pollination_final.csv")
 #mean(data$elev)
 
 pollination<-data$Principal_pollinator
@@ -534,7 +534,7 @@ tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliqui
                "Pal_laxivenulosa","Pal_angustifolia1","Pal_wolffiae","Pal_cauligera")
 tree <- ape::drop.tip(astral01, tips2delete)
 plot(tree)
-new_names <- read.csv("~/Repos/Palicourea/Climatic_niche_overlap/pal_name_updates.csv", header = T)
+new_names <- read.csv("~/Repos/Palicourea/Climatic_niche/pal_name_updates.csv", header = T)
 match_indices <- match(tree$tip.label, new_names$old_label)
 # Replace names in tree$tip.label vector
 tree$tip.label <- ifelse(is.na(match_indices), tree$tip.label, new_names$new_label[match_indices])
@@ -646,13 +646,13 @@ ggplot(result, aes(x = bin_end, y = prop_hummingbird)) +
 #  by = "species"
 #)
 
-#write.csv(dat,"Climatic_niche_overlap/data4_phylm_prelim.csv",row.names = F)
+#write.csv(dat,"Climatic_niche/data4_phylm_prelim.csv",row.names = F)
 
 
 #Test for correlation of 
 library(phylolm)
 
-data4phylm<-read.csv("Climatic_niche_overlap/data4phylm.csv")
+data4phylm<-read.csv("Climatic_niche/data4phylm.csv")
 rownames(data4phylm) <- data4phylm$species
 
 head(tree$tip.label)
