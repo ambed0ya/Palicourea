@@ -527,7 +527,7 @@ ggpubr::ggarrange(p2) #in supplements
 ########################### Inflorescence type, climate, and elevation##################################
 #########################################################################################################
 
-data<-read.csv("Climatic_niche/Palicourea_median_climate_data_with_elev_pollination_final.csv")
+data<-read.csv("Palicourea_median_climate_data_with_elev_pollination_final.csv")
 #mean(data$elev)
 
 pollination<-data$Principal_pollinator
@@ -536,11 +536,11 @@ pollination<- setNames(pollination, species)
 
 elevation<-data$elev
 elevation<- setNames(elevation, species)
-astral01 <- read.tree("../Biogeographic_modeling/rev_dendrogram.tre")
+astral01 <- read.tree("../Biogeographic_modeling/rev_dendrogram_UCLN_MCC_bio.tre")
 
 tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
                "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana",
-               "Pal_laxivenulosa","Pal_angustifolia1","Pal_wolffiae","Pal_cauligera")
+               "Pal_laxivenulosa","Pal_angustifolia1","Pal_wolffiae","Pal_cauligera","Pal_trichocephala")
 tree <- ape::drop.tip(astral01, tips2delete)
 plot(tree)
 new_names <- read.csv("~/Repos/Palicourea/Climatic_niche/pal_name_updates.csv", header = T)
