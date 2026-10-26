@@ -1,0 +1,51 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(geiger)
+library(ape)
+library(phytools)
+library(phangorn)
+library(TreeTools)
+library(phylogram)
+library(treeio)
+
+setwd("~/Repos/Palicourea/Biogeographic_modeling")
+
+tips2delete<-c("Car_guianensis", "Car_affinis", "Car_ipecacuanha",
+               "Eum_boliviana","Not_epiphytica",
+               "Not_uliginosa","Psy_carthagenensis",
+               "Psy_grandis","Psy_mapourioides",
+               "Psy_horizontalis","Psy_jinotegensis",
+               "Psy_limonensis","Psy_marginata",
+               "Psy_nervosa","Psy_panamensis","Psy_subsessilis","Rud_cornifolia", "Rud_hostmanniana", "Pal_brachiata2") # ,"Pal_patens", "Pal_liogieri")
+
+#When making tree for biogeographic reconsruction add "Pal_patens", "Pal_liogieri", to drop as they are not present in our modeled areas
+
+beast_tree <- read.beast("~/Repos/Palicourea/AstralPlate3BS10")
+phylo_tree <- as.phylo(beast_tree)
+write.tree(phylo_tree, file = "UCLN_MCC.newick")
+
+trees<-"UCLN_MCC.newick"
+
+trees01<-ape::read.tree(trees)
+
+tree <- ape::drop.tip(trees01, tips2delete)
+write.tree(tree,file="rev_dendrogram_UCLN_MCC.tre")
+
+
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+

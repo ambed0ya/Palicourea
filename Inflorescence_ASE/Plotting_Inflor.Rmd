@@ -1,0 +1,76 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+
+library(RevGadgets)
+library(ggplot2)
+library(ggtree)
+
+setwd("~/Repos/Palicourea/Inflorescence_ASE)
+
+CHARACTER <- "palicourea.inflorescence_type"
+NUM_STATES <- 4
+
+STATE_LABELS <- c("0" = "Palicourea-like", "1" = "Cephaelis-like", "2" = "Open Psychotria-like", "3" = "Condensed Psychotria-like")
+
+tree_file <- paste0(CHARACTER,"_ase_freeK.tree")
+
+#install.packages("ggtree")
+# process the ancestral states
+ase <- processAncStates(tree_file,
+                        # Specify state labels.
+                        # These numbers correspond to
+                        # your input data file.
+                        state_labels = STATE_LABELS)
+state_cols <- c(
+  "Palicourea-like" = "#2C6BB2",
+  "Cephaelis-like" = "#2CB1B5",
+  "Open Psychotria-like" = "#B21E4B",
+  "Condensed Psychotria-like" = "#F07F5A"
+)
+
+# produce the plot object, showing MAP states at nodes.
+# color corresponds to state, size to the state's posterior probability
+p <- plotAncStatesMAP(t = ase,
+                      tree_layout = "rect",
+                      tip_labels_size = 1) +
+     # modify legend location using ggplot2
+     theme(legend.position = c(0.92,0.81))
+
+#p <- plotAncStatesMAP(t = ase,
+ #                     tree_layout = "rect",
+  #                    tip_labels_size = 1) +
+  #   scale_color_manual(values = state_cols) +
+  #   theme(legend.position = c(0.92,0.81))
+
+ggsave(paste0(CHARACTER,"_ASE_FreeK_MAP.pdf"), p, width = 11, height = 15)
+
+
+p <- plotAncStatesPie(t = ase,
+                      tree_layout = "rect",
+                      tip_labels_size = 1) +
+     # modify legend location using ggplot2
+     theme(legend.position = c(0.92,0.81))
+
+#p <- plotAncStatesPie(t = ase,
+ #                     tree_layout = "rect",
+  #                    tip_labels_size = 1) +
+   #  scale_fill_manual(values = state_cols) +
+    # theme(legend.position = c(0.92,0.81))
+
+ggsave(paste0(CHARACTER,"_ASE_FreeK_Pie.pdf"), p, width = 11, height = 15)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+

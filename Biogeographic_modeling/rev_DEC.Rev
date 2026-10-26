@@ -1,9 +1,9 @@
 #!/usr/bin/rb
 
 # filenames
-range_fn = "/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/palicourea.range_noPsy.nex"
-tree_fn  = "/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/rev_dendrogram.tre"
-out_fn   = "/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output"
+range_fn = "~/Repos/Palicourea/Biogeographic_modeling/palicourea.range_noPsy.nex"
+tree_fn  = "~/Repos/Palicourea/Biogeographic_modeling/rev_dendrogram_UCLN_MCC_bio.tre"
+out_fn   = "~/Repos/Palicourea/Biogeographic_modeling/Palicourea_DEC"
 
 # read binary (01) presence-absence range data
 dat_range_01 = readDiscreteCharacterData(range_fn)
@@ -137,7 +137,7 @@ out_tree_fn = out_str + ".tre"
 out_mcc_fn = out_str + ".mcc.tre"
 
 #build MCC tree and discard burnin fraction
-tree_trace = readTreeTrace(file="/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output.trees", treetype="clock")
+tree_trace = readTreeTrace(file="~/Repos/Palicourea/Biogeographic_modeling/Palicourea_DEC.trees", treetype="clock")
 tree_trace.setBurnin(0.25)
 n_burn = tree_trace.getBurnin()
 
@@ -145,10 +145,10 @@ n_burn = tree_trace.getBurnin()
 mcc_tree = mccTree(tree_trace, file=out_mcc_fn)
 
 #get ancestral state trace
-state_trace = readAncestralStateTrace(file="/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output.states.log")
+state_trace = readAncestralStateTrace(file="~/Repos/Palicourea/Biogeographic_modeling/Palicourea_DEC.states.log")
 
 #get ancestral state tree trace
-tree_trace = readAncestralStateTreeTrace(file="/Users/aislinnmumford/Desktop/Biogeographic_Reconstruction_Resubmission/output.trees", treetype="clock")
+tree_trace = readAncestralStateTreeTrace(file="~/Repos/Palicourea/Biogeographic_modeling/Palicourea_DEC.trees", treetype="clock")
 
 #compute and save the ancestral state tree
 anc_tree = ancestralStateTree(tree=mcc_tree,

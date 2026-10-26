@@ -12,12 +12,12 @@
 # Reading in the Data #
 #######################
 
-setwd("/Users/aislinnmumford/Desktop/InflorRecon")
+setwd("~/Repos/Palicourea/Inflorescence_ASE")
 CHARACTER = "palicourea.inflorescence_type"
 NUM_STATES = 4
 
 # Import the morphological character matrix #
-morpho <- readDiscreteCharacterData("/Users/aislinnmumford/Desktop/InflorRecon/palicourea_inflor_type_resub.nex")
+morpho <- readDiscreteCharacterData("palicourea_inflor_type_resub2.nex")
 
 # Create some vector for the moves and monitors of this analysis
 moves    = VectorMoves()
@@ -30,7 +30,7 @@ monitors = VectorMonitors()
 # Here we use a fixed tree topology of primates
 # Note that the readTrees function always returns a vector of trees,
 # so we simple take the first tree
-phylogeny <- readTrees("/Users/aislinnmumford/Desktop/InflorRecon/rev_dendrogram.tre")[1]
+phylogeny <- readTrees("~/Repos/Palicourea/Inflorescence_ASE/rev_dendrogram_UCLN_MCC.tre")[1]
 
 
 #########################
@@ -102,6 +102,7 @@ mymodel = model(phylogeny)
 ### Compute power posterior distributions
 pow_p = powerPosterior(mymodel, moves, monitors, "freeK_ml/"+CHARACTER+"_freeK.out", cats=63, sampleFreq=10)
 pow_p.burnin(generations=2000,tuningInterval=250)
+
 pow_p.run(generations=1000)
 
 ### Use stepping-stone sampling to calculate marginal likelihoods
@@ -111,6 +112,11 @@ ss.marginal()
 ### Use path-sampling to calculate marginal likelihoods
 ps = pathSampler(file="freeK_ml/"+CHARACTER+"_freeK.out", powerColumnName="power", likelihoodColumnName="likelihood")
 ps.marginal()
+
+#ss.marginal()
+#   -174.9064
+#> ps.marginal()
+#   -174.8937
 
 # Quit RevBayes #
 q()
