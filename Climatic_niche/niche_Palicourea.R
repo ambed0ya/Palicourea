@@ -432,12 +432,12 @@ test.dispRity(disparity_rarefied, test = bhatt.coeff, correction = "bonferroni")
 
 ##Reading tree
 astral01 <- read.tree("../Biogeographic_modeling/rev_dendrogram_UCLN_MCC_bio.tre")
-#removing taxa for which there isnt enought climate data, or those that have moved outside of the areas where
+#removing taxa for which there isnt enough climate data, or those that have moved outside of the areas where
 #the clade originated
 tips2delete<-c("Pal_guianensis2","Pal_demissa2","Pal_angustifolia2","Pal_obliquinervia",
                "Pal_wolffiae","Pal_cauligera","Pal_vesiculifera","Pal_alagoana",
                "Pal_laxivenulosa","Pal_angustifolia1","Pal_allenii","Pal_caerulea",
-               "Psy_stipulosa", "Psy_pseudinundata","Pal_suerrensis","Pal_subspicata")
+               "Pal_stipulosa", "Pal_cf_pseudinundata","Pal_suerrensis","Pal_subspicata")
 tree <- ape::drop.tip(astral01, tips2delete)
 plot(tree)
 
@@ -658,10 +658,9 @@ ggplot(result, aes(x = bin_end, y = prop_hummingbird)) +
 #write.csv(dat,"Climatic_niche/data4_phylm_prelim.csv",row.names = F)
 
 
-#Test for correlation of 
 library(phylolm)
 
-data4phylm<-read.csv("Climatic_niche/data4phylm.csv")
+data4phylm<-read.csv("data4phylm.csv")
 rownames(data4phylm) <- data4phylm$species
 
 head(tree$tip.label)
@@ -677,9 +676,10 @@ fit <- phylolm(
 )
 
 #Check data
-dat_complete <- data4phylm[complete.cases(data4phylm[, c("PC1", "elev")]), ]
+dat_complete <- data4phylm[complete.cases(data4phylm[, c("PC2", "elev")]), ]
 nrow(dat_complete)
 setdiff(tree$tip.label, rownames(dat_complete))
+setdiff(rownames(dat_complete), tree$tip.label)
 
 summary(fit)
 
@@ -697,20 +697,16 @@ library(phylopath)
 library(dplyr)
 library(graph)
 
+#making sure the codings are binary
 
-# Checking that variables are correctly formatted
+data4phylm$Area_bin <- factor(
+  ifelse(data4phylm$Area == "Andean", "Andean", "extra_Andean"),
+  levels = c("extra_Andean", "Andean"))
 
-data4phylm$Area_bin <- ifelse(
-  data4phylm$Area == "Andean",
-  1,
-  0
-) # Andean vs extra-Andean
+data4phylm$Infl_bin <- factor(
+  ifelse(data4phylm$Infl_prp_poll == "Hummingbird", "Hummingbird","Non_Hummingbird"),
+  levels = c("Non_Hummingbird", "Hummingbird")) # inflorescence type / pollination proxy
 
-data4phylm$Infl_bin <- ifelse(
-  data4phylm$Infl_prp_poll == "Hummingbird",
-  1,
-  0
-) # inflorescence type / pollination proxy
 data4phylm$PC2  <- as.numeric(data4phylm$PC2) # climatic niche axis PC1/PC2
 data4phylm$elev  <- as.numeric(data4phylm$elev) # elevation
 
@@ -720,75 +716,46 @@ rownames(data4phylm) <- data4phylm$species
 
 models_main <- define_model_set(
   
-  H1 = c(
-    Infl_bin ~ Area_bin,
-    PC1  ~ PC1
-  ),
+  H1 = c(Infl_bin ~ Area_bin,
+    PC2  ~ PC2),
   
-  H2 = c(
-    Area_bin ~ PC1,
-    Infl_bin ~ Area_bin
-  ),
+  H2 = c(Area_bin ~ PC2,
+    Infl_bin ~ Area_bin),
   
-  H3 = c(
-    Infl_bin ~ Area_bin,
-    PC1  ~ Infl_bin
-  ),
+  H3 = c(Infl_bin ~ Area_bin,
+    PC2  ~ Infl_bin),
   
-  H4 = c(
-    Infl_bin ~ Area_bin,
-    PC1  ~ Area_bin
-  ),
+  H4 = c(Infl_bin ~ Area_bin,
+    PC2  ~ Area_bin),
   
-  H5 = c(
-    Infl_bin ~ PC1,
-    Area_bin  ~ Area_bin
-  ),
+  H5 = c(Infl_bin ~ PC2,
+    Area_bin  ~ Area_bin),
   
-  H6 = c(
-    PC1  ~ Area_bin,
-    Infl_bin ~ PC1
-  ),
+  H6 = c(PC2  ~ Area_bin,
+    Infl_bin ~ PC2),
   
-  H7 = c(
-    Infl_bin ~ PC1,
-    Area_bin  ~ Infl_bin
-  ),
+  H7 = c(Infl_bin ~ PC2,
+    Area_bin  ~ Infl_bin),
   
-  H8 = c(
-    Infl_bin ~ PC1,
-    Area_bin  ~ PC1
-  ),
+  H8 = c(Infl_bin ~ PC2,
+    Area_bin  ~ PC2),
   
-  H9 = c(
-    Infl_bin ~ Area_bin + PC1
-  ),
+  H9 = c(Infl_bin ~ Area_bin + PC2),
   
-  H10 = c(
-    PC1  ~ Area_bin,
-    Infl_bin ~ Infl_bin
-  ),
+  H10 = c(PC2  ~ Area_bin,
+    Infl_bin ~ Infl_bin),
 
-  H11 = c(
-    Area_bin ~ PC1,
-    Infl_bin ~ Infl_bin
-  ),
+  H11 = c(Area_bin ~ PC2,
+    Infl_bin ~ Infl_bin),
   
-  H12 = c(
-    Area_bin ~ Infl_bin,
-    PC1 ~ PC1
-  ),
+  H12 = c(Area_bin ~ Infl_bin,
+    PC2 ~ PC2),
   
-  H13 = c(
-    PC1 ~ Infl_bin,
-    Area_bin ~ Area_bin
-  ),
+  H13 = c(PC2 ~ Infl_bin,
+    Area_bin ~ Area_bin),
   
-  H14 = c(
-    Area_bin ~ Infl_bin,
-    PC1 ~ Infl_bin
-  )
-  
+  H14 = c(Area_bin ~ Infl_bin,
+    PC2 ~ Infl_bin)
 )
 
 ##plotting to check model specification
@@ -800,49 +767,80 @@ models_main <- define_model_set(
 #plot(models_main$H6_all_independent)
 
 
-path_main <- phylo_path(
-  model_set = models_main,
-  data = data4phylm,
-  tree = tree,
-  model = "lambda",
-  method = "logistic_MPLE",
-  na.rm = TRUE
-)
+path_main <- phylo_path(model_set = models_main,
+  data = data4phylm, tree = tree, model = "lambda", method = "logistic_IG10",
+  na.rm = TRUE)
 
 summary(path_main)
 
 #Extracting raw coefficients for the best model:
-best_fit <- best(path_main)
+#best_fit <- best(path_main)
 
 #Extracting standardized coefficients for the best model (and raw for continuous data):
 data_std <- data4phylm
-data_std$PC1_z <- as.numeric(scale(data_std$PC1))
+data_std$PC2_z <- as.numeric(scale(data_std$PC2))
+data_std$Infl01 <- ifelse(data_std$Infl_bin == "Hummingbird", 1, 0)
+data_std$Area01 <- ifelse(data_std$Area_bin == "Andean", 1, 0)
 
-fit_PC1 <- phylolm(
-  Infl_bin ~ PC1_z,
-  phy = tree,
-  data = data_std,
-  model = "lambda"
+# Prune tree to species present in data
+tree_pruned <- drop.tip(
+  tree,
+  setdiff(tree$tip.label, rownames(data_std))
 )
 
-summary(fit_PC1)
-coef(fit_PC1)
-
-fit_poll <- phyloglm(
-  Area_bin ~ PC1,
-  phy = tree,
+fit_area_PC1 <- phylolm(
+  PC1_z ~ Area01,
+  phy = tree_pruned,
   data = data_std,
-  method = "logistic_MPLE"
+  method = "logistic_IG10"
 )
-summary(fit_poll)
-coef(fit_poll)
+summary(fit_area_PC1)
+coef(fit_area_PC1)
 
-fit_PC2_Infl <- phyloglm(
-  Infl_bin ~ PC2_z,
-  phy = tree,
+fit_PC1_area <- phyloglm(
+  Area01 ~ PC1_z,
+  phy = tree_pruned,
   data = data_std,
-  method = "logistic_MPLE"
+  method = "logistic_IG10"
+)
+summary(fit_PC1_area)
+coef(fit_PC1_area)
+
+
+fit_area_infl <- phyloglm(
+  Infl01 ~ Area01,
+  phy = tree_pruned,
+  data = data_std,
+  method = "logistic_IG10"
 )
 
-summary(fit_PC2_Infl)
-coef(fit_PC2_Infl)
+summary(fit_area_infl)
+coef(fit_area_infl)
+
+fit_area_PC2 <- phylolm(
+  PC2_z ~ Area01,
+  phy = tree_pruned,
+  data = data_std,
+  method = "logistic_IG10"
+)
+summary(fit_area_PC2)
+coef(fit_area_PC2)
+
+fit_area_infl <- phyloglm(
+  Infl01 ~ Area01,
+  phy = tree_pruned,
+  data = data_std,
+  method = "logistic_IG10"
+)
+
+summary(fit_area_infl)
+coef(fit_area_infl)
+
+fit_PC2_area <- phyloglm(
+  Area01 ~ PC2_z,
+  phy = tree_pruned,
+  data = data_std,
+  method = "logistic_IG10"
+)
+summary(fit_PC2_area)
+coef(fit_PC2_area)
