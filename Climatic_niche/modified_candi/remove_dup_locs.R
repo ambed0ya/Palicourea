@@ -9,7 +9,7 @@ remove_dup_locs <- function(df_list) {
   results_list <- list()
   for (i in 1:length(df_list)){
     df <- df_list[[i]]
-    if ("demicalLatitude" %in% colnames(df)){
+    if ("decimalLatitude" %in% colnames(df)){
       df_new <-  df[!duplicated(df[,c("decimalLatitude", "decimalLongitude")]),]
       rows_originial <- raster::nrow(df)
       rows_new <- raster::nrow(df_new)
