@@ -8,14 +8,14 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
 
 ```{r}
-source("/Applications/RevBayes_OSX_v1.0.13/scripts/plot_anc_range.util.Rplot_anc_range.util.R")
+source("/Users/aislinnmumford/Desktop/Resubmission/Biogeographic_Reconstruction_Resubmission/with2NewClade/plot_anc_range.util.R")
 
 
 # file names
-fp = "~/Repos/Palicourea/Biogeographic_modeling" # edit to provide an absolute filepath
+fp = "/Users/aislinnmumford/Desktop/BioGeoTry3/" # edit to provide an absolute filepath
 plot_fn = paste(fp, "Range.pdf",sep="")
 tree_fn = paste(fp, "rev_DTE.ase.tre", sep="")
-label_fn = paste(fp, "Palicourea_DEC.state_labels.txt", sep="")
+label_fn = paste(fp, "out6areas.state_labels.txt", sep="")
 color_fn = paste(fp, "rangecolor.txt", sep="")
 
 # get state labels and state colors
@@ -111,7 +111,6 @@ ggsave(file=plot_fn, plot=pp_map, device="pdf", height=20, width=15, useDingbats
 #                      tip_pie_size = 0.4, tip_labels_states = T,
 #                      cladogenetic = TRUE, tip_labels_offset = 2, 
 #                      timeline = T) +
-
 
 
 ```
